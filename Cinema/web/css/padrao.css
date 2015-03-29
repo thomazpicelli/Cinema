@@ -1,0 +1,288 @@
+/* 
+    Created on : 27/02/2015, 20:54:21
+    Author     : thomazpicelli
+*/
+body{
+	background-color: #ffffff; 
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	margin: 0px; 
+	font-family: arial, verdana;
+	color: #000;
+	text-align: justify;
+}
+
+/*** HEADER ***/
+.top {
+	width: auto;
+	height:30px;
+	background-color: black;
+	padding-left: 60%;
+}
+
+.x {
+	width: auto;
+	height: 140px;
+}
+
+	.LOGO{
+		width: 200px;
+		height: 100px;
+		padding: 1%;
+		margin: 1% 5% 0% 13%;
+		float: left;
+	}
+	
+.x form{
+	padding: 4% 5% 1% 0%;  
+	float: left;
+}
+
+.x form input[type="search"] {
+	background-color: white;
+	padding: 0%;
+	margin: 0%;
+	font-size: 16px;
+    color: #DEDEDE;
+	height:42px;
+	width: 400px;
+	border-left: 1px black solid;
+	border-bottom: 1px black solid;
+	border-top: 1px black solid;
+	border-radius: 4px 0px 0px 4px;
+	float: left;
+}
+
+.x form input[type="search"]:hover {
+	color: black;
+	background-color: #E0E0E0;
+}
+
+.x form input[type="image"] {
+	height:40px;
+	width: 40px;
+	padding: 0%;
+	margin-left: 0%;
+	border: 1px black solid;
+	border-radius: 0px 4px 4px 0px;
+	float: left;
+}
+
+
+	.y{
+		padding: 3%; 
+		margin: 0%;
+	}
+
+	.y a p{
+		display: inline-block;
+		text-decoration:none;
+		padding: 1% 0% 0% 1%;
+		color: black;
+		float: left;
+	}
+		
+	.y a img {
+		width: 25px;
+		height: 25px;
+		padding: 2% 0% 0% 0%;
+		float: left;
+	}
+	
+	
+	
+	header nav{
+	background-color: black;
+	margin: 0px 15% 0px 15%;
+	border-radius: 2px 2px 2px 2px; 
+	height: 55px;
+	padding: 0px;
+	clear: left;
+}	
+
+header nav ul{
+	margin: 0px;
+	padding: 5px;
+}
+
+header nav ul li {
+	display: inline-block; 
+	text-align: center;	
+	height: 20px;
+	width: 100px;
+	border-radius: 2px 2px 2px 2px; 
+	padding: 10px 0px 10px 0px;
+	margin: 2px 0px 2px 0px;
+}
+
+header ul li a{
+	text-decoration: none;
+	color: white;
+	font-size: 12pt;
+	padding: 0px;
+	margin: 0px;
+}
+
+header nav ul li:hover{
+	background-color: #2B2B2B;
+	border-bottom: 2px #FF5E00 solid;
+	height: 20px;
+	width: 100px;
+	padding: 10px 0px 8px 0px;
+}
+
+header nav ul li:active{
+	background-color: #FF5E00;
+}
+	
+.home{
+	background-color: #FF5E00; 
+	color: black;
+	border-radius: 4px 4px 4px 4px;
+}
+
+
+
+/*** FOOTER ***/
+
+
+footer{
+	clear: left;
+	font-size: 12pt;
+	width: auto; 
+	
+}
+
+.foot{
+	background-color: #ffffff;
+	border:1px solid black;
+	border-radius: 6px 6px 0px 0px;
+	height:200px;
+	width:100% - 2px;
+	padding-top: 20px;
+}
+
+.foot ul{
+	margin-left: 20%;
+	float: left;
+	padding-left: 6px;
+	border-left: 2px solid #FC9300;
+	border-radius:10px 0px 0px 10px;
+	float: left;
+}
+
+.foot ul li{
+	list-style-type: nome;
+	display: block;
+	text-align: left;
+	padding: 2px;
+}
+
+.foot ul li a{
+	text-decoration: none;
+	color: black;
+}
+
+.selocima{
+	margin-left: 10%;
+	padding-top: 2%;
+	float: left;
+}
+
+.selocima p {
+	font-size: 14pt;
+}
+
+.selocima img {
+	margin-left: 5%; 
+}
+
+.selobaixo {
+	margin-left: 20%;
+	padding-top: 2%;
+	padding-left: 40%;
+}
+
+.selobaixo img{
+	margin-left: 5%;
+	
+}
+
+.copy {
+	background-color: #010101;
+	text-align: center;	
+	margin: 0px;
+	padding: 10px;
+}
+
+.copy small {
+	color: #FC9300;
+	padding: 6px;
+	margin: 6px;
+} 
+
+
+/*** ICONE SOCIAL ***/
+
+.share-icon {
+    display: inline-block;
+    float: left;
+    margin-left: 1%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    vertical-align: middle;
+    background-image: url(/img/share-icons.png);
+}
+
+.share-facebook {
+	background-position: 0px -40px;
+}
+
+.share-facebook:hover {
+	background-position: 0px 0px;
+}
+
+.share-twitter {
+	background-position: -40px -40px;
+}
+
+.share-twitter:hover {
+	background-position: -40px 0px;
+}
+
+.share-pinterest {
+	background-position: -80px -40px;
+}
+.share-pinterest:hover {
+	background-position: -80px 0px;
+}
+.share-linkedin {
+	background-position: -240px -40px;
+}
+.share-linkedin:hover {
+	background-position: -240px 0px;
+}
+.share-googleplus {
+	background-position: -120px -40px;
+}
+.share-googleplus:hover {
+	background-position: -120px 0px;
+}
+.share-stumbleupon {
+	background-position: -360px -40px;
+}
+.share-stumbleupon:hover {
+	background-position: -360px 0px;
+}
+.share-email {
+	background-position: -320px -40px;
+}    
+.share-email:hover {
+	background-position: -320px 0px;
+}
+
+
+

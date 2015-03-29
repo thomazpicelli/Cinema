@@ -1,0 +1,36 @@
+.login{
+	margin: 5% 5% 5% 30%;
+	border:1px black solid;
+	width: 30%;
+	height: 300px;
+	padding: 1%;
+	float: left;
+}
+
+.login p{
+	font-size:16pt;
+	margin-left: 5%;
+	
+}
+.login input{
+	
+}
+.login form {
+	font-size: 12pt;
+	margin: 2% 0% 2% 2%;
+}
+.login form input[type="text"]{ 
+border: 1px solid #FF5E00;
+	border-radius: 4px;
+	margin: 2%;
+	padding: 4px;
+}
+.login form input[type="password"]{ 
+border: 1px solid #FF5E00;
+	border-radius: 4px;
+	margin: 2%;
+	padding: 4px;
+}
+.login form input[type="image"]{
+	margin: 2%;
+} 
