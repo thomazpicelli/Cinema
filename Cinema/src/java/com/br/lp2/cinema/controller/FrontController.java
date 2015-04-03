@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.lp2.cinema.controller;
 
 import com.br.lp2.cinema.commands.*;
@@ -42,7 +37,7 @@ public class FrontController extends HttpServlet {
             out.println("<title>Servlet FrontController</title>");            
             out.println("</head>");
             out.println("<body>");
-            
+            out.println("<p>oi</p>");
             Command command = null;
             try {
                 command = (Command)Class.forName("com.br.lp2.cinema.commands."+commandName).newInstance();

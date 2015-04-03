@@ -1,36 +1,43 @@
 .login{
-	margin: 5% 5% 5% 30%;
-	border:1px black solid;
-	width: 30%;
-	height: 300px;
-	padding: 1%;
-	float: left;
+    margin: 5% 5% 5% 30%;
+    border:1px black solid;
+    border-radius: 4px;
+    width: 30%;
+    height: 285px;
+    float: left;
 }
-
 .login p{
-	font-size:16pt;
-	margin-left: 5%;
-	
-}
-.login input{
-	
+  position: relative;
+  width: 100%;
+  display: block;
+  background: #FF5E00;
+  border-radius: 4px;
+  padding: 15px;
+  color: #fff;
+  font-size: 20px;
 }
 .login form {
-	font-size: 12pt;
-	margin: 2% 0% 2% 2%;
+    margin: 2% 0% 2% 2%;
+}
+.login form input{
+    font-size: 14px;
 }
 .login form input[type="text"]{ 
 border: 1px solid #FF5E00;
 	border-radius: 4px;
 	margin: 2%;
 	padding: 4px;
+        height: 25px;
+        width: 60%; 
 }
 .login form input[type="password"]{ 
 border: 1px solid #FF5E00;
 	border-radius: 4px;
 	margin: 2%;
 	padding: 4px;
+        height: 25px;
+        width: 60%;
 }
 .login form input[type="image"]{
-	margin: 2%;
+	margin: 5%;
 } 

@@ -4,23 +4,26 @@
         <title>Cinema</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/padrao.css"/> <!-- CSS PADRAO -->
-        <link rel="stylesheet" type="text/css" href="css/acesso.css"/> <!-- CSS ACESSO DE PRODUTOS -->
+        <link rel="stylesheet" type="text/css" href="css/padrao.css"/>
+        <link rel="stylesheet" type="text/css" href="css/acesso.css"/>
+        <script type="text/javascript" src="js.js"></script>
     </head>
     <body>
         <header>
-            <div class="login">
-                <p>Login</p></br>
-                <form action = "FrontController" method = "POST">
-                    Login:<input type="text" placeholder="Login" name="nome"/></br>
-                    Senha:<input type="password" placeholder="Senha" name="senha"/></br></br>
-                    <input type="hidden" name="command" value="Login"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" />
-                </form>
-            </div>
+
         </header>
         <section>
- 
+            <form action="FrontController" method="POST">
+            </form>
+            <fieldset class="login">
+                <p>Login</p>
+                <form name="command" action="FrontController" method="POST">
+                    <input type="text" placeholder="Login" name="nome" required/></br>
+                    <input type="password" placeholder="Senha" name="senha" required/></br>  
+                    <input type="hidden" name="command" value="Login"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                </form>
+            </fieldset> 
         </section>
         <footer>
             
