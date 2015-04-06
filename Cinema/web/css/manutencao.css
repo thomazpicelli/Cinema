@@ -1,3 +1,6 @@
+header h1{
+    margin-left: 35%;
+}
 header nav{
     background-color: #FF5E00;
     margin: 0px 25% 0px 25%;
@@ -52,6 +55,27 @@ section{
     height: auto;
     float: left;
     padding: 1% 5% 0% 5%;
+}
+section select{
+    border: 1px solid #FF5E00;
+    border-radius: 4px;
+    margin: 2%;
+    padding: 4px;
+    height: 35px;
+    width: 60%; 
+}
+
+section form input[type="number"]{
+    border: 1px solid #FF5E00;
+	border-radius: 4px;
+	margin: 2%;
+	padding: 4px;
+        height: 25px;
+        width: 60%;
+}
+
+section form input[type="image"]{
+    margin: 5%;
 }
 
 .modulo p {
