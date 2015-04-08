@@ -101,6 +101,17 @@ border: 1px solid #FF5E00;
         height: 25px;
         width: 60%;
 }
+.modulo form input[type="password"]{ 
+border: 1px solid #FF5E00;
+	border-radius: 4px;
+	margin: 2%;
+	padding: 4px;
+        height: 25px;
+        width: 60%;
+}
 .modulo form input[type="image"]{
 	margin: 5%;
+}
+.red{
+    color: red;
 }

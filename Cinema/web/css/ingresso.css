@@ -1,3 +1,9 @@
+#poster{
+align: center;
+width: 270px;
+height: 410px;
+}
+
 header nav{
     background-color: #FF5E00;
     margin: 0px 25% 0px 25%;
@@ -5,7 +11,7 @@ header nav{
     height: 55px;
     width: 50%;
     padding: 0px;
-    clear: left;
+    float: left;
 }	
 
 header nav ul{
@@ -81,6 +87,3 @@ border: 1px solid #FF5E00;
 	margin: 5%;
 }
 
-#poster{
-    width:180px;
-}
