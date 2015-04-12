@@ -1,6 +1,7 @@
 
-import com.br.lp2.model.DAO.*;
-import com.br.lp2.model.javabeans.*;
+import com.br.lp2.cinema.model.javabeans.Genero;
+import com.br.lp2.cinema.model.DAO.GeneroDAO;
+import com.br.lp2.cinema.model.DAO.GeneroDAOconcreto;
 import java.util.ArrayList;
 
 /**

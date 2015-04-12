@@ -1,7 +1,6 @@
 package com.br.lp2.cinema.commands;
 
 import com.br.lp2.cinema.controller.*;
-import com.br.lp2.model.DAO.*;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

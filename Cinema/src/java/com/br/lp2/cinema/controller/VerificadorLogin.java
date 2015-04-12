@@ -5,7 +5,7 @@
  */
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.model.javabeans.Funcionario;
+import com.br.lp2.cinema.model.javabeans.Funcionario;
 import java.util.ArrayList;
 
 /**
