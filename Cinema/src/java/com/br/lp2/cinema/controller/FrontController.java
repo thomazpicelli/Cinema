@@ -40,7 +40,6 @@ public class FrontController extends HttpServlet {
             out.println("<title>Servlet FrontController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<p>oi</p>");
             Command command = null;
             try {
                 command = (Command)Class.forName("com.br.lp2.cinema.commands."+commandName).newInstance();
