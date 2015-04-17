@@ -5,7 +5,12 @@
  */
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.javabeans.Funcionario;
+import com.br.lp2.cinema.model.DAO.AtendenteDAO;
+import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
+import com.br.lp2.cinema.model.DAO.GerenteDAO;
+import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
+import com.br.lp2.cinema.model.javabeans.Atendente;
+import com.br.lp2.cinema.model.javabeans.Gerente;
 import java.util.ArrayList;
 
 /**
@@ -13,22 +18,21 @@ import java.util.ArrayList;
  * @author thomazpicelli
  */
 public class VerificadorLogin {
-    private Funcionario funcionario;
+    private String nome;
+    private String senha;
 
-    public VerificadorLogin(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public VerificadorLogin(String nome, String senha) {
+        this.nome = nome;
+        this.senha = senha;
     }
-    
-    public boolean verifica()
-    {
-         dao = new UsuarioDAOconcreto();
-        ArrayList<Usuario> listaUsuarios = dao.select();
-        
 
+    public boolean verificaGerente(){
+        GerenteDAO gerenteDao = new GerenteDAOconcreto();
+        ArrayList<Gerente> listaGerentes = gerenteDao.readGerente();
+        
         boolean verificado = false;
-        for (Usuario user : listaUsuarios) {
-            if(usuario.getUsername().equals(user.getUsername()) && usuario.getSenha().equals(user.getSenha()))
-            {    
+        for (Gerente gerente : listaGerentes) {
+            if(gerente.getLogin().equals(nome) && gerente.getSenha().equals(senha)){    
                 verificado = true;
                 break;
             } 
@@ -36,4 +40,19 @@ public class VerificadorLogin {
         return verificado;
     }
     
+    public boolean verificaAtendente(){
+        AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
+        ArrayList<Atendente> listaAtendentes = atendenteDAO.readAtendente();
+        
+        boolean verificado = false;
+        if(!verificado){
+            for (Atendente atendente : listaAtendentes) {
+                if(atendente.getLogin().equals(nome) && atendente.getSenha().equals(senha)){    
+                    verificado = true;
+                    break;
+                } 
+            }
+        }
+        return verificado;
+    }
 }
