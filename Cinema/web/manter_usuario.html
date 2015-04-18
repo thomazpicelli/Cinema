@@ -35,11 +35,11 @@
                 <form name="command" action="FrontController" method="POST">
                     <input type="text" placeholder="Nome" name="nome" required/></br>
                     <input type="text" placeholder="Login" name="username" required/></br>
-                    <input type="password" placeholder="Senha" name="senha" required/></br>
-                    <input type="password" placeholder="Confirma Senha" name="senha" required/></br>
-                    Gerente:  <input type="radio" name="gerente" value="Gerente"/>
-                    Atendente:<input type="radio" name="atendente" value="Atendente"/></br>
-                    <input type="hidden" name="command" value="Usuario"/>
+                    <input type="password" placeholder="Senha" name="senha1" required/></br>
+                    <input type="password" placeholder="Confirma Senha" name="senha2" required/></br>
+                    Gerente:  <input type="radio" name="cargo" value="Gerente"/>
+                    Atendente:<input type="radio" name="cargo" value="Atendente"/></br>
+                    <input type="hidden" name="command" value="CriaUsuario"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

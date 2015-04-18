@@ -8,8 +8,8 @@ import java.io.Serializable;
  */
 public class Atendente extends Funcionario implements Serializable{
  
-    public Atendente( int pk, String nome, String login, String senha) {
-        super(pk, nome, login, senha);
+    public Atendente(String nome, String login, String senha) {
+        super(nome, login, senha);
     }
     
 }

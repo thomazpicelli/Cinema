@@ -8,9 +8,9 @@ import java.io.Serializable;
  */
 public class Gerente extends Funcionario implements Serializable{
 
-    public Gerente(int pk, String nome, String login, String senha) {
-        super(pk, nome, login, senha);
+    public Gerente(String nome, String login, String senha) {
+        super(nome, login, senha);
     }
     
-       
+          
 }

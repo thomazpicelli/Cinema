@@ -47,7 +47,7 @@ public class FrontController extends HttpServlet {
                 Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
             }
             command.execute(request, response);
-            
+
             out.println("</body>");
             out.println("</html>");
         }

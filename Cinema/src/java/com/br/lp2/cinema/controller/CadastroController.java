@@ -44,13 +44,6 @@ public class CadastroController extends HttpServlet {
             out.println("<title>Servlet CadastroController</title>");            
             out.println("</head>");
             out.println("<body>");
-            
-            Usuario user = new Usuario(nome, sobrenome, telefone, email, username, password);
-            UsuarioDAO dao = new UsuarioDAOconcreto();
-            boolean inserido = dao.insert(user);
-            if(inserido) out.println("USUÁRIO INSERIDO COM SUCESSO!");
-            else out.println("ERRO AO INSERIR USUÁRIO!");
-            
             out.println("</body>");
             out.println("</html>");
         }

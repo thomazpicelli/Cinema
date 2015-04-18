@@ -23,18 +23,17 @@ public class Login implements Command{
         senha = request.getParameter("senha");
 
         VerificadorLogin vl = new VerificadorLogin(nome,senha);
-        boolean verificaA = false;
-        boolean verificaG = false;
+        boolean verificaA, verificaG = false;
         verificaA = vl.verificaAtendente();
         if(!verificaA) verificaG = vl.verificaGerente();
             
         try {
             RequestDispatcher rd;
-            if(verificaA && !verificaG)
+            if(verificaA)
                 //rd = request.getRequestDispatcher("/principal_atendente.html");
                 response.sendRedirect("./principal_atendente.html");
             else{
-                if(!verificaA && verificaG)
+                if(verificaG)
                     //rd = request.getRequestDispatcher("/principal_gerente.html");
                     response.sendRedirect("./principal_gerente.html");
                 else

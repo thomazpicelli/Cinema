@@ -29,12 +29,11 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
         boolean resultado = false;
         
         try {
-            String sql = "INSERT INTO Atendente (pk, nome, login, senha) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO Atendente (nome, login, senha) VALUES(?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, atendente.getPk());
-            statement.setString(2, atendente.getNome());
-            statement.setString(3, atendente.getLogin());
-            statement.setString(4, atendente.getSenha());
+            statement.setString(1, atendente.getNome());
+            statement.setString(2, atendente.getLogin());
+            statement.setString(3, atendente.getSenha());
             rs = statement.executeQuery();
             resultado = statement.execute();
         } catch (SQLException sQLException) {
@@ -53,7 +52,7 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
             rs = statement.executeQuery();
             
             while (rs.next()) {
-                Atendente a = new Atendente(rs.getInt("pk"), rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
+                Atendente a = new Atendente(rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
                 lista.add(a);
             }
         } catch (SQLException sQLException) {
@@ -72,7 +71,7 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
             rs = statement.executeQuery();
             
             while (rs.next()) {
-                a = new Atendente(rs.getInt("pk"), rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
+                a = new Atendente(rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -91,7 +90,7 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
                 rs = statement.executeQuery();
                 
                 while (rs.next()) {
-                a = new Atendente(rs.getInt("pk"), rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
+                a = new Atendente(rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
                 }
             } catch (SQLException sQLException) {
                 System.out.println(sQLException.getMessage());
@@ -103,9 +102,8 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     public boolean updateAtendente(int id, Funcionario atendente) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE Atendente SET pk=? nome=? login=? senha=?";
+            String sql = "UPDATE Atendente SET nome=? login=? senha=?";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, atendente.getPk());
             statement.setString(2, atendente.getNome());
             statement.setString(3, atendente.getLogin());
             statement.setString(4, atendente.getSenha());
