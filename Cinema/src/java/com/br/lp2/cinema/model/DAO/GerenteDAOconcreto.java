@@ -32,7 +32,7 @@ public class GerenteDAOconcreto implements GerenteDAO {
             statement.setString(1, gerente.getNome());
             statement.setString(2, gerente.getLogin());
             statement.setString(3, gerente.getSenha());
-            rs = statement.executeQuery();
+            //rs = statement.executeQuery();
             resultado = statement.execute();
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

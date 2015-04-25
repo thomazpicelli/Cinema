@@ -29,7 +29,7 @@ public class GeneroDAOconcreto implements GeneroDAO{
             String sql = "INSERT INTO genero(nome) VALUES(?)";
             statement = connection.prepareStatement(sql);
             statement.setString(1, genero.getNome());
-            rs = statement.executeQuery();
+            //rs = statement.executeQuery();
             resultado = statement.execute();
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

@@ -34,7 +34,7 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
             statement.setString(1, atendente.getNome());
             statement.setString(2, atendente.getLogin());
             statement.setString(3, atendente.getSenha());
-            rs = statement.executeQuery();
+            //rs = statement.executeQuery();
             resultado = statement.execute();
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

@@ -46,15 +46,30 @@ public class CriaUsuario implements Command{
             }
         }
         else{
+            boolean insert;
             if(cargo.contentEquals("Gerente")){
                 GerenteDAO gerenteDAO = new GerenteDAOconcreto();
-                gerenteDAO.insertGerente(new Gerente(nome, username, senha1));
+                insert = gerenteDAO.insertGerente(new Gerente(nome, username, senha1));
             }
             else{
                 AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-                atendenteDAO.insertAtendente(new Atendente(nome,username,senha1));
+                insert = atendenteDAO.insertAtendente(new Atendente(nome,username,senha1));
             }
-            //sucesso
+            if(insert){
+                try{    
+                    response.sendRedirect("./sucesso.html");
+                } catch(IOException ex){
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else{
+                try{    
+                    response.sendRedirect("./manter_usuario.html");
+                } catch(IOException ex){
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    
         }
     }
 }
