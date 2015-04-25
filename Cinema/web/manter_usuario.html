@@ -47,10 +47,11 @@
                 <p><a id="3">Mudar:</a></p></br>
                 
                 <form name="command" action="FrontController" method="POST">
+                    <input type="number" placeholder="Código do Usuário que deseja alterar" name="codigo" required/></br>
                     <input type="text" placeholder="Nome" name="nome" required/></br>
                     <input type="text" placeholder="Login" name="username" required/></br>
-                    <span class="red">*</span><input type="password" placeholder="Senha" name="senha" required/></br>
-                    <span class="red">*</span><input type="password" placeholder="Confirma Senha" name="senha" required/></br>
+                    <span class="red">*</span><input type="password" placeholder="Senha" name="senha1" required/></br>
+                    <span class="red">*</span><input type="password" placeholder="Confirma Senha" name="senha2" required/></br>
                     Gerente:  <input type="radio" name="gerente" value="Gerente"/>
                     Atendente:<input type="radio" name="atendente" value="Atendente"/></br>
                     <input type="hidden" name="command" value="Usuario"/>

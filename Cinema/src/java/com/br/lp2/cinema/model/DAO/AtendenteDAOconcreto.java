@@ -102,13 +102,14 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     public boolean updateAtendente(int id, Funcionario atendente) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE Atendente SET nome=? login=? senha=?";
+            String sql = "UPDATE Atendente SET nome=?, login=?, senha=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
-            statement.setString(2, atendente.getNome());
-            statement.setString(3, atendente.getLogin());
-            statement.setString(4, atendente.getSenha());
+            statement.setString(1, atendente.getNome());
+            statement.setString(2, atendente.getLogin());
+            statement.setString(3, atendente.getSenha());
+            statement.setInt(4, id);
             int r = statement.executeUpdate();
-            resultado = r>0;
+            if(r > 0) resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }

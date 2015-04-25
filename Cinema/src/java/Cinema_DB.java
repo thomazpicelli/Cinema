@@ -16,5 +16,7 @@ public class Cinema_DB {
 
         AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
         atendenteDAO.insertAtendente(new Atendente("Sandra", "sandra", "senha"));
+        
+        atendenteDAO.updateAtendente(2, new Atendente("Marcio", "Marcio", "123"));
     }
 }
