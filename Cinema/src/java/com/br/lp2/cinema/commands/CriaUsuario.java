@@ -8,10 +8,6 @@ import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Atendente;
 import com.br.lp2.cinema.model.javabeans.Gerente;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,39 +33,40 @@ public class CriaUsuario implements Command{
         VerificadorCadastro vc = new VerificadorCadastro(username, senha1, senha2);
         boolean userName = vc.verificaUserName();
         boolean senha = vc.verificaSenha();
+        String senhaMD5 = vc.SenhaMD5(); 
         
         if(!senha || userName){
             try {
-                response.sendRedirect("./manter_usuario.html");
+                response.sendRedirect("./manter_usuario.jsp");
             } catch (IOException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                ex.getMessage();
             }
         }
         else{
+            
             boolean insert;
             if(cargo.contentEquals("Gerente")){
                 GerenteDAO gerenteDAO = new GerenteDAOconcreto();
-                insert = gerenteDAO.insertGerente(new Gerente(nome, username, senha1));
+                insert = gerenteDAO.insertGerente(new Gerente(nome, username, senhaMD5));
             }
             else{
                 AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-                insert = atendenteDAO.insertAtendente(new Atendente(nome,username,senha1));
+                insert = atendenteDAO.insertAtendente(new Atendente(nome,username,senhaMD5));
             }
             if(insert){
                 try{    
                     response.sendRedirect("./sucesso.html");
                 } catch(IOException ex){
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.getMessage();
                 }
             }
             else{
                 try{    
-                    response.sendRedirect("./manter_usuario.html");
+                    response.sendRedirect("./manter_usuario.jsp");
                 } catch(IOException ex){
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.getMessage();
                 }
             }
-                    
         }
     }
 }

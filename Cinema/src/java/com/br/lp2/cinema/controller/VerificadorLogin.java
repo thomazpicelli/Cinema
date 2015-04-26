@@ -6,6 +6,9 @@ import com.br.lp2.cinema.model.DAO.GerenteDAO;
 import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Atendente;
 import com.br.lp2.cinema.model.javabeans.Gerente;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 /**
@@ -49,5 +52,17 @@ public class VerificadorLogin {
             }
         }
         return verificado;
+    }
+    
+    public String SenhaMD5(){
+        MessageDigest md = null;  
+        try {  
+            md = MessageDigest.getInstance("MD5");  
+        } catch (NoSuchAlgorithmException e) {  
+            e.printStackTrace();  
+        }  
+        BigInteger hash = new BigInteger(1, md.digest(senha.getBytes()));  
+        senha = hash.toString(16);  
+        return senha;  
     }
 }

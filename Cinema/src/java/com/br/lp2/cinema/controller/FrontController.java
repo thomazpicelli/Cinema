@@ -3,13 +3,12 @@ package com.br.lp2.cinema.controller;
 import com.br.lp2.cinema.commands.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet (name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
     private String commandName;
+    private String nome;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,11 +40,15 @@ public class FrontController extends HttpServlet {
             out.println("<title>Servlet FrontController</title>");            
             out.println("</head>");
             out.println("<body>");
+       
+            HttpSession session = request.getSession();
+            session.setAttribute("nome", nome);
+            
             Command command = null;
             try {
                 command = (Command)Class.forName("com.br.lp2.cinema.commands."+commandName).newInstance();
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
-                Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.getMessage();
             }
             command.execute(request, response);
 
@@ -80,6 +84,7 @@ public class FrontController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         commandName = request.getParameter("command");
+        nome = request.getParameter("nome");
         processRequest(request, response);
         
     }

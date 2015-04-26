@@ -38,7 +38,7 @@ public class MudaUsuario implements Command{
         boolean codigo = vc.verificaCodgio();
         if(!senha || userName || !codigo){
             try {
-                response.sendRedirect("./manter_usuario.html");
+                response.sendRedirect("./manter_usuario.jsp");
             } catch (IOException ex) {
                 ex.getMessage();
             }
@@ -62,7 +62,7 @@ public class MudaUsuario implements Command{
             }
             else{
                 try{    
-                    response.sendRedirect("./manter_usuario.html");
+                    response.sendRedirect("./manter_usuario.jsp");
                 } catch(IOException ex){
                     ex.getMessage();
                 }
