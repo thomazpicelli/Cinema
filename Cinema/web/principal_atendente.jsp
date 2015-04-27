@@ -18,10 +18,10 @@
     <body>
         <header>
             <%
-                HttpSession s = request.getSession();
-                if(s.getAttribute("nome")!=null && !s.getAttribute("nome").equals("")){
+                session = request.getSession();
+                if(session.getAttribute("nome")!=null && !session.getAttribute("nome").equals("")){
                     out.print("<p> Olá ");
-                    out.print(s.getAttribute("nome"));
+                    out.print(session.getAttribute("nome"));
                     out.print(" ! Acesso Comercial.</p>");
                 }
                 else{
@@ -29,7 +29,7 @@
                 }
             %>    
             <p id="lugar" onload="Tempo()">---:---:---</p>
-            <a href="./index.jsp" <% s.removeAttribute("nome"); %> >SAIR</a>
+            <a href="./index.jsp">SAIR</a>
         </header>
         <section>
             <nav>

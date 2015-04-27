@@ -17,7 +17,7 @@
     </head>
     <body>
         <header>
-
+            <% session.removeAttribute("nome"); %>
         </header>
         <section>
             <fieldset class="login">

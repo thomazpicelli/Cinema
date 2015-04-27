@@ -17,10 +17,9 @@
     <body>
         <header>
             <%
-                HttpSession s = request.getSession();
-                if(s.getAttribute("nome")!=null && !s.getAttribute("nome").equals("")){
+                if(session.getAttribute("nome")!=null && !session.getAttribute("nome").equals("")){
                     out.print("<p> Olá ");
-                    out.print(s.getAttribute("nome"));
+                    out.print(session.getAttribute("nome"));
                     out.print(" ! Acesso Total.</p>");
                 }
                 else{
@@ -28,7 +27,7 @@
                 }
             %>    
             <p id="lugar" onload="Tempo()">---:---:---</p>
-            <a href="./index.jsp" <% s.removeAttribute("nome"); %> >SAIR</a>
+            <a href="./index.jsp">SAIR</a>
             <h1>Manutenção de Sala</h1>
             <nav>
                 <ul>
