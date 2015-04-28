@@ -32,10 +32,9 @@ public class CriaUsuario implements Command{
         
         VerificadorCadastro vc = new VerificadorCadastro(username, senha1, senha2);
         boolean userName = vc.verificaUserName();
-        boolean senha = vc.verificaSenha();
-        String senhaMD5 = vc.SenhaMD5(); 
+        boolean senha = vc.verificaSenha(); 
         
-        if(!senha || userName){
+        if(!senha || !userName){
             try {
                 response.sendRedirect("./manter_usuario.jsp");
             } catch (IOException ex) {
@@ -43,15 +42,14 @@ public class CriaUsuario implements Command{
             }
         }
         else{
-            
-            boolean insert;
+            boolean insert = false;
             if(cargo.contentEquals("Gerente")){
                 GerenteDAO gerenteDAO = new GerenteDAOconcreto();
-                insert = gerenteDAO.insertGerente(new Gerente(nome, username, senhaMD5));
+                insert = gerenteDAO.insertGerente(new Gerente(nome, username, senha1));
             }
             else{
                 AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-                insert = atendenteDAO.insertAtendente(new Atendente(nome,username,senhaMD5));
+                insert = atendenteDAO.insertAtendente(new Atendente(nome,username,senha1));
             }
             if(insert){
                 try{    

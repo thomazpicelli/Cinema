@@ -20,6 +20,10 @@
             <% session.removeAttribute("nome"); %>
         </header>
         <section>
+            <% if(session.getAttribute("nlogin")!=null && !session.getAttribute("nlogin").equals("")){
+                    out.print("<p> Login Inválido</p>");
+                }
+            %>
             <fieldset class="login">
                 <p>Login</p>
                 <form name="command" action="FrontController" method="POST">

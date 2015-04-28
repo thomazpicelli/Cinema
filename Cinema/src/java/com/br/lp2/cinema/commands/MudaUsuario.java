@@ -22,21 +22,24 @@ public class MudaUsuario implements Command{
     private String senha1;
     private String senha2;
     private String cargo;
+    private String cargoA;
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         codigo = Integer.parseInt(request.getParameter("codigo"));
+        cargoA = request.getParameter("cargoA");
         nome = request.getParameter("nome");
         username = request.getParameter("username");
         senha1 = request.getParameter("senha1");
         senha2 = request.getParameter("senha2");
         cargo = request.getParameter("cargo");
-        
-        VerificadorCadastro vc = new VerificadorCadastro(codigo, username, senha1, senha2);
+
+        VerificadorCadastro vc = new VerificadorCadastro(codigo, username, senha1, senha2, cargoA);
         boolean userName = vc.verificaUserName();
         boolean senha = vc.verificaSenha();
         boolean codigo = vc.verificaCodgio();
-        if(!senha || userName || !codigo){
+        
+        if(!senha || !userName || !codigo){
             try {
                 response.sendRedirect("./manter_usuario.jsp");
             } catch (IOException ex) {
@@ -45,7 +48,7 @@ public class MudaUsuario implements Command{
         }
         else{
             boolean update;
-            if(vc.isCargo()){
+            if(cargoA.equals("Gerente")){
                 GerenteDAO gerenteDAO = new GerenteDAOconcreto();
                 update = gerenteDAO.updateGerente(this.codigo, new Gerente(nome, username, senha1));
             }

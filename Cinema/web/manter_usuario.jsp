@@ -65,13 +65,16 @@
                 
                 <form name="command" action="FrontController" method="POST">
                     <input type="number" placeholder="Código do Usuário que deseja alterar" name="codigo" required/></br>
+                    <h3>Cargo Atual:</h3>
+                    Gerente:  <input type="radio" name="cargoA" value="Gerente"/>
+                    Atendente:<input type="radio" name="cargoA" value="Atendente"/></br>
                     <input type="text" placeholder="Nome" name="nome" required/></br>
                     <input type="text" placeholder="Login" name="username" required/></br>
                     <span class="red">*</span><input type="password" placeholder="Senha" name="senha1" required/></br>
                     <span class="red">*</span><input type="password" placeholder="Confirma Senha" name="senha2" required/></br>
-                    Gerente:  <input type="radio" name="gerente" value="Gerente"/>
-                    Atendente:<input type="radio" name="atendente" value="Atendente"/></br>
-                    <input type="hidden" name="command" value="Usuario"/>
+                    Gerente:  <input type="radio" name="cargo" value="Gerente"/>
+                    Atendente:<input type="radio" name="cargo" value="Atendente"/></br>
+                    <input type="hidden" name="command" value="MudaUsuario"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

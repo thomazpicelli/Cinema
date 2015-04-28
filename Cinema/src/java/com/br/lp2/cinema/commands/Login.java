@@ -25,15 +25,17 @@ public class Login implements Command{
         if(!verificaA) verificaG = vl.verificaGerente();
         
         HttpSession session = request.getSession();
-        session.setAttribute("nome", nome);            
-        
+        session.setAttribute("nome", nome);      
+        session.setAttribute("nlogin", "");
         try {
             if(verificaA)
                 response.sendRedirect("./principal_atendente.jsp");
             else if(verificaG)
-                response.sendRedirect("./principal_gerente.jsp");
-            else
+                response.sendRedirect("./principal_gerente.jsp");    
+            else{
+                session.setAttribute("nlogin", "Erro");                    
                 response.sendRedirect("./index.jsp");
+            }
         } catch (IOException ex) {
             ex.getMessage();
         }

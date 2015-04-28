@@ -20,38 +20,42 @@ public class VerificadorCadastro {
     private String username;
     private String senha1;
     private String senha2;
-    private boolean cargo; //atendente false, gerente true
+    private String cargoA; //atendente false, gerente true
 
     public VerificadorCadastro(String username, String senha1, String senha2) {
         this.username = username;
         this.senha1 = senha1;
         this.senha2 = senha2;
-        this.cargo = false; //assume atendente 
     }
 
-    public VerificadorCadastro(int codigo, String username, String senha1, String senha2) {
+    public VerificadorCadastro(int codigo, String username, String senha1, String senha2, String cargoA){
         this.codigo = codigo;
         this.username = username;
         this.senha1 = senha1;
         this.senha2 = senha2;
-        this.cargo = false;
+        this.cargoA = cargoA;
     }
 
     public boolean verificaCodgio(){
-        GerenteDAO gerenteDao = new GerenteDAOconcreto();
-        ArrayList<Gerente> listaGerentes = gerenteDao.readGerente();
-        AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-        ArrayList<Atendente> listaAtendentes = atendenteDAO.readAtendente();
-        
         boolean verificado = false;
-        for (Gerente gerente : listaGerentes) {
-            if(gerente.getPk() == codigo){
-                cargo = true; //cargo é gerente
-                break;
-            } 
+        if(cargoA.equals("Gerente")){
+            GerenteDAO gerenteDao = new GerenteDAOconcreto();
+            ArrayList<Gerente> listaGerentes = gerenteDao.readGerente();
+            System.out.println("GERENTE VERIFICACAO");
+            for (Gerente gerente : listaGerentes) {
+                System.out.println(gerente);
+                if(gerente.getPk() == codigo){
+                    verificado = true;
+                    System.out.println("ACHOU O CODIGO DO ZÉEEEE");
+                    break;
+                } 
+            }   
         }
-        if(!verificado){
-            for (Atendente atendente : listaAtendentes) {
+        else{
+            AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
+            ArrayList<Atendente> listaAtendentes = atendenteDAO.readAtendente();
+        
+            for (Atendente atendente : listaAtendentes){
                 if(atendente.getPk() == codigo){
                     verificado = true;
                     break;
@@ -67,18 +71,17 @@ public class VerificadorCadastro {
         AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
         ArrayList<Atendente> listaAtendentes = atendenteDAO.readAtendente();
         
-        boolean verificado = false;
+        boolean verificado = true;
         for (Gerente gerente : listaGerentes) {
             if(gerente.getLogin().equals(username)){    
-                verificado = true;
-                cargo = true; //assume gerente
+                verificado = false;
                 break;
             } 
         }
         if(!verificado){
             for (Atendente atendente : listaAtendentes) {
                 if(atendente.getLogin().equals(username)){
-                    verificado = true;
+                    verificado = false;
                     break;
                 }
             }
@@ -88,10 +91,6 @@ public class VerificadorCadastro {
     public boolean verificaSenha(){
         boolean verificado = this.senha1.equals(senha2);
         return verificado;
-    }
-
-    public boolean isCargo() {
-        return cargo;
     }
     
     public String SenhaMD5(){

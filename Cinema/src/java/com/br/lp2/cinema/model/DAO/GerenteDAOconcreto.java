@@ -32,8 +32,8 @@ public class GerenteDAOconcreto implements GerenteDAO {
             statement.setString(1, gerente.getNome());
             statement.setString(2, gerente.getLogin());
             statement.setString(3, gerente.getSenha());
-            //rs = statement.executeQuery();
-            resultado = statement.execute();
+            int r = statement.executeUpdate();
+            if(r>0) resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
@@ -95,13 +95,14 @@ public class GerenteDAOconcreto implements GerenteDAO {
     public boolean updateGerente(int id, Funcionario gerente) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE gerente SET nome=? login=? senha=?";
+            String sql = "UPDATE gerente SET nome=?, login=?, senha=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
-            statement.setString(2, gerente.getNome());
-            statement.setString(3, gerente.getLogin());
-            statement.setString(4, gerente.getSenha());
+            statement.setString(1, gerente.getNome());
+            statement.setString(2, gerente.getLogin());
+            statement.setString(3, gerente.getSenha());
+            statement.setInt(4, id);
             int r = statement.executeUpdate();
-            resultado = r>0;
+            if(r>0) resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
