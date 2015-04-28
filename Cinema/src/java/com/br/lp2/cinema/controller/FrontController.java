@@ -13,12 +13,10 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author thomazpicelli
-
 */
 @WebServlet (name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
     private String commandName;
-    private String nome;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +38,7 @@ public class FrontController extends HttpServlet {
             out.println("<title>Servlet FrontController</title>");            
             out.println("</head>");
             out.println("<body>");
-       
-            HttpSession session = request.getSession();
-            session.setAttribute("nome", nome);
-            
+                 
             Command command = null;
             try {
                 command = (Command)Class.forName("com.br.lp2.cinema.commands."+commandName).newInstance();
@@ -84,7 +79,6 @@ public class FrontController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         commandName = request.getParameter("command");
-        nome = request.getParameter("nome");
         processRequest(request, response);
         
     }

@@ -4,6 +4,7 @@ import com.br.lp2.cinema.controller.*;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -22,7 +23,10 @@ public class Login implements Command{
         boolean verificaA, verificaG = false;
         verificaA = vl.verificaAtendente();
         if(!verificaA) verificaG = vl.verificaGerente();
-            
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("nome", nome);            
+        
         try {
             if(verificaA)
                 response.sendRedirect("./principal_atendente.jsp");
