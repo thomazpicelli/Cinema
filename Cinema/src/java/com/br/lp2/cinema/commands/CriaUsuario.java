@@ -30,7 +30,7 @@ public class CriaUsuario implements Command{
         senha2 = request.getParameter("senha2");
         cargo = request.getParameter("cargo");
         
-        VerificadorCadastro vc = new VerificadorCadastro(username, senha1, senha2);
+        VerificadorUsuario vc = new VerificadorUsuario(username, senha1, senha2);
         boolean userName = vc.verificaUserName();
         boolean senha = vc.verificaSenha(); 
         

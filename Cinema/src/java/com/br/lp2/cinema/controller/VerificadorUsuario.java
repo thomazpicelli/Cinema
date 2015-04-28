@@ -15,20 +15,20 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class VerificadorCadastro {
+public class VerificadorUsuario {
     private int codigo;
     private String username;
     private String senha1;
     private String senha2;
     private String cargoA; //atendente false, gerente true
 
-    public VerificadorCadastro(String username, String senha1, String senha2) {
+    public VerificadorUsuario(String username, String senha1, String senha2) {
         this.username = username;
         this.senha1 = senha1;
         this.senha2 = senha2;
     }
 
-    public VerificadorCadastro(int codigo, String username, String senha1, String senha2, String cargoA){
+    public VerificadorUsuario(int codigo, String username, String senha1, String senha2, String cargoA){
         this.codigo = codigo;
         this.username = username;
         this.senha1 = senha1;

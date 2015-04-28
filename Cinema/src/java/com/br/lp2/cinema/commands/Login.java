@@ -33,7 +33,7 @@ public class Login implements Command{
             else if(verificaG)
                 response.sendRedirect("./principal_gerente.jsp");    
             else{
-                session.setAttribute("nlogin", "Erro");                    
+                session.setAttribute("nlogin", "Inválido");                    
                 response.sendRedirect("./index.jsp");
             }
         } catch (IOException ex) {

@@ -1,6 +1,6 @@
 package com.br.lp2.cinema.commands;
 
-import com.br.lp2.cinema.controller.VerificadorCadastro;
+import com.br.lp2.cinema.controller.VerificadorUsuario;
 import com.br.lp2.cinema.model.DAO.AtendenteDAO;
 import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
 import com.br.lp2.cinema.model.DAO.GerenteDAO;
@@ -34,7 +34,7 @@ public class MudaUsuario implements Command{
         senha2 = request.getParameter("senha2");
         cargo = request.getParameter("cargo");
 
-        VerificadorCadastro vc = new VerificadorCadastro(codigo, username, senha1, senha2, cargoA);
+        VerificadorUsuario vc = new VerificadorUsuario(codigo, username, senha1, senha2, cargoA);
         boolean userName = vc.verificaUserName();
         boolean senha = vc.verificaSenha();
         boolean codigo = vc.verificaCodgio();
