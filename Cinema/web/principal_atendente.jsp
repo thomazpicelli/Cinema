@@ -12,24 +12,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/dropdown.css"/>
+        <link rel="stylesheet" type="text/css" href="css/principal.css"/>
         <script type="text/javascript" src="js/dropdown.js"></script>
         <script type="text/javascript" src="js/clock.js"></script>
     </head>
     <body>
         <header>
-            <%
-                session = request.getSession();
-                if(session.getAttribute("nome")!=null && !session.getAttribute("nome").equals("")){
-                    out.print("<p> Olá ");
-                    out.print(session.getAttribute("nome"));
-                    out.print(" ! Acesso Comercial.</p>");
-                }
-                else{
-                    response.sendRedirect("./index.jsp");
-                }
-            %>    
-            <p id="lugar" onload="Tempo()">---:---:---</p>
-            <a href="./index.jsp">SAIR</a>
+            <%@ include file= "header.jsp" %>
         </header>
         <section>
             <nav>

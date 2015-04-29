@@ -11,7 +11,6 @@
         <title>Cinema</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/padrao.css"/>
         <link rel="stylesheet" type="text/css" href="css/acesso.css"/>
         <script type="text/javascript" src="js.js"></script>
     </head>
@@ -20,8 +19,9 @@
             <% session.removeAttribute("nome"); %>
         </header>
         <section>
+            <p class="a"></p>
             <% if(session.getAttribute("nlogin")!=null && !session.getAttribute("nlogin").equals("")){
-                    out.print("<p> Login Inválido</p>");
+                    out.print("<p class='invalido'> Login Inválido</p>");
                 }
             %>
             <fieldset class="login">

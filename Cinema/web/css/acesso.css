@@ -1,5 +1,8 @@
+.a{
+    margin-top: 4%;
+}
 .login{
-    margin: 5% 5% 5% 30%;
+    margin: 0% 5% 5% 30%;
     border:1px black solid;
     border-radius: 4px;
     width: 30%;
@@ -40,4 +43,12 @@ border: 1px solid #FF5E00;
 }
 .login form input[type="image"]{
 	margin: 5%;
-} 
+}
+.invalido{
+    width: 30%;
+    padding: 13px;
+    margin: 5% 0px 2% 30%;
+    border-radius: 4px;
+    border: 2px solid red;
+    background: #FF9494;
+}

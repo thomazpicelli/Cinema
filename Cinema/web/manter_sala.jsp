@@ -11,23 +11,13 @@
         <title>Cinema</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/manutencao.css"/> <!-- CSS ACESSO DE PRODUTOS -->
+        <link rel="stylesheet" type="text/css" href="css/manutencao.css"/>
+        <link rel="stylesheet" type="text/css" href="css/principal.css"/>  
         <script type="text/javascript" src="js/clock.js"></script>
     </head>
     <body>
         <header>
-            <%
-                if(session.getAttribute("nome")!=null && !session.getAttribute("nome").equals("")){
-                    out.print("<p> Olá ");
-                    out.print(session.getAttribute("nome"));
-                    out.print(" ! Acesso Total.</p>");
-                }
-                else{
-                    response.sendRedirect("./index.jsp");
-                }
-            %>    
-            <p id="lugar" onload="Tempo()">---:---:---</p>
-            <a href="./index.jsp">SAIR</a>
+            <%@ include file= "header.jsp" %>
             <h1>Manutenção de Sala</h1>
             <nav>
                 <ul>
