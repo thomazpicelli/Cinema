@@ -28,10 +28,14 @@ public class Login implements Command{
         session.setAttribute("nome", nome);      
         session.setAttribute("nlogin", "");
         try {
-            if(verificaA)
+            if(verificaA){
+                session.setAttribute("cargo", "atendente");
                 response.sendRedirect("./principal_atendente.jsp");
-            else if(verificaG)
+            }
+            else if(verificaG){
+                session.setAttribute("cargo", "gerente");
                 response.sendRedirect("./principal_gerente.jsp");    
+            }
             else{
                 session.setAttribute("nlogin", "Inválido");                    
                 response.sendRedirect("./index.jsp");

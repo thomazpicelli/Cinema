@@ -19,7 +19,6 @@
             <% session.removeAttribute("nome"); %>
         </header>
         <section>
-            <p class="a"></p>
             <% if(session.getAttribute("nlogin")!=null && !session.getAttribute("nlogin").equals("")){
                     out.print("<p class='invalido'> Login Inválido</p>");
                 }
