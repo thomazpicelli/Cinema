@@ -1,8 +1,13 @@
-header{
-    margin: 1% 0% 0% 20%;
+.nome{
+    margin: 1% 0% 0% 0%;
+    display: inline-block;
+    margin-left: 9%;
+    margin-right: 15%;
+    font-size: 15pt;
 }
-header a{
+.nome a{
     color: red;
+    text-decoration: none;
 }
 section{
     margin-top: 0%;

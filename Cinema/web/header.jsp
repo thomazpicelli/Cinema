@@ -1,12 +1,15 @@
 <%
     if(session.getAttribute("nome")!=null && !session.getAttribute("nome").equals("")){
-        out.print("<p> Olá ");
+        out.print("<p class='nome'> Olá ");
         out.print(session.getAttribute("nome"));
-        out.print(" ! Acesso Total.</p>");
+        if(session.getAttribute("cargo").equals("gerente"))
+            out.print("! -  Acesso Total.</p>");
+        else
+            out.print("! -  Acesso Comercial.</p>");
     }
     else{
         response.sendRedirect("./index.jsp");
     }
 %>    
-<p id="lugar" onload="Tempo()">---:---:---</p>
-<a href="./index.jsp">SAIR</a>
+<p class="nome" id="lugar" onload="Tempo()">---:---:---</p>
+<p class="nome"><a href="./index.jsp">SAIR</a></p>

@@ -1,5 +1,8 @@
 header h1{
-    margin-left: 35%;
+   margin-left: 40%;
+}
+.principal{
+    background-color: #656665;
 }
 header nav{
     background-color: #FF5E00;
