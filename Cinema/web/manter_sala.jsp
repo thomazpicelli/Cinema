@@ -31,14 +31,14 @@
                     <option>Exibição</option>
                     <option>Espera</option>
                 </select></br>
-                <input type="hidden" name="command" value="Login"/>
+                <input type="hidden" name="command" value="SituacaoSala"/>
                 <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
             </form>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
                     <input type="number" placeholder="Buscar" name="sala" required/></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="hidden" name="command" value="BuscaSala"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -53,7 +53,7 @@
                         <option>Exibição</option>
                         <option>Espera</option>
                     </select></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="hidden" name="command" value="CriaSala"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -70,7 +70,7 @@
                         <option>Exibição</option>
                         <option>Espera</option>
                     </select></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="hidden" name="command" value="MudaSala"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -78,7 +78,7 @@
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
                     <input type="number" placeholder="Codigo da Sala" name="codigo" required/></br></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="hidden" name="command" value="DeletaSala"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

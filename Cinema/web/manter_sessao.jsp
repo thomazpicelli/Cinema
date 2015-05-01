@@ -37,7 +37,7 @@
                     <input type="number" placeholder="Sala" name="sala" required/></br>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
                     Legendado:<input type="radio" name="legendado" value="Legendado" checked="checked"/></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="hidden" name="command" value="CriaSessao"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -49,8 +49,8 @@
                     <input type="number" placeholder="Filme" name="filme" required/></br>
                     <input type="number" placeholder="Sala" name="sala" required/></br>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
-                    Legendado:<input type="radio" name="legendado" value="Legendado" checked="checked"/></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    Legendado:<input type="radio" name="legendado" value="legendado" checked="checked"/></br>
+                    <input type="hidden" name="command" value="MudaSessao"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -58,7 +58,7 @@
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
                     <input type="number" placeholder="Codigo da Sessao" name="codigo" required/></br></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="hidden" name="command" value="DeletaSessao"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

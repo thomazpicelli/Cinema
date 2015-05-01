@@ -65,7 +65,9 @@
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
                     <span class="red">*</span><input type="number" placeholder="Codigo da Sessao" name="codigo" required/></br></br>
-                    <input type="hidden" name="command" value="Usuario"/>
+                    Gerente:  <input type="radio" name="cargo" value="Gerente"/>
+                    Atendente:<input type="radio" name="cargo" value="Atendente"/></br>
+                    <input type="hidden" name="command" value="DeletaUsuario"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

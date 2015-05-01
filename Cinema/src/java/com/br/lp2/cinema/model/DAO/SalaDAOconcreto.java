@@ -26,14 +26,15 @@ public class SalaDAOconcreto implements SalaDAO{
     public boolean insertSala(Sala sala) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Sala (pk, numero, lotacao, especial, situacao) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO Sala ( numero, lotacao, especial, situacao) VALUES(?,?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, sala.getPk());
-            statement.setInt(2, sala.getNumero());
-            statement.setInt(3, sala.getLotacao());
+            statement.setInt(1, sala.getNumero());
+            statement.setInt(2, sala.getLotacao());
+            statement.setInt(3, sala.getEspecial());
             statement.setObject(4, sala.getSituacao());
-            rs = statement.executeQuery();
-            resultado = statement.execute();
+            int r = statement.executeUpdate();
+            if(r>0)
+                resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
@@ -95,13 +96,13 @@ public class SalaDAOconcreto implements SalaDAO{
     public boolean updateSala(int id, Sala sala) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE sala SET pk=? numero=? lotacao=? especial=? situacao=?";
+            String sql = "UPDATE sala SET numero=?, lotacao=?, especial=?, situacao=?, WHERE pk=?";
             statement = connection.prepareStatement(sql);
-             statement = connection.prepareStatement(sql);
-            statement.setInt(1, sala.getPk());
-            statement.setInt(2, sala.getNumero());
-            statement.setInt(3, sala.getLotacao());
+            statement.setInt(1, sala.getNumero());
+            statement.setInt(2, sala.getLotacao());
+            statement.setInt(3, sala.getEspecial());
             statement.setObject(4, sala.getSituacao());
+            statement.setInt(5, id);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {

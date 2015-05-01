@@ -1,7 +1,6 @@
 package com.br.lp2.cinema.model.javabeans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -25,6 +24,14 @@ public class Sessao implements Serializable{
         this.lista = listaIngresso;
     }
 
+    public Sessao(Filme filme, Sala sala, Date horario, boolean legendado, ListaIngressos lista) {
+        this.filme = filme;
+        this.sala = sala;
+        this.horario = horario;
+        this.legendado = legendado;
+        this.lista = lista;
+    }
+    
     public int getPk() {
         return pk;
     }

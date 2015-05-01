@@ -24,6 +24,13 @@ public class Sala implements Serializable{
         this.situacao = situacao;
     }
 
+    public Sala(int numero, int lotacao, int especial, Situacao situacao) {
+        this.numero = numero;
+        this.lotacao = lotacao;
+        this.especial = especial;
+        this.situacao = situacao;
+    }
+    
     public int getPk() {
         return pk;
     }

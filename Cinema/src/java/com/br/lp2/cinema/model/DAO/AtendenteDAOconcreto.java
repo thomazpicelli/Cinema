@@ -27,15 +27,15 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     @Override
     public boolean insertAtendente(Funcionario atendente) {
         boolean resultado = false;
-        
         try {
             String sql = "INSERT INTO Atendente (nome, login, senha) VALUES(?,?,?)";
             statement = connection.prepareStatement(sql);
             statement.setString(1, atendente.getNome());
             statement.setString(2, atendente.getLogin());
             statement.setString(3, atendente.getSenha());
-            //rs = statement.executeQuery();
-            resultado = statement.execute();
+            int r = statement.executeUpdate();
+            if(r>0)
+                resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
@@ -45,7 +45,6 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     @Override
     public ArrayList <Atendente> readAtendente() {
         ArrayList<Atendente> lista = new ArrayList();
-        
         try {
             String sql = "SELECT * FROM Atendente";
             statement = connection.prepareStatement(sql);

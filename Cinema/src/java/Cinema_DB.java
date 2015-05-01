@@ -1,10 +1,10 @@
 
-import com.br.lp2.cinema.model.DAO.AtendenteDAO;
-import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
+import com.br.lp2.cinema.model.DAO.SessaoDAO;
+import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Genero;
 import com.br.lp2.cinema.model.DAO.GeneroDAO;
 import com.br.lp2.cinema.model.DAO.GeneroDAOconcreto;
-import com.br.lp2.cinema.model.javabeans.Atendente;
+import com.br.lp2.cinema.model.javabeans.Sessao;
 import java.util.ArrayList;
 
 /**
@@ -14,9 +14,8 @@ import java.util.ArrayList;
 public class Cinema_DB {
     public static void main(String[] args) {
 
-        AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-        atendenteDAO.insertAtendente(new Atendente("Sandra", "sandra", "senha"));
-        
-        atendenteDAO.updateAtendente(2, new Atendente("Marcio", "Marcio", "123"));
+        SessaoDAO sessaoDAO = new SessaoDAOconcreto();
+        boolean resultado = sessaoDAO.deleteSessao(1);
+        System.out.println(resultado);
     }
 }

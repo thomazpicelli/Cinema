@@ -29,16 +29,17 @@ public class SessaoDAOconcreto implements SessaoDAO{
     public boolean insertSessao(Sessao sessao) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Sessao (pk, id_filme, id-sala, horario, legendado, id_listIngresso) VALUES(?,?,?,?,?,?)";
+            String sql = "INSERT INTO Sessao (id_filme, id-sala, horario, legendado, id_listIngresso) VALUES(?,?,?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, sessao.getPk());
-            statement.setObject(2, sessao.getFilme());
-            statement.setObject(3, sessao.getSala());
-            statement.setDate(4, (Date)sessao.getHorario());
-            statement.setBoolean(5, sessao.isLegendado());
-            statement.setObject(6, sessao.getLista());
+            statement.setObject(1, sessao.getFilme());
+            statement.setObject(2, sessao.getSala());
+            statement.setDate(3, (Date)sessao.getHorario());
+            statement.setBoolean(4, sessao.isLegendado());
+            statement.setObject(5, sessao.getLista());;
             rs = statement.executeQuery();
-            resultado = statement.execute();
+            int r = statement.executeUpdate();
+            if(r>0)
+                resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
@@ -100,14 +101,14 @@ public class SessaoDAOconcreto implements SessaoDAO{
     public boolean updateSessao(int id, Sessao sessao) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE sessao SET pk=? id_filme=? id_sala=? horario=?, legendado=?, id_listaIngresso=?";
+            String sql = "UPDATE sessao SET id_filme=?, id_sala=?, horario=?, legendado=?, id_listaIngresso=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, sessao.getPk());
-            statement.setObject(2, sessao.getFilme());
-            statement.setObject(3, sessao.getSala());
-            statement.setDate(4, (Date)sessao.getHorario());
-            statement.setBoolean(5, sessao.isLegendado());
-            statement.setObject(6, sessao.getLista()); 
+            statement.setObject(1, sessao.getFilme());
+            statement.setObject(2, sessao.getSala());
+            statement.setDate(3, (Date)sessao.getHorario());
+            statement.setBoolean(4, sessao.isLegendado());
+            statement.setObject(5, sessao.getLista()); 
+            statement.setInt(6, id);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {
