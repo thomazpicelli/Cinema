@@ -16,7 +16,7 @@ public interface SessaoDAO {
     //READ
     public ArrayList<Sessao> readSessao();
     public Sessao readSessaoById(int id);
-    public Sessao readSessaoBySala(Sala sala);
+    public Sessao readSessaoBySala(int id);
     
     //UPDATE
     public boolean updateSessao(int id, Sessao sessao);

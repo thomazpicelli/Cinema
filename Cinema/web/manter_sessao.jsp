@@ -36,7 +36,9 @@
                     <input type="number" placeholder="Filme" name="filme" required/></br>
                     <input type="number" placeholder="Sala" name="sala" required/></br>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
-                    Legendado:<input type="radio" name="legendado" value="Legendado" checked="checked"/></br>
+                    Legendado:<br>
+                    Sim:<input type="radio" name="legendado" value="legendado" checked=""/></br>
+                    Não:<input type="radio" name="legendado" value=""/></br>
                     <input type="hidden" name="command" value="CriaSessao"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
@@ -49,7 +51,9 @@
                     <input type="number" placeholder="Filme" name="filme" required/></br>
                     <input type="number" placeholder="Sala" name="sala" required/></br>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
-                    Legendado:<input type="radio" name="legendado" value="legendado" checked="checked"/></br>
+                    Legendado:<br>
+                    Sim:<input type="radio" name="legendado" value="legendado" checked=""/></br>
+                    Não:<input type="radio" name="legendado" value=""/></br>
                     <input type="hidden" name="command" value="MudaSessao"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>

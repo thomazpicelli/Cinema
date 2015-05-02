@@ -26,7 +26,7 @@
                 <p><a id="1">Buscar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
                     <input type="text" placeholder="Buscar" name="filme" required/></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="hidden" name="command" value="BuscaFilme"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -35,15 +35,19 @@
                 <form name="command" action="FrontController" method="POST">
                     <input type="text" placeholder="Nome" name="nome" required/></br>
                     <input type="text" placeholder="Idioma" name="idioma" required/></br>
-                    <input type="text" placeholder="Situação" name="situacao" required/></br>
                     <input type="number" placeholder="duração" name="duracao" required/></br>
                     <input type="number" placeholder="Ano" name="ano" required/></br>
                     <input type="number" placeholder="Classificação" name="classificacao" required/></br>
                     <input type="number" placeholder="Diretor" name="diretor" required/></br>
                     <input type="number" placeholder="Genero" name="genero" required/></br>
                     <input type="number" placeholder="Distribuidora" name="distribuidora" required/></br>
-                    <input type="number" placeholder="Lista de Atores" name="listaaores" required/></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="number" placeholder="Lista de Atores" name="listadeatores" required/></br>
+                    <select name="situacao">
+                        <option>CARTAZ</option>
+                        <option>ESTREIA</option>
+                        <option>LANÇAMENTO</option>
+                    </select></br>
+                    <input type="hidden" name="command" value="CriaFilme"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -54,7 +58,6 @@
                     <input type="number" placeholder="Codigo do filme" name="codigo" required/></br></br>
                     <input type="text" placeholder="Nome" name="nome" required/></br>
                     <input type="text" placeholder="Idioma" name="idioma" required/></br>
-                    <input type="text" placeholder="Situação" name="situacao" required/></br>
                     <input type="number" placeholder="duração" name="duracao" required/></br>
                     <input type="number" placeholder="Ano" name="ano" required/></br>
                     <input type="number" placeholder="Classificação" name="classificacao" required/></br>
@@ -62,7 +65,12 @@
                     <input type="number" placeholder="Genero" name="genero" required/></br>
                     <input type="number" placeholder="Distribuidora" name="distribuidora" required/></br>
                     <input type="number" placeholder="Lista de Atores" name="listaaores" required/></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <select name="situacao">
+                        <option>CARTAZ</option>
+                        <option>ESTREIA</option>
+                        <option>LANÇAMENTO</option>
+                    </select></br>
+                    <input type="hidden" name="command" value="MudaFilme"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -70,7 +78,7 @@
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
                     <input type="number" placeholder="Codigo do filme" name="codigo" required/></br></br>
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="hidden" name="command" value="DeletaFilme"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

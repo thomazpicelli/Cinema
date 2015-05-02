@@ -17,7 +17,6 @@ public class CriaSessao implements Command{
     private String horario;
     private boolean legendado = false;
     
-    
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         filme = Integer.parseInt(request.getParameter("filme"));

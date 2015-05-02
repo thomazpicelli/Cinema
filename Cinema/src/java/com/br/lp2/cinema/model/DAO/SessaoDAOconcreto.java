@@ -81,12 +81,12 @@ public class SessaoDAOconcreto implements SessaoDAO{
     }
 
     @Override
-    public Sessao readSessaoBySala(Sala sala) {
+    public Sessao readSessaoBySala(int id) {
         Sessao s = null;
         try {
-            String sql = "SELECT * FROM Sessao WHERE sala =?";
+            String sql = "SELECT * FROM Sessao WHERE id_sala=?";
             statement = connection.prepareStatement(sql);
-            statement.setObject(1, sala);
+            statement.setObject(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
                 s = new Sessao(rs.getInt("pk"), (Filme)rs.getObject("id_filme"), (Sala)rs.getObject("id_sala"), (Date)rs.getDate("horario"), rs.getBoolean("legendado"), (ListaIngressos)rs.getObject("id_listaIngresso"));

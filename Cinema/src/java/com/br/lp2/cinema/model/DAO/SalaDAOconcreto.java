@@ -2,10 +2,12 @@ package com.br.lp2.cinema.model.DAO;
 
 import com.br.lp2.cinema.model.connectionFactory.ConnectionFactory;
 import com.br.lp2.cinema.model.javabeans.Sala;
+import com.sun.xml.wss.impl.callback.SAMLCallback;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
 import java.util.ArrayList;
 
 /**
@@ -26,12 +28,12 @@ public class SalaDAOconcreto implements SalaDAO{
     public boolean insertSala(Sala sala) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Sala ( numero, lotacao, especial, situacao) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO Sala (numero, lotacao, especial, situacao) VALUES(?,?,?,?)";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, sala.getNumero());
             statement.setInt(2, sala.getLotacao());
             statement.setInt(3, sala.getEspecial());
-            statement.setObject(4, sala.getSituacao());
+            statement.setObject(4, sala.getSituacao().toString());
             int r = statement.executeUpdate();
             if(r>0)
                 resultado = true;
@@ -96,12 +98,12 @@ public class SalaDAOconcreto implements SalaDAO{
     public boolean updateSala(int id, Sala sala) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE sala SET numero=?, lotacao=?, especial=?, situacao=?, WHERE pk=?";
+            String sql = "UPDATE sala SET numero=?, lotacao=?, especial=?, situacao=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, sala.getNumero());
             statement.setInt(2, sala.getLotacao());
             statement.setInt(3, sala.getEspecial());
-            statement.setObject(4, sala.getSituacao());
+            statement.setObject(4, sala.getSituacao().toString());
             statement.setInt(5, id);
             int r = statement.executeUpdate();
             resultado = r>0;

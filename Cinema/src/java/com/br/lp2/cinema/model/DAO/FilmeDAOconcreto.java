@@ -30,21 +30,21 @@ public class FilmeDAOconcreto implements FilmeDAO{
     public boolean insertFilme(Filme filme) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Filme (pk, id_diretor, id_genero, id_listaAtores, id_distribuidora, nome, classificacao, ano, duracao, situacao, idioma) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Filme (id_diretor, id_genero, id_listaAtores, id_distribuidora, nome, classificacao, ano, duracao, situacao, idioma) VALUES(?,?,?,?,?,?,?,?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, filme.getPk());
-            statement.setObject(2, filme.getDiretor());
-            statement.setObject(3, filme.getGenero());
-            statement.setObject(4, filme.getListaAtores());
-            statement.setObject(5, filme.getDistribuidora());
-            statement.setString(6, filme.getNome());
-            statement.setInt(7, filme.getClassificacao());
-            statement.setInt(8, filme.getAno());
-            statement.setInt(9, filme.getDuracao());
-            statement.setObject(10, filme.getSituacao());
-            statement.setString(11, filme.getIdioma());
-            rs = statement.executeQuery();
-            resultado = statement.execute();
+            statement.setObject(1, filme.getDiretor());
+            statement.setObject(2, filme.getGenero());
+            statement.setObject(3, filme.getListaAtores());
+            statement.setObject(4, filme.getDistribuidora());
+            statement.setString(5, filme.getNome());
+            statement.setInt(6, filme.getClassificacao());
+            statement.setInt(7, filme.getAno());
+            statement.setInt(8, filme.getDuracao());
+            statement.setObject(9, filme.getSituacao().toString());
+            statement.setString(10, filme.getIdioma());
+            int r = statement.executeUpdate();
+            if(r>0)
+                resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
@@ -106,19 +106,19 @@ public class FilmeDAOconcreto implements FilmeDAO{
     public boolean updateFilme(int id, Filme filme) {
          boolean resultado = false;
         try {
-            String sql = "UPDATE filme SET pk=? id_diretor=? id_genero=? id_listaAtores=? id_distribuidora=? nome=? classificacao=? ano=? duracao=? situacao=? idioma=?";
+            String sql = "UPDATE filme SET id_diretor=?, id_genero=?, id_listaAtores=?, id_distribuidora=?, nome=?, classificacao=?, ano=?, duracao=?, situacao=?, idioma=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, filme.getPk());
-            statement.setObject(2, filme.getDiretor());
-            statement.setObject(3, filme.getGenero());
-            statement.setObject(4, filme.getListaAtores());
-            statement.setObject(5, filme.getDistribuidora());
-            statement.setString(6, filme.getNome());
-            statement.setInt(7, filme.getClassificacao());
-            statement.setInt(8, filme.getAno());
-            statement.setInt(9, filme.getDuracao());
-            statement.setObject(10, filme.getSituacao());
-            statement.setString(11, filme.getIdioma());
+            statement.setObject(1, filme.getDiretor());
+            statement.setObject(2, filme.getGenero());
+            statement.setObject(3, filme.getListaAtores());
+            statement.setObject(4, filme.getDistribuidora());
+            statement.setString(5, filme.getNome());
+            statement.setInt(6, filme.getClassificacao());
+            statement.setInt(7, filme.getAno());
+            statement.setInt(8, filme.getDuracao());
+            statement.setObject(9, filme.getSituacao().toString());
+            statement.setString(10, filme.getIdioma());
+            statement.setInt(11, id);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {
