@@ -25,10 +25,10 @@
             </br>
             <h2>Situação da Sala:</h2>
             <form name="command" action="FrontController" method="POST">
-                <input type="number" placeholder="Número da Sala" name="sala" required/></br>
-                <select name="Situação">
-                    <option>Manutenção</option>
-                    <option>Exibição</option>
+                <input type="number" placeholder="Número da Sala" name="numero" required/></br>
+                <select name="situacao">
+                    <option>Manutencao</option>
+                    <option>Exibicao</option>
                     <option>Espera</option>
                 </select></br>
                 <input type="hidden" name="command" value="SituacaoSala"/>
@@ -48,9 +48,9 @@
                     <input type="number" placeholder="Número" name="numero" required/></br>
                     <input type="number" placeholder="Lotação" name="lotacao" required/></br>
                     <input type="number" placeholder="Especial" name="especial" required/></br>
-                    <select name="Situação">
-                        <option>Manutenção</option>
-                        <option>Exibição</option>
+                    <select name="situacao">
+                        <option>Manutencao</option>
+                        <option>Exibicao</option>
                         <option>Espera</option>
                     </select></br>
                     <input type="hidden" name="command" value="CriaSala"/>
@@ -65,9 +65,9 @@
                     <input type="number" placeholder="Número" name="numero" required/></br>
                     <input type="number" placeholder="Lotação" name="lotacao" required/></br>
                     <input type="number" placeholder="Especial" name="especial" required/></br>
-                    <select name="Situação">
-                        <option>Manutenção</option>
-                        <option>Exibição</option>
+                    <select name="situacao">
+                        <option>Manutencao</option>
+                        <option>Exibicao</option>
                         <option>Espera</option>
                     </select></br>
                     <input type="hidden" name="command" value="MudaSala"/>

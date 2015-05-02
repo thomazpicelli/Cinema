@@ -43,9 +43,9 @@
                     <input type="number" placeholder="Distribuidora" name="distribuidora" required/></br>
                     <input type="number" placeholder="Lista de Atores" name="listadeatores" required/></br>
                     <select name="situacao">
-                        <option>CARTAZ</option>
-                        <option>ESTREIA</option>
-                        <option>LANÇAMENTO</option>
+                        <option>Cartaz</option>
+                        <option>Estreia</option>
+                        <option>Lancamento</option>
                     </select></br>
                     <input type="hidden" name="command" value="CriaFilme"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
@@ -64,11 +64,11 @@
                     <input type="number" placeholder="Diretor" name="diretor" required/></br>
                     <input type="number" placeholder="Genero" name="genero" required/></br>
                     <input type="number" placeholder="Distribuidora" name="distribuidora" required/></br>
-                    <input type="number" placeholder="Lista de Atores" name="listaaores" required/></br>
+                    <input type="number" placeholder="Lista de Atores" name="listadeatores" required/></br>
                     <select name="situacao">
-                        <option>CARTAZ</option>
-                        <option>ESTREIA</option>
-                        <option>LANÇAMENTO</option>
+                        <option>Cartaz</option>
+                        <option>Estreia</option>
+                        <option>Lancamento</option>
                     </select></br>
                     <input type="hidden" name="command" value="MudaFilme"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>

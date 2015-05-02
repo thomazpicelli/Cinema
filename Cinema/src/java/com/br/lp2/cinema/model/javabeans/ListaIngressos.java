@@ -10,7 +10,10 @@ import java.util.ArrayList;
 public class ListaIngressos implements Serializable{
     private int pk;
     private static ArrayList<Ingresso> lista;
-    
+
+    public ListaIngressos(int pk) {
+        this.pk = pk;
+    }
     
     public ListaIngressos(){
         lista = new ArrayList<>();

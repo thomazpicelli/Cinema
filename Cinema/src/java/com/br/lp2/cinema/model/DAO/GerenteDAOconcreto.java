@@ -48,8 +48,8 @@ public class GerenteDAOconcreto implements GerenteDAO {
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Gerente a = new Gerente(rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
-                lista.add(a);
+                Gerente g = new Gerente(rs.getInt("pk"),rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
+                lista.add(g);
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -66,7 +66,7 @@ public class GerenteDAOconcreto implements GerenteDAO {
             statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                g = new Gerente(rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
+                g = new Gerente(rs.getInt("pk"),rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -83,7 +83,7 @@ public class GerenteDAOconcreto implements GerenteDAO {
             statement.setString(1, nome);
             rs = statement.executeQuery();
             while (rs.next()) {
-                g = new Gerente(rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
+                g = new Gerente(rs.getInt("pk"),rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

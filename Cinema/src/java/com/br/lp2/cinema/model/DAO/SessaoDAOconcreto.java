@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 /**
  *
@@ -29,14 +30,13 @@ public class SessaoDAOconcreto implements SessaoDAO{
     public boolean insertSessao(Sessao sessao) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Sessao (id_filme, id-sala, horario, legendado, id_listIngresso) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO Sessao (id_filme, id-sala, horario, legendado, id_listaIngressos) VALUES(?,?,?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setObject(1, sessao.getFilme());
-            statement.setObject(2, sessao.getSala());
-            statement.setDate(3, (Date)sessao.getHorario());
+            statement.setObject(1, sessao.getFilme().getPk());
+            statement.setObject(2, sessao.getSala().getPk());
+            statement.setTime(3, (Time)sessao.getHorario());
             statement.setBoolean(4, sessao.isLegendado());
-            statement.setObject(5, sessao.getLista());;
-            rs = statement.executeQuery();
+            statement.setObject(5, sessao.getLista().getPk());
             int r = statement.executeUpdate();
             if(r>0)
                 resultado = true;
@@ -54,7 +54,7 @@ public class SessaoDAOconcreto implements SessaoDAO{
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Sessao s = new Sessao(rs.getInt("pk"), (Filme)rs.getObject("id_filme"), (Sala)rs.getObject("id_sala"), (Date)rs.getDate("horario"), rs.getBoolean("legendado"), (ListaIngressos)rs.getObject("id_listaIngresso"));
+                Sessao s = new Sessao(rs.getInt("pk"), (Filme)rs.getObject("id_filme"), (Sala)rs.getObject("id_sala"), (Date)rs.getDate("horario"), rs.getBoolean("legendado"), (ListaIngressos)rs.getObject("id_listaIngressos"));
                 lista.add(s);
             }
         } catch (SQLException sQLException) {
@@ -72,7 +72,7 @@ public class SessaoDAOconcreto implements SessaoDAO{
             statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                s = new Sessao(rs.getInt("pk"), (Filme)rs.getObject("id_filme"), (Sala)rs.getObject("id_sala"), (Date)rs.getDate("horario"), rs.getBoolean("legendado"), (ListaIngressos)rs.getObject("id_listaIngresso"));
+                s = new Sessao(rs.getInt("pk"), (Filme)rs.getObject("id_filme"), (Sala)rs.getObject("id_sala"), (Date)rs.getDate("horario"), rs.getBoolean("legendado"), (ListaIngressos)rs.getObject("id_listaIngressos"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -89,7 +89,7 @@ public class SessaoDAOconcreto implements SessaoDAO{
             statement.setObject(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                s = new Sessao(rs.getInt("pk"), (Filme)rs.getObject("id_filme"), (Sala)rs.getObject("id_sala"), (Date)rs.getDate("horario"), rs.getBoolean("legendado"), (ListaIngressos)rs.getObject("id_listaIngresso"));
+                s = new Sessao(rs.getInt("pk"), (Filme)rs.getObject("id_filme"), (Sala)rs.getObject("id_sala"), (Date)rs.getDate("horario"), rs.getBoolean("legendado"), (ListaIngressos)rs.getObject("id_listaIngressos"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -101,13 +101,13 @@ public class SessaoDAOconcreto implements SessaoDAO{
     public boolean updateSessao(int id, Sessao sessao) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE sessao SET id_filme=?, id_sala=?, horario=?, legendado=?, id_listaIngresso=? WHERE pk=?";
+            String sql = "UPDATE sessao SET id_filme=?, id_sala=?, horario=?, legendado=?, id_listaIngressos=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
-            statement.setObject(1, sessao.getFilme());
-            statement.setObject(2, sessao.getSala());
-            statement.setDate(3, (Date)sessao.getHorario());
+            statement.setObject(1, sessao.getFilme().getPk());
+            statement.setObject(2, sessao.getSala().getPk());
+            statement.setTime(3, (Time)sessao.getHorario());
             statement.setBoolean(4, sessao.isLegendado());
-            statement.setObject(5, sessao.getLista()); 
+            statement.setObject(5, sessao.getLista().getPk()); 
             statement.setInt(6, id);
             int r = statement.executeUpdate();
             resultado = r>0;

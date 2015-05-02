@@ -15,7 +15,7 @@ public class DeletaSessao implements Command{
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        request.getParameter("codigo");
+        codigo = Integer.parseInt(request.getParameter("codigo"));
 
         SessaoDAO sessaoDAO = new SessaoDAOconcreto();
         boolean delete = sessaoDAO.deleteSessao(codigo);
@@ -23,7 +23,7 @@ public class DeletaSessao implements Command{
         try {    
             if(delete)
                 response.sendRedirect("sucesso.html");
-            else
+                else
                 response.sendRedirect("manter_sessao.jsp");
         } catch (IOException ex) {
             ex.getMessage();

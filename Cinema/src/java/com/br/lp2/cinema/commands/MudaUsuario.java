@@ -21,7 +21,6 @@ public class MudaUsuario implements Command{
     private String username;
     private String senha1;
     private String senha2;
-    private String cargo;
     private String cargoA;
     
     @Override
@@ -32,7 +31,6 @@ public class MudaUsuario implements Command{
         username = request.getParameter("username");
         senha1 = request.getParameter("senha1");
         senha2 = request.getParameter("senha2");
-        cargo = request.getParameter("cargo");
 
         VerificadorUsuario vc = new VerificadorUsuario(codigo, username, senha1, senha2, cargoA);
         boolean userName = vc.verificaUserName();
@@ -56,19 +54,13 @@ public class MudaUsuario implements Command{
                 AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
                 update = atendenteDAO.updateAtendente(this.codigo, new Atendente(nome,username,senha1));
             }
-            if(update){
-                try{    
+            try{
+                if(update)
                     response.sendRedirect("./sucesso.html");
-                } catch(IOException ex){
-                    ex.getMessage();
-                }
-            }
-            else{
-                try{    
+                else
                     response.sendRedirect("./manter_usuario.jsp");
-                } catch(IOException ex){
-                    ex.getMessage();
-                }
+            } catch(IOException ex){
+                ex.getMessage();
             }
         }
     }

@@ -22,6 +22,14 @@
             <%@include file="manutencao.jsp"%>
         </header>
         <section>
+            <div class="modulo">
+                <form name="command" action="FrontController" method="POST">
+                    <p>Mudar Cargo</p></br>
+                    <input type="text" placeholder="Nome" name="nome" required><br>
+                    <input type="hidden" name="command" value="MudaCargo"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                </form>
+            </div>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
@@ -55,8 +63,6 @@
                     <input type="text" placeholder="Login" name="username" required/></br>
                     <span class="red">*</span><input type="password" placeholder="Senha" name="senha1" required/></br>
                     <span class="red">*</span><input type="password" placeholder="Confirma Senha" name="senha2" required/></br>
-                    Gerente:  <input type="radio" name="cargo" value="Gerente"/>
-                    Atendente:<input type="radio" name="cargo" value="Atendente"/></br>
                     <input type="hidden" name="command" value="MudaUsuario"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>

@@ -35,6 +35,7 @@
                 <form name="command" action="FrontController" method="POST">
                     <input type="number" placeholder="Filme" name="filme" required/></br>
                     <input type="number" placeholder="Sala" name="sala" required/></br>
+                    <input type="number" placeholder="Lista de Ingressos" name="listadeingressos" required/><br>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
                     Legendado:<br>
                     Sim:<input type="radio" name="legendado" value="legendado" checked=""/></br>
@@ -50,6 +51,7 @@
                     <input type="number" placeholder="Codigo da Sessao" name="codigo" required/></br></br>
                     <input type="number" placeholder="Filme" name="filme" required/></br>
                     <input type="number" placeholder="Sala" name="sala" required/></br>
+                    <input type="number" placeholder="Lista de Ingressos" name="listadeingressos" required/><br>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
                     Legendado:<br>
                     Sim:<input type="radio" name="legendado" value="legendado" checked=""/></br>

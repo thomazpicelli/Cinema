@@ -22,6 +22,10 @@ public class Filme implements Serializable{
         CARTAZ, ESTREIA, LANÇAMENTO
     }
 
+    public Filme(int pk) {
+        this.pk = pk;
+    }
+
     public Filme(int pk, Diretor diretor, Genero genero, ListaAtores listaAtores, Distribuidora distribuidora, String nome, int classificacao, int ano, int duracao, tiposituacao situacao, String idioma) {
         this.pk = pk;
         this.diretor = diretor;

@@ -22,6 +22,10 @@ public class VerificadorUsuario {
     private String senha2;
     private String cargoA; //atendente false, gerente true
 
+    public VerificadorUsuario(String username) {
+        this.username = username;
+    }
+
     public VerificadorUsuario(String username, String senha1, String senha2) {
         this.username = username;
         this.senha1 = senha1;
@@ -39,14 +43,11 @@ public class VerificadorUsuario {
     public boolean verificaCodgio(){
         boolean verificado = false;
         if(cargoA.equals("Gerente")){
-            GerenteDAO gerenteDao = new GerenteDAOconcreto();
-            ArrayList<Gerente> listaGerentes = gerenteDao.readGerente();
-            System.out.println("GERENTE VERIFICACAO");
+            GerenteDAO gerenteDAO = new GerenteDAOconcreto();
+            ArrayList<Gerente> listaGerentes = gerenteDAO.readGerente();
             for (Gerente gerente : listaGerentes) {
-                System.out.println(gerente);
                 if(gerente.getPk() == codigo){
                     verificado = true;
-                    System.out.println("ACHOU O CODIGO DO ZÉEEEE");
                     break;
                 } 
             }   

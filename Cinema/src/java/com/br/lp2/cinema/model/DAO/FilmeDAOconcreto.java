@@ -32,10 +32,10 @@ public class FilmeDAOconcreto implements FilmeDAO{
         try {
             String sql = "INSERT INTO Filme (id_diretor, id_genero, id_listaAtores, id_distribuidora, nome, classificacao, ano, duracao, situacao, idioma) VALUES(?,?,?,?,?,?,?,?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setObject(1, filme.getDiretor());
-            statement.setObject(2, filme.getGenero());
-            statement.setObject(3, filme.getListaAtores());
-            statement.setObject(4, filme.getDistribuidora());
+            statement.setObject(1, filme.getDiretor().getPk());
+            statement.setObject(2, filme.getGenero().getPk());
+            statement.setObject(3, filme.getListaAtores().getPk());
+            statement.setObject(4, filme.getDistribuidora().getPk());
             statement.setString(5, filme.getNome());
             statement.setInt(6, filme.getClassificacao());
             statement.setInt(7, filme.getAno());
@@ -108,10 +108,10 @@ public class FilmeDAOconcreto implements FilmeDAO{
         try {
             String sql = "UPDATE filme SET id_diretor=?, id_genero=?, id_listaAtores=?, id_distribuidora=?, nome=?, classificacao=?, ano=?, duracao=?, situacao=?, idioma=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
-            statement.setObject(1, filme.getDiretor());
-            statement.setObject(2, filme.getGenero());
-            statement.setObject(3, filme.getListaAtores());
-            statement.setObject(4, filme.getDistribuidora());
+            statement.setObject(1, filme.getDiretor().getPk());
+            statement.setObject(2, filme.getGenero().getPk());
+            statement.setObject(3, filme.getListaAtores().getPk());
+            statement.setObject(4, filme.getDistribuidora().getPk());
             statement.setString(5, filme.getNome());
             statement.setInt(6, filme.getClassificacao());
             statement.setInt(7, filme.getAno());

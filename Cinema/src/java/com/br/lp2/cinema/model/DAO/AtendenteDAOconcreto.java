@@ -70,7 +70,7 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
             rs = statement.executeQuery();
             
             while (rs.next()) {
-                a = new Atendente(rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
+                a = new Atendente(rs.getInt("pk"),rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -82,19 +82,19 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     public Atendente readAtendenteByNome(String nome) {
         Atendente a = null;
         
-            try {
-                String sql = "SELECT * FROM Atendente WHERE nome =?";
-                statement = connection.prepareStatement(sql);
-                statement.setString(1, nome);
-                rs = statement.executeQuery();
+        try {
+            String sql = "SELECT * FROM Atendente WHERE nome =?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, nome);
+            rs = statement.executeQuery();
                 
-                while (rs.next()) {
-                a = new Atendente(rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
-                }
-            } catch (SQLException sQLException) {
-                System.out.println(sQLException.getMessage());
+            while (rs.next()) {
+                a = new Atendente(rs.getInt("pk"),rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
             }
-            return a;
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return a;
     }
 
     @Override

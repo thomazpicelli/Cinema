@@ -2,12 +2,10 @@ package com.br.lp2.cinema.model.DAO;
 
 import com.br.lp2.cinema.model.connectionFactory.ConnectionFactory;
 import com.br.lp2.cinema.model.javabeans.Sala;
-import com.sun.xml.wss.impl.callback.SAMLCallback;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLType;
 import java.util.ArrayList;
 
 /**
@@ -86,7 +84,7 @@ public class SalaDAOconcreto implements SalaDAO{
             statement.setInt(1, numero);
             rs = statement.executeQuery();
             while (rs.next()) {
-                s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"), (Sala.Situacao)rs.getObject("situacao"));
+                s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

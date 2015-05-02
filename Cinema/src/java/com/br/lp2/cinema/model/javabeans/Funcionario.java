@@ -18,6 +18,13 @@ public abstract class Funcionario implements Serializable{
         this.senha = senha;
     }
 
+    public Funcionario(int pk, String nome, String login, String senha) {
+        this.pk = pk;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+    }
+
     public int getPk() {
         return pk;
     }

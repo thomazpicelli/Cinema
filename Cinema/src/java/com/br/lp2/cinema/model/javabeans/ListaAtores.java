@@ -11,6 +11,10 @@ public class ListaAtores implements Serializable{
     private int pk;
     private static ArrayList<InfoAtor> lista;
 
+    public ListaAtores(int pk) {
+        this.pk = pk;
+    }
+
     public ListaAtores() {
         lista = new ArrayList<InfoAtor>();
     }

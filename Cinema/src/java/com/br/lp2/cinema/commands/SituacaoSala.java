@@ -9,22 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author thomazpicelli
+ * @author Thomazpicelli
  */
-public class CriaSala implements Command{
+public class SituacaoSala implements Command{
     private int numero;
-    private int lotacao;
-    private int especial;
     private String situacao;
     private Sala.Situacao si;
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         numero = Integer.parseInt(request.getParameter("numero"));
-        lotacao = Integer.parseInt(request.getParameter("lotacao"));
-        especial = Integer.parseInt(request.getParameter("especial"));
-        situacao = request.getParameter("situacao");
-
+        situacao  = request.getParameter("situacao");
+        
         switch (situacao) {
             case "Manutencao":
                 si = Sala.Situacao.MANUTENÇÃO;
@@ -36,15 +32,18 @@ public class CriaSala implements Command{
                 si = Sala.Situacao.ESPERA;
                 break;
         }
-        SalaDAO salaDAO = new SalaDAOconcreto();
-        boolean insert = salaDAO.insertSala(new Sala(numero, lotacao, especial,si));
         
-        try {
-            if(insert)
+        SalaDAO salaDAO = new SalaDAOconcreto();
+        Sala sala = salaDAO.readSalaByNumero(numero);
+        
+        boolean update = salaDAO.updateSala(sala.getPk(), new Sala(sala.getNumero(), sala.getLotacao(), sala.getEspecial(), si));
+        
+        try{
+            if(update)
                 response.sendRedirect("sucesso.html");
             else
                 response.sendRedirect("manter_sala.jsp");
-        } catch (IOException ex) {
+        }catch (IOException ex){
             ex.getMessage();
         }
     }

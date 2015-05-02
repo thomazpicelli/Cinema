@@ -11,5 +11,9 @@ public class Atendente extends Funcionario implements Serializable{
     public Atendente(String nome, String login, String senha) {
         super(nome, login, senha);
     }
+
+    public Atendente(int pk, String nome, String login, String senha) {
+        super(pk, nome, login, senha);
+    }
     
 }

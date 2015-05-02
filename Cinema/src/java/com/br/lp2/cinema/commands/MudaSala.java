@@ -17,6 +17,7 @@ public class MudaSala implements Command{
     private int lotacao;
     private int especial;
     private String situacao;
+    private Sala.Situacao si;
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -25,9 +26,21 @@ public class MudaSala implements Command{
         lotacao = Integer.parseInt(request.getParameter("lotacao"));
         especial = Integer.parseInt(request.getParameter("especial"));
         situacao = request.getParameter("situacao");
+        
+        switch (situacao) {
+            case "Manutencao":
+                si = Sala.Situacao.MANUTENÇÃO;
+                break;
+            case "Exibicao":
+                si = Sala.Situacao.EXIBICAO;
+                break;
+            case "Espera":
+                si = Sala.Situacao.ESPERA;
+                break;
+        }
 
         SalaDAO salaDAO = new SalaDAOconcreto();
-        boolean update = salaDAO.updateSala(codigo, new Sala(numero, lotacao, especial, Sala.Situacao.EXIBICAO));
+        boolean update = salaDAO.updateSala(codigo, new Sala(numero, lotacao, especial, si));
         
         try {    
             if(update)

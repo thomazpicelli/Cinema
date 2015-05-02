@@ -16,6 +16,17 @@ public class Sala implements Serializable{
             MANUTENÇÃO, EXIBICAO, ESPERA
     }
 
+    public Sala(int pk) {
+        this.pk = pk;
+    }
+
+    public Sala(int pk, int numero, int lotacao, int especial) {
+        this.pk = pk;
+        this.numero = numero;
+        this.lotacao = lotacao;
+        this.especial = especial;
+    }
+
     public Sala(int pk, int numero, int lotacao, int especial, Situacao situacao) {
         this.pk = pk;
         this.numero = numero;
