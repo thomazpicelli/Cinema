@@ -4,11 +4,10 @@ nav{
     margin: 5% 0% 0% 20%;
     border:1px black solid;
     border-radius: 4px;
-    width: auto;
+    width: 650px;
     height: 300px;
     float: left;
     padding: 1% 5% 0% 5%;
-    
 }
 .dropdown {
   width: 300px;
