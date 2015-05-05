@@ -4,6 +4,7 @@
     Author     : Thomaz
 --%>
 
+<%@page import="javax.jms.Session"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,11 +26,37 @@
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
-                    <input type="text" placeholder="Buscar" name="filme" required/></br>
-                    <input type="hidden" name="command" value="BuscaFilme"/>
+                    <input type="text" placeholder="Nome do Filme" name="filme" required/></br>
+                    <input type="hidden" name="command" value="BuscaFilme_F"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
+            <div class="modulo">    
+                <form name="command" action="FrontController" method="POST">
+                    <input type="text" placeholder="Buscar por Genero" name="genero" required/></br>
+                    <input type="hidden" name="command" value="BuscaFilme_G"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                </form>
+            </div>
+            <% 
+                
+                
+            %>
+            <div class="modulo">    
+                <form name="command" action="FrontController" method="POST">
+                    <input type="text" placeholder="Buscar por Diretor" name="diretor" required/></br>
+                    <input type="hidden" name="command" value="BuscaFilme_D"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                </form>
+            </div>
+            <div class="modulo">    
+                <form name="command" action="FrontController" method="POST">
+                    <input type="text" placeholder="Buscar por Ator" name="ator" required/></br>
+                    <input type="hidden" name="command" value="BuscaFilme_A"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                </form>
+            </div>
+            
             <div class="modulo">
                 <p><a id="2">Criar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
