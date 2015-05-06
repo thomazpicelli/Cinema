@@ -46,7 +46,7 @@ public class FrontController extends HttpServlet {
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
                 ex.getMessage();
             }
-            command.execute(request, response,classe[1]);
+            command.execute(request, response, classe[1]);
             
             out.println("</body>");
             out.println("</html>");

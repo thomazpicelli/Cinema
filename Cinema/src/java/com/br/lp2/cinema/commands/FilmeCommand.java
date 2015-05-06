@@ -67,6 +67,11 @@ public class FilmeCommand implements Command{
                 resultado = Deleta();
                 break;
             case "Busca":
+                break;
+            default:
+                try {
+                    response.sendRedirect("manter_filme.jsp");
+                } catch (IOException ex) { ex.getMessage(); }
         }   
      
         try{
