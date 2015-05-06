@@ -74,7 +74,7 @@
                         <option>Estreia</option>
                         <option>Lancamento</option>
                     </select></br>
-                    <input type="hidden" name="command" value="CriaFilme"/>
+                    <input type="hidden" name="command" value="FilmeCommand_Cria"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -105,7 +105,7 @@
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
                     <input type="number" placeholder="Codigo do filme" name="codigo" required/></br></br>
-                    <input type="hidden" name="command" value="DeletaFilme"/>
+                    <input type="hidden" name="command" value="FilmeCommand_Deleta"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

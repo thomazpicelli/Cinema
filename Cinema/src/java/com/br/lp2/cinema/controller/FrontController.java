@@ -37,15 +37,17 @@ public class FrontController extends HttpServlet {
             out.println("<title>Servlet FrontController</title>");            
             out.println("</head>");
             out.println("<body>");
-                 
+            
+            String[] classe = commandName.split("_");
+
             Command command = null;
             try {
-                command = (Command)Class.forName("com.br.lp2.cinema.commands."+commandName).newInstance();
+                command = (Command)Class.forName("com.br.lp2.cinema.commands."+classe[0]).newInstance();
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
                 ex.getMessage();
             }
-            command.execute(request, response);
-
+            command.execute(request, response,classe[1]);
+            
             out.println("</body>");
             out.println("</html>");
         }

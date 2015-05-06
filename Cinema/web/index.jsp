@@ -28,7 +28,7 @@
                 <form name="command" action="FrontController" method="POST">
                     <input type="text" placeholder="Login" name="nome" required/></br>
                     <input type="password" placeholder="Senha" name="senha" required/></br>  
-                    <input type="hidden" name="command" value="Login"/>
+                    <input type="hidden" name="command" value="Login_x"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </fieldset> 

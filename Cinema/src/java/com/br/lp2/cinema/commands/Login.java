@@ -15,7 +15,7 @@ public class Login implements Command{
     private String senha;
    
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) {
+    public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
         nome = request.getParameter("nome");
         senha = request.getParameter("senha");
 
