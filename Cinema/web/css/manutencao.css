@@ -71,7 +71,7 @@ section select{
 section form input[type="number"]{
     border: 1px solid #FF5E00;
 	border-radius: 4px;
-	margin: 2%;
+	margin: 0%;
 	padding: 4px;
         height: 25px;
         width: 60%;

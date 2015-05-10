@@ -35,6 +35,15 @@ public class Sala implements Serializable{
         this.situacao = situacao;
     }
 
+    public Sala(int pk, int numero, int lotacao, int especial, String situacao) {
+        this.pk = pk;
+        this.numero = numero;
+        this.lotacao = lotacao;
+        this.especial = especial;
+        this.situacao = Enum.valueOf(Sala.Situacao.class, situacao); 
+    }
+    
+
     public Sala(int numero, int lotacao, int especial, Situacao situacao) {
         this.numero = numero;
         this.lotacao = lotacao;

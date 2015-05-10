@@ -40,7 +40,7 @@
                     Legendado:<br><br>
                     Sim:<input type="radio" name="legendado" value="legendado" checked=""/>
                     Não:<input type="radio" name="legendado" value=""/></br>
-                    <input type="hidden" name="command" value="CriaSessao"/>
+                    <input type="hidden" name="command" value="SessaoCommand_Cria"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -56,15 +56,19 @@
                     Legendado:<br><br>
                     Sim:<input type="radio" name="legendado" value="legendado" checked=""/>
                     Não:<input type="radio" name="legendado" value=""/></br>
-                    <input type="hidden" name="command" value="MudaSessao"/>
+                    <input type="hidden" name="command" value="SessaoCommand_Muda"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
             <div class="modulo">
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
-                    <input type="number" placeholder="Codigo da Sessao" name="codigo" required/></br></br>
-                    <input type="hidden" name="command" value="DeletaSessao"/>
+                    <select name="codigo">
+                        <c:forEach var="sessao" items="${sessoes}" >
+                            <option value="${sessao.getPk()}">${sessao.getPk()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <input type="hidden" name="command" value="SessaoCommand_Deleta"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

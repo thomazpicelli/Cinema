@@ -24,6 +24,14 @@ public class Sessao implements Serializable{
         this.lista = listaIngresso;
     }
 
+    public Sessao(int pk, Filme filme, Sala sala, boolean legendado, ListaIngressos lista) {
+        this.pk = pk;
+        this.filme = filme;
+        this.sala = sala;
+        this.legendado = legendado;
+        this.lista = lista;
+    }
+
     public Sessao(Filme filme, Sala sala, Date horario, boolean legendado, ListaIngressos lista) {
         this.filme = filme;
         this.sala = sala;

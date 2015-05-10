@@ -26,21 +26,24 @@ public class SessaoCommand implements Command{
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
-        codigo = Integer.parseInt(request.getParameter("codigo"));
-        filme = Integer.parseInt(request.getParameter("filme"));
-        sala = Integer.parseInt(request.getParameter("sala"));
-        horario = Long.parseLong(request.getParameter("horario"));
         String legenda = request.getParameter("legendado");
-        listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));        
-               
         if(legenda.equals("legendado"))
             legendado = true;  
         
         switch(operacao){
             case "Cria":
+                filme = Integer.parseInt(request.getParameter("filme"));
+                sala = Integer.parseInt(request.getParameter("sala"));
+                horario = Long.parseLong(request.getParameter("horario"));
+                listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));
                 resultado = Cria();
                 break;
             case "Muda": 
+                codigo = Integer.parseInt(request.getParameter("codigo"));
+                filme = Integer.parseInt(request.getParameter("filme"));
+                sala = Integer.parseInt(request.getParameter("sala"));
+                horario = Long.parseLong(request.getParameter("horario"));
+                listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));
                 resultado = Muda();
                 break;
             case "Deleta":

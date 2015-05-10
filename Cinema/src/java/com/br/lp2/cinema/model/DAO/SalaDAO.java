@@ -13,7 +13,7 @@ public interface SalaDAO {
     public boolean insertSala(Sala sala);
     
     //READ
-    public ArrayList<Sala> readGerente();
+    public ArrayList<Sala> readSala();
     public Sala readSalaById(int id);
     public Sala readSalaByNumero(int numero);
     

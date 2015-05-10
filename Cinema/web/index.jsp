@@ -34,8 +34,6 @@
             </fieldset> 
         </section>
         <footer>
-            
-            
         </footer>
     </body>
 </html>

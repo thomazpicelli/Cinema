@@ -54,7 +54,7 @@ public class SessaoDAOconcreto implements SessaoDAO{
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Sessao s = new Sessao(rs.getInt("pk"), (Filme)rs.getObject("id_filme"), (Sala)rs.getObject("id_sala"), (Date)rs.getDate("horario"), rs.getBoolean("legendado"), (ListaIngressos)rs.getObject("id_listaIngressos"));
+                Sessao s = new Sessao(rs.getInt("pk"), new Filme(rs.getInt("id_filme")), new Sala(rs.getInt("id_sala")), rs.getBoolean("legendado"), new ListaIngressos(rs.getInt("id_listaIngressos")));
                 lista.add(s);
             }
         } catch (SQLException sQLException) {

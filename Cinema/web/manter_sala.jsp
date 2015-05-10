@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,14 +25,18 @@
         <section>
             </br>
             <h2>Situação da Sala:</h2>
-            <form name="command" action="FrontController" method="POST">
-                <input type="number" placeholder="Número da Sala" name="numero" required/></br>
+            Número:<form name="command" action="FrontController" method="POST">
+                <select name="numero">
+                    <c:forEach var="sala" items="${salas}" >
+                        <option value="${sala.getNumero()}">${sala.getNumero()}</option> 
+                    </c:forEach>    
+                </select>
                 <select name="situacao">
                     <option>Manutencao</option>
                     <option>Exibicao</option>
                     <option>Espera</option>
                 </select></br>
-                <input type="hidden" name="command" value="SituacaoSala"/>
+                <input type="hidden" name="command" value="SalaCommand_MudaSituacao"/>
                 <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
             </form>
             <div class="modulo">    
@@ -41,6 +46,7 @@
                     <input type="hidden" name="command" value="BuscaSala"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
+                
             </div>
             <div class="modulo">
                 <p><a id="2">Criar:</a></p></br>
@@ -53,32 +59,38 @@
                         <option>Exibicao</option>
                         <option>Espera</option>
                     </select></br>
-                    <input type="hidden" name="command" value="CriaSala"/>
+                    <input type="hidden" name="command" value="SalaCommand_Cria"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
             <div class="modulo">
                 <p><a id="3">Mudar:</a></p></br>
-                
+                Numero:<form name="command" action="SalaMudaController" method="POST">
+                    <select name="numero">
+                        <c:forEach var="sala" items="${salas}" >
+                            <option value="${sala.getNumero()}">${sala.getNumero()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <input style="margin: 0%;" type="image" src="img/p.png" alt="Submit Form" name="command"/>
+                </form>
                 <form name="command" action="FrontController" method="POST">
-                    <input type="number" placeholder="Codigo da Sala" name="codigo" required/></br></br>
-                    <input type="number" placeholder="Número" name="numero" required/></br>
-                    <input type="number" placeholder="Lotação" name="lotacao" required/></br>
-                    <input type="number" placeholder="Especial" name="especial" required/></br>
-                    <select name="situacao">
-                        <option>Manutencao</option>
-                        <option>Exibicao</option>
-                        <option>Espera</option>
-                    </select></br>
-                    <input type="hidden" name="command" value="MudaSala"/>
+                    <input type="number" placeholder="Número" name="numero" value="${sessionScope.salaUpdate.getNumero()}" required/></br>
+                    <input type="number" placeholder="Lotação" name="lotacao" value="${sessionScope.salaUpdate.getLotacao()}" required/></br>
+                    <input type="number" placeholder="Especial" name="especial" value="${sessionScope.salaUpdate.getEspecial()}" required/></br>
+                    <input type="hidden" name="command" value="SalaCommand_Muda"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
             <div class="modulo">
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
-                    <input type="number" placeholder="Codigo da Sala" name="codigo" required/></br></br>
-                    <input type="hidden" name="command" value="DeletaSala"/>
+                    <select name="codigo">
+                        <c:forEach var="sala" items="${salas}" >
+                            <option value="${sala.getPk()}">${sala.getPk()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <c:if test="${verificaSessao == 'sim'}"><p>Existem sessões nesta sala! Exclusão inválida!</p></c:if>
+                    <input type="hidden" name="command" value="SalaCommand_Deleta"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

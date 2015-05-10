@@ -2,10 +2,7 @@ package com.br.lp2.cinema.commands;
 
 import com.br.lp2.cinema.model.DAO.SalaDAO;
 import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
-import com.br.lp2.cinema.model.DAO.SessaoDAO;
-import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Sala;
-import com.br.lp2.cinema.model.javabeans.Sessao;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,41 +22,49 @@ public class SalaCommand implements Command{
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
-        numero = Integer.parseInt(request.getParameter("numero"));
-        lotacao = Integer.parseInt(request.getParameter("lotacao"));
-        especial = Integer.parseInt(request.getParameter("especial"));
         situacao = request.getParameter("situacao");
-        
-        switch (situacao) {
-            case "Manutencao":
-                si = Sala.Situacao.MANUTENÇÃO;
-                break;
-            case "Exibicao":
-                si = Sala.Situacao.EXIBICAO;
-                break;
-            case "Espera":
-                si = Sala.Situacao.ESPERA;
-                break;
+        if(!situacao.equals("") || situacao != null){
+            switch (situacao) {
+                case "Manutencao":
+                    si = Sala.Situacao.MANUTENÇÃO;
+                    break;
+                case "Exibicao":
+                    si = Sala.Situacao.EXIBICAO;
+                    break;
+                case "Espera":
+                    si = Sala.Situacao.ESPERA;
+                    break;
+            }
         }
         switch(operacao){
             case "Cria":
+                numero = Integer.parseInt(request.getParameter("numero"));
+                lotacao = Integer.parseInt(request.getParameter("lotacao"));
+                especial = Integer.parseInt(request.getParameter("especial"));
                 resultado = Cria();
                 break;
             case "Muda": 
+                numero = Integer.parseInt(request.getParameter("numero"));
+                lotacao = Integer.parseInt(request.getParameter("lotacao"));
+                especial = Integer.parseInt(request.getParameter("especial"));
                 resultado = Muda();
                 break;
             case "Deleta":
+                codigo = Integer.parseInt(request.getParameter("codigo"));
                 resultado = Deleta();
+                if(!resultado)
+                    request.getSession().setAttribute("verificaSessao", "sim");
                 break;
             case "Busca":
                 break;
             case "MudaSituacao":
+                numero = Integer.parseInt(request.getParameter("numero"));                
                 resultado = Situacao();
                 break;
-                default:
-                try {
-                    response.sendRedirect("manter_sala.jsp");
+            default:
+                try { response.sendRedirect("manter_sala.jsp");
                 } catch (IOException ex) { ex.getMessage(); }
+                break;
         }   
         
         try { 
@@ -74,7 +79,7 @@ public class SalaCommand implements Command{
 
     private boolean Cria() {
         SalaDAO salaDAO = new SalaDAOconcreto();
-        boolean insert = salaDAO.insertSala(new Sala(numero, lotacao, especial,si));
+        boolean insert = salaDAO.insertSala(new Sala(numero, lotacao, especial, si));
         return insert;
     }
 
@@ -85,14 +90,8 @@ public class SalaCommand implements Command{
     }
 
     private boolean Deleta() {
-        boolean delete = false;
-        SessaoDAO sessaoDAO = new SessaoDAOconcreto();
-        Sessao sessao = sessaoDAO.readSessaoBySala(codigo);
-        
-        if(sessao == null){
-            SalaDAO salaDAO = new SalaDAOconcreto();
-            delete = salaDAO.deleteSala(codigo);
-        }
+        SalaDAO salaDAO = new SalaDAOconcreto();
+        boolean delete = salaDAO.deleteSala(codigo);
         return delete;
     }
 

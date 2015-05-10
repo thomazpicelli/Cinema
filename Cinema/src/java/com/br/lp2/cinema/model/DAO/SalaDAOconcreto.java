@@ -42,14 +42,14 @@ public class SalaDAOconcreto implements SalaDAO{
     }
 
     @Override
-    public ArrayList<Sala> readGerente() {
+    public ArrayList<Sala> readSala() {
         ArrayList<Sala> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Sala";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Sala s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"), (Sala.Situacao)rs.getObject("situacao"));
+                Sala s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"), rs.getString("situacao"));
                 lista.add(s);
             }
         } catch (SQLException sQLException) {
@@ -67,7 +67,7 @@ public class SalaDAOconcreto implements SalaDAO{
             statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"), (Sala.Situacao)rs.getObject("situacao"));
+                s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"), rs.getString("situacao"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
