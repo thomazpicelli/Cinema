@@ -44,13 +44,14 @@ public class SalaCommand implements Command{
                 resultado = Cria();
                 break;
             case "Muda": 
+                codigo = Integer.parseInt(request.getParameter("codigo"));
                 numero = Integer.parseInt(request.getParameter("numero"));
                 lotacao = Integer.parseInt(request.getParameter("lotacao"));
                 especial = Integer.parseInt(request.getParameter("especial"));
                 resultado = Muda();
                 break;
             case "Deleta":
-                codigo = Integer.parseInt(request.getParameter("codigo"));
+                numero = Integer.parseInt(request.getParameter("numero"));
                 resultado = Deleta();
                 if(!resultado)
                     request.getSession().setAttribute("verificaSessao", "sim");
@@ -90,8 +91,10 @@ public class SalaCommand implements Command{
     }
 
     private boolean Deleta() {
+        boolean delete = false;
         SalaDAO salaDAO = new SalaDAOconcreto();
-        boolean delete = salaDAO.deleteSala(codigo);
+        Sala s = salaDAO.readSalaByNumero(numero);
+        if(s != null) delete = salaDAO.deleteSala(s.getPk());
         return delete;
     }
 

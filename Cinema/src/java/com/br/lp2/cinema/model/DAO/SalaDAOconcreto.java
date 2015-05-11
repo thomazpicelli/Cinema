@@ -126,19 +126,4 @@ public class SalaDAOconcreto implements SalaDAO{
         }
         return resultado;
     }
-
-    @Override
-    public boolean deleteSala(Sala sala) {
-        boolean resultado = false;
-        try {
-            String sql = "DELETE FROM sala WHERE VALUES(?)";
-            statement = connection.prepareStatement(sql);
-            int r = statement.executeUpdate();
-            resultado = r>0;
-            
-        } catch (SQLException sQLException) {
-            System.out.println(sQLException.getMessage());
-        }
-        return resultado;
-    }
 }

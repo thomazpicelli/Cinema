@@ -1,9 +1,15 @@
 package com.br.lp2.cinema.controller;
 
+import com.br.lp2.cinema.model.DAO.FilmeDAO;
+import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;
+import com.br.lp2.cinema.model.DAO.ListaIngressosDAO;
+import com.br.lp2.cinema.model.DAO.ListaIngressosDAOconcreto;
 import com.br.lp2.cinema.model.DAO.SalaDAO;
 import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
 import com.br.lp2.cinema.model.DAO.SessaoDAO;
 import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
+import com.br.lp2.cinema.model.javabeans.Filme;
+import com.br.lp2.cinema.model.javabeans.ListaIngressos;
 import com.br.lp2.cinema.model.javabeans.Sala;
 import com.br.lp2.cinema.model.javabeans.Sessao;
 import java.io.IOException;
@@ -36,12 +42,26 @@ public class SessaoController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            ArrayList<Sessao> lista = new ArrayList<Sessao>();
+            ArrayList<Sessao> lista1 = new ArrayList<Sessao>();
             SessaoDAO sessao = new SessaoDAOconcreto();
-            lista = sessao.readSessao();
-            
-            request.getSession().setAttribute("sessoes", lista);
+            lista1 = sessao.readSessao();
+            request.getSession().setAttribute("sessoes", lista1);
 
+            ArrayList<Filme> lista2 = new ArrayList<Filme>();
+            FilmeDAO filme = new FilmeDAOconcreto();
+            lista2 = filme.readFilme();
+            request.getSession().setAttribute("filmes", lista2);
+            
+            ArrayList<Sala> lista3 = new ArrayList<Sala>();
+            SalaDAO sala = new SalaDAOconcreto();
+            lista3 = sala.readSala();
+            request.getSession().setAttribute("salas", lista3);
+            
+            ArrayList<ListaIngressos> lista4 = new ArrayList<ListaIngressos>();
+            ListaIngressosDAO listaIngressosDAO = new ListaIngressosDAOconcreto();
+            lista4 = listaIngressosDAO.readListaIngressos();
+            request.getSession().setAttribute("ingressos", lista4);
+            
             response.sendRedirect("manter_sessao.jsp");	
         }
     }

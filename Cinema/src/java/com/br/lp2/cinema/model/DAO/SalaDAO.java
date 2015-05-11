@@ -22,5 +22,4 @@ public interface SalaDAO {
     
     //DELETE
     public boolean deleteSala(int id);
-    public boolean deleteSala(Sala sala);    
 }

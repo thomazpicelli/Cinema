@@ -1,10 +1,5 @@
-<%-- 
-    Document   : manter_sessao
-    Created on : 26/04/2015, 01:07:52
-    Author     : Thomaz
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,9 +28,24 @@
             <div class="modulo">
                 <p><a id="2">Criar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
-                    <input type="number" placeholder="Filme" name="filme" required/></br>
-                    <input type="number" placeholder="Sala" name="sala" required/></br>
-                    <input type="number" placeholder="Lista de Ingressos" name="listadeingressos" required/><br>
+                    <select name="filme">
+                        <option value="" selected="">-- Filme --</option>
+                        <c:forEach var="filme" items="${filmes}" >
+                            <option value="${filme.getPk()}">${filme.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="sala">
+                        <option value="" selected="">-- Sala --</option>
+                        <c:forEach var="sala" items="${salas}" >
+                            <option value="${sala.getPk()}">${sala.getNumero()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="listadeingressos">
+                        <option value="" selected="">-- Ingressos Disponíveis --</option>
+                        <c:forEach var="ing" items="${ingressos}" >
+                            <option value="${ing.getPk()}">${ing.getPk()}</option> 
+                        </c:forEach>    
+                    </select>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
                     Legendado:<br><br>
                     Sim:<input type="radio" name="legendado" value="legendado" checked=""/>
@@ -48,10 +58,30 @@
                 <p><a id="3">Mudar:</a></p></br>
                 
                 <form name="command" action="FrontController" method="POST">
-                    <input type="number" placeholder="Codigo da Sessao" name="codigo" required/></br></br>
-                    <input type="number" placeholder="Filme" name="filme" required/></br>
-                    <input type="number" placeholder="Sala" name="sala" required/></br>
-                    <input type="number" placeholder="Lista de Ingressos" name="listadeingressos" required/><br>
+                    <select name="codigo">
+                        <option value="" selected=""> -- Código -- </option>
+                        <c:forEach var="sessao" items="${sessoes}" >
+                            <option value="${sessao.getPk()}">${sessao.getPk()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="filme">
+                        <option value="" selected="">-- Filme --</option>
+                        <c:forEach var="filme" items="${filmes}" >
+                            <option value="${filme.getPk()}">${filme.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="sala">
+                        <option value="" selected="">-- Sala --</option>
+                        <c:forEach var="sala" items="${salas}" >
+                            <option value="${sala.getPk()}">${sala.getNumero()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="listadeingressos">
+                        <option value="" selected="">-- Ingressos Disponíveis --</option>
+                        <c:forEach var="ing" items="${ingressos}" >
+                            <option value="${ing.getPk()}">${ing.getPk()}</option> 
+                        </c:forEach>    
+                    </select>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
                     Legendado:<br><br>
                     Sim:<input type="radio" name="legendado" value="legendado" checked=""/>
@@ -64,8 +94,9 @@
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
                     <select name="codigo">
+                        <option value="" selected=""> -- Código -- Filme -- Horário --</option>
                         <c:forEach var="sessao" items="${sessoes}" >
-                            <option value="${sessao.getPk()}">${sessao.getPk()}</option> 
+                            <option value="${sessao.getPk()}">${sessao.getPk()} - ${sessao.getFilme().getNome()} - ${sessao.getHorario()}</option> 
                         </c:forEach>    
                     </select>
                     <input type="hidden" name="command" value="SessaoCommand_Deleta"/>

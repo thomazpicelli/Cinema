@@ -46,7 +46,7 @@ public class ListaIngressosDAOconcreto implements ListaIngressosDAO{
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                ListaIngressos li = new ListaIngressos();
+                ListaIngressos li = new ListaIngressos(rs.getInt("pk"));
                 lista.add(li);
             }
         } catch (SQLException sQLException) {
