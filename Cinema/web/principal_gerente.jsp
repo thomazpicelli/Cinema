@@ -26,9 +26,9 @@
                     <a href="#">Manutenção</a>
                     <ul>
                         <li><a href="SalaController">Manter Sala</a></li>
-                        <li><a href="SessaoController">Manter Filme</a></li>
-                        <li><a href="manter_sessao.jsp">Manter Sessão</a></li>
-                        <li><a href="manter_usuario.jsp">Manter Usuário</a></li>
+                        <li><a href="FilmeController">Manter Filme</a></li>
+                        <li><a href="SessaoController">Manter Sessão</a></li>
+                        <li><a href="UsuarioController">Manter Usuário</a></li>
                     </ul>
                 </div>
                 <div class="dropdown hover">

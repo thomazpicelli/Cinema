@@ -41,8 +41,8 @@ public class GerenteDAOconcreto implements GerenteDAO {
     }
 
     @Override
-    public ArrayList<Gerente> readGerente() {
-        ArrayList<Gerente> lista = new ArrayList();
+    public ArrayList<Funcionario> readGerente() {
+        ArrayList<Funcionario> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Gerente";
             statement = connection.prepareStatement(sql);
@@ -126,14 +126,14 @@ public class GerenteDAOconcreto implements GerenteDAO {
     }
 
     @Override
-    public boolean deleteGerente(Funcionario gerente) {
+    public boolean deleteGerente(String nome) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM gerente WHERE VALUES(?)";
+            String sql = "DELETE FROM gerente WHERE nome = ?";
             statement = connection.prepareStatement(sql);
+            statement.setString(1, nome);
             int r = statement.executeUpdate();
             resultado = r>0;
-            
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }

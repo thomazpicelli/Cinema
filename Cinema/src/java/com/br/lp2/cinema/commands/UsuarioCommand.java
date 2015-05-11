@@ -27,7 +27,6 @@ public class UsuarioCommand implements Command{
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
-        codigo = Integer.parseInt(request.getParameter("codigo"));
         nome = request.getParameter("nome");
         username = request.getParameter("username");
         senha1 = request.getParameter("senha1");
@@ -39,6 +38,7 @@ public class UsuarioCommand implements Command{
                 resultado = Cria();
                 break;
             case "Muda": 
+                codigo = Integer.parseInt(request.getParameter("codigo"));
                 resultado = Muda();
                 break;
             case "Deleta":
@@ -46,11 +46,13 @@ public class UsuarioCommand implements Command{
                 break;
             case "Busca":
                 break;
-            case "MudaCargo":
+            case "Cargo":
                 resultado = Cargo();
                 break;
                 default:
-                    
+                    try{ response.sendRedirect("./manter_usuario.jsp");
+                    } catch(IOException ex){ ex.getMessage(); }
+                    break;
         }   
         
         if(resultado){
@@ -114,33 +116,36 @@ public class UsuarioCommand implements Command{
 
     private boolean Deleta() {
         boolean delete = false;
-        if(cargo.equals("Gerente")){
-            GerenteDAO gerenteDAO = new GerenteDAOconcreto();
-            delete = gerenteDAO.deleteGerente(codigo);
-        }
-        else if(cargo.equals("Atendente")){
-            AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-            delete = atendenteDAO.deleteAtendente(codigo);
+        GerenteDAO gerenteDAO = new GerenteDAOconcreto();
+        AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
+
+        Funcionario funcionario = atendenteDAO.readAtendenteByNome(nome);
+        if(funcionario != null)
+            delete = atendenteDAO.deleteAtendente(funcionario.getNome());
+        else{
+            funcionario = gerenteDAO.readGerenteByNome(nome);
+            if(funcionario != null)
+                delete = gerenteDAO.deleteGerente(funcionario.getNome());
         }
         return delete;
     }    
 
     private boolean Cargo() {
+        boolean delete, insert = false;
         GerenteDAO gerenteDAO = new GerenteDAOconcreto();
         AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
 
         Funcionario funcionario = atendenteDAO.readAtendenteByNome(nome);
-        if(funcionario == null)
-            funcionario = gerenteDAO.readGerenteByNome(nome);
-        
-        boolean delete, insert = false;
-        if(funcionario instanceof Atendente){
-           delete = atendenteDAO.deleteAtendente(funcionario);
+        if(funcionario != null){
+            delete = atendenteDAO.deleteAtendente(funcionario.getNome());
            if(delete) insert = gerenteDAO.insertGerente(funcionario);
         }
-        else if(funcionario instanceof Gerente){
-            delete = gerenteDAO.deleteGerente(funcionario);
-            if(delete) insert = atendenteDAO.insertAtendente(funcionario);
+        else{
+            funcionario = gerenteDAO.readGerenteByNome(nome);
+            if(funcionario != null){
+                delete = gerenteDAO.deleteGerente(funcionario.getNome());
+                if(delete) insert = atendenteDAO.insertAtendente(funcionario);
+            }
         }
         return insert;
     }

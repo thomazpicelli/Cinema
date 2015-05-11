@@ -43,15 +43,15 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     }
 
     @Override
-    public ArrayList <Atendente> readAtendente() {
-        ArrayList<Atendente> lista = new ArrayList();
+    public ArrayList<Funcionario> readAtendente() {
+        ArrayList<Funcionario> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Atendente";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             
             while (rs.next()) {
-                Atendente a = new Atendente(rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
+                Atendente a = new Atendente(rs.getInt("pk"), rs.getString("nome"), rs.getString("login"), rs.getString("senha"));
                 lista.add(a);
             }
         } catch (SQLException sQLException) {
@@ -133,12 +133,12 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     }
 
     @Override
-    public boolean deleteAtendente(Funcionario atendente) {
+    public boolean deleteAtendente(String nome) {
         boolean resultado = false;
-        
         try {
-            String sql = "DELETE FROM Atendente WHERE VALUES(?)";
+            String sql = "DELETE FROM Atendente WHERE nome =?";
             statement = connection.prepareStatement(sql);
+            statement.setString(1, nome);
             int r = statement.executeUpdate();
             resultado = r>0;
             

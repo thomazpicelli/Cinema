@@ -59,7 +59,7 @@ public class FilmeDAOconcreto implements FilmeDAO{
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Filme f = new Filme(rs.getInt("pk"), (Diretor)rs.getObject("id_diretor"), (Genero)rs.getObject("id_genero"), (ListaAtores)rs.getObject("id_listaAtores"), (Distribuidora)rs.getObject("id_distribuidora"), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), (Filme.tiposituacao)rs.getObject("situacao"), rs.getString("idioma"));
+                Filme f = new Filme(rs.getInt("pk"), new Diretor(rs.getInt("id_diretor")), new Genero(rs.getInt("id_genero")), new ListaAtores(rs.getInt("id_listaAtores")), new Distribuidora(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
                 lista.add(f);
             }
         } catch (SQLException sQLException) {
@@ -77,7 +77,7 @@ public class FilmeDAOconcreto implements FilmeDAO{
             statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                f = new Filme(rs.getInt("pk"), new Diretor(rs.getInt("id_diretor")), new Genero(rs.getInt("id_genero")), new ListaAtores(rs.getInt("id_listaAtores")), new Distribuidora(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), (Filme.tiposituacao)rs.getObject("situacao"), rs.getString("idioma"));            
+                f = new Filme(rs.getInt("pk"), new Diretor(rs.getInt("id_diretor")), new Genero(rs.getInt("id_genero")), new ListaAtores(rs.getInt("id_listaAtores")), new Distribuidora(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));            
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

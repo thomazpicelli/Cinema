@@ -4,8 +4,7 @@ import com.br.lp2.cinema.model.DAO.AtendenteDAO;
 import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
 import com.br.lp2.cinema.model.DAO.GerenteDAO;
 import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
-import com.br.lp2.cinema.model.javabeans.Atendente;
-import com.br.lp2.cinema.model.javabeans.Gerente;
+import com.br.lp2.cinema.model.javabeans.Funcionario;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,8 +43,8 @@ public class VerificadorUsuario {
         boolean verificado = false;
         if(cargoA.equals("Gerente")){
             GerenteDAO gerenteDAO = new GerenteDAOconcreto();
-            ArrayList<Gerente> listaGerentes = gerenteDAO.readGerente();
-            for (Gerente gerente : listaGerentes) {
+            ArrayList<Funcionario> listaGerentes = gerenteDAO.readGerente();
+            for (Funcionario gerente : listaGerentes) {
                 if(gerente.getPk() == codigo){
                     verificado = true;
                     break;
@@ -54,9 +53,9 @@ public class VerificadorUsuario {
         }
         else{
             AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-            ArrayList<Atendente> listaAtendentes = atendenteDAO.readAtendente();
+            ArrayList<Funcionario> listaAtendentes = atendenteDAO.readAtendente();
         
-            for (Atendente atendente : listaAtendentes){
+            for (Funcionario atendente : listaAtendentes){
                 if(atendente.getPk() == codigo){
                     verificado = true;
                     break;
@@ -68,19 +67,19 @@ public class VerificadorUsuario {
     
     public boolean verificaUserName(){
         GerenteDAO gerenteDao = new GerenteDAOconcreto();
-        ArrayList<Gerente> listaGerentes = gerenteDao.readGerente();
+        ArrayList<Funcionario> listaGerentes = gerenteDao.readGerente();
         AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-        ArrayList<Atendente> listaAtendentes = atendenteDAO.readAtendente();
+        ArrayList<Funcionario> listaAtendentes = atendenteDAO.readAtendente();
         
         boolean verificado = true;
-        for (Gerente gerente : listaGerentes) {
+        for (Funcionario gerente : listaGerentes) {
             if(gerente.getLogin().equals(username)){    
                 verificado = false;
                 break;
             } 
         }
         if(!verificado){
-            for (Atendente atendente : listaAtendentes) {
+            for (Funcionario atendente : listaAtendentes) {
                 if(atendente.getLogin().equals(username)){
                     verificado = false;
                     break;

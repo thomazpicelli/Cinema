@@ -4,8 +4,7 @@ import com.br.lp2.cinema.model.DAO.AtendenteDAO;
 import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
 import com.br.lp2.cinema.model.DAO.GerenteDAO;
 import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
-import com.br.lp2.cinema.model.javabeans.Atendente;
-import com.br.lp2.cinema.model.javabeans.Gerente;
+import com.br.lp2.cinema.model.javabeans.Funcionario;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,10 +25,10 @@ public class VerificadorLogin {
 
     public boolean verificaGerente(){
         GerenteDAO gerenteDao = new GerenteDAOconcreto();
-        ArrayList<Gerente> listaGerentes = gerenteDao.readGerente();
+        ArrayList<Funcionario> listaGerentes = gerenteDao.readGerente();
         
         boolean verificado = false;
-        for (Gerente gerente : listaGerentes) {
+        for (Funcionario gerente : listaGerentes) {
             if(gerente.getLogin().equals(nome) && gerente.getSenha().equals(senha)){    
                 verificado = true;
                 break;
@@ -40,11 +39,11 @@ public class VerificadorLogin {
     
     public boolean verificaAtendente(){
         AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-        ArrayList<Atendente> listaAtendentes = atendenteDAO.readAtendente();
+        ArrayList<Funcionario> listaAtendentes = atendenteDAO.readAtendente();
         
         boolean verificado = false;
         if(!verificado){
-            for (Atendente atendente : listaAtendentes) {
+            for (Funcionario atendente : listaAtendentes) {
                 if(atendente.getLogin().equals(nome) && atendente.getSenha().equals(senha)){    
                     verificado = true;
                     break;

@@ -14,7 +14,7 @@ public interface AtendenteDAO {
     public boolean insertAtendente(Funcionario atendente);
     
     //READ
-    public ArrayList<Atendente> readAtendente();
+    public ArrayList<Funcionario> readAtendente();
     public Atendente readAtendenteById(int id);
     public Atendente readAtendenteByNome(String nome);
     
@@ -23,6 +23,6 @@ public interface AtendenteDAO {
     
     //DELETE
     public boolean deleteAtendente(int id);
-    public boolean deleteAtendente(Funcionario atendente);    
+    public boolean deleteAtendente(String nome);    
 }
 

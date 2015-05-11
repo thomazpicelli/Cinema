@@ -1,10 +1,5 @@
-<%-- 
-    Document   : manter_usuario
-    Created on : 26/04/2015, 01:06:13
-    Author     : Thomaz
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,8 +20,13 @@
             <div class="modulo">
                 <form name="command" action="FrontController" method="POST">
                     <p>Mudar Cargo</p></br>
-                    <input type="text" placeholder="Nome" name="nome" required><br>
-                    <input type="hidden" name="command" value="MudaCargo"/>
+                    <select name="nome">
+                        <option value="" selected="selected"> -- Usuários -- </option>
+                        <c:forEach var="usuario" items="${usuarios}" >
+                            <option value="${usuario.getNome()}">${usuario.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <input type="hidden" name="command" value="UsuarioCommand_Cargo"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
@@ -45,35 +45,47 @@
                     <input type="text" placeholder="Login" name="username" required/></br>
                     <input type="password" placeholder="Senha" name="senha1" required/></br>
                     <input type="password" placeholder="Confirma Senha" name="senha2" required/></br>
-                    Gerente:  <input type="radio" name="cargo" value="Gerente"/>
-                    Atendente:<input type="radio" name="cargo" value="Atendente"/></br>
-                    <input type="hidden" name="command" value="CriaUsuario"/>
+                    <select name="cargo">
+                        <option value="" selected=""> -- Cargo-- </option>
+                        <option value="Atendente">Atendente</option> 
+                        <option value="Gerente">Gerente</option> 
+                    </select>
+                    <input type="hidden" name="command" value="UsuarioCommand_Cria"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
             <div class="modulo">
                 <p><a id="3">Mudar:</a></p></br>
-                
                 <form name="command" action="FrontController" method="POST">
-                    <input type="number" placeholder="Código do Usuário que deseja alterar" name="codigo" required/></br>
-                    <h3>Cargo Atual:</h3>
-                    Gerente:  <input type="radio" name="cargoA" value="Gerente"/>
-                    Atendente:<input type="radio" name="cargoA" value="Atendente"/></br>
+                    <select name="codigo">
+                        <option value="" selected="selected"> -- Codigo - Usuários -- </option>
+                        <c:forEach var="usuario" items="${usuarios}" >
+                            <option value="${usuario.getPk()}">${usuario.getPk()} - ${usuario.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="cargo">
+                        <option value="" selected=""> -- Cargo-- </option>
+                        <option value="Atendente">Atendente</option> 
+                        <option value="Gerente">Gerente</option> 
+                    </select>
                     <input type="text" placeholder="Nome" name="nome" required/></br>
                     <input type="text" placeholder="Login" name="username" required/></br>
                     <span class="red">*</span><input type="password" placeholder="Senha" name="senha1" required/></br>
                     <span class="red">*</span><input type="password" placeholder="Confirma Senha" name="senha2" required/></br>
-                    <input type="hidden" name="command" value="MudaUsuario"/>
+                    <input type="hidden" name="command" value="UsuarioCommand_Muda"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
             <div class="modulo">
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
-                    <span class="red">*</span><input type="number" placeholder="Codigo da Sessao" name="codigo" required/></br></br>
-                    Gerente:  <input type="radio" name="cargo" value="Gerente"/>
-                    Atendente:<input type="radio" name="cargo" value="Atendente"/></br>
-                    <input type="hidden" name="command" value="DeletaUsuario"/>
+                    <select name="nome">
+                        <option value="" selected="selected"> -- Usuários -- </option>
+                        <c:forEach var="usuario" items="${usuarios}" >
+                            <option value="${usuario.getNome()}">${usuario.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <input type="hidden" name="command" value="UsuarioCommand_Deleta"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>

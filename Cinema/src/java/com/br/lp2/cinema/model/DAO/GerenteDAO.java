@@ -14,7 +14,7 @@ public interface GerenteDAO {
     public boolean insertGerente(Funcionario gerente);
     
     //READ
-    public ArrayList<Gerente> readGerente();
+    public ArrayList<Funcionario> readGerente();
     public Gerente readGerenteById(int id);
     public Gerente readGerenteByNome(String nome);
     
@@ -23,5 +23,5 @@ public interface GerenteDAO {
     
     //DELETE
     public boolean deleteGerente(int id);
-    public boolean deleteGerente(Funcionario gerente);    
+    public boolean deleteGerente(String nome);    
 }
