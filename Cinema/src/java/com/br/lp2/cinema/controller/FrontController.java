@@ -1,6 +1,6 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.commands.*;
+import com.br.lp2.cinema.controller.commands.Command;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -42,10 +42,11 @@ public class FrontController extends HttpServlet {
 
             Command command = null;
             try {
-                command = (Command)Class.forName("com.br.lp2.cinema.commands."+classe[0]).newInstance();
+                command = (Command)Class.forName("com.br.lp2.cinema.controller.commands."+classe[0]).newInstance();
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
                 ex.getMessage();
             }
+            System.out.println(classe[0] + " - " + classe[1]);
             command.execute(request, response, classe[1]);
             
             out.println("</body>");

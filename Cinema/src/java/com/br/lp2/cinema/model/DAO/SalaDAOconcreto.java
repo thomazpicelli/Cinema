@@ -84,7 +84,7 @@ public class SalaDAOconcreto implements SalaDAO{
             statement.setInt(1, numero);
             rs = statement.executeQuery();
             while (rs.next()) {
-                s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"));
+                s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"),rs.getString("situacao"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

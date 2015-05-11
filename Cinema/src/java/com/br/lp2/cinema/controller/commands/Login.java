@@ -1,4 +1,4 @@
-package com.br.lp2.cinema.commands;
+package com.br.lp2.cinema.controller.commands;
 
 import com.br.lp2.cinema.controller.*;
 import java.io.IOException;

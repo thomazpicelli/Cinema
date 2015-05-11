@@ -1,4 +1,4 @@
-package com.br.lp2.cinema.commands;
+package com.br.lp2.cinema.controller.commands;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

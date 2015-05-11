@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Thomaz
+ * @author thomazpicelli
  */
-@WebServlet(name = "SalaController", urlPatterns = {"/SalaController"})
-public class SalaController extends HttpServlet {
+@WebServlet(name = "BuscaSalaController", urlPatterns = {"/BuscaSalaController"})
+public class BuscaSalaController extends HttpServlet {
     private String todos;
     private int numero;
 
@@ -35,12 +35,26 @@ public class SalaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
+            request.removeAttribute("busca");
+            
             ArrayList<Sala> lista = new ArrayList<Sala>();
             SalaDAO sala = new SalaDAOconcreto();
-            lista = sala.readSala();
-            request.getSession().setAttribute("salas", lista);
-                        
-            response.sendRedirect("manter_sala.jsp");	            
+            if(todos != null){
+                lista = sala.readSala();
+                request.getSession().setAttribute("busca", lista);
+            }
+            else{
+                String num = request.getParameter("numero");
+                if(num != null){ 
+                    System.out.println("aaaa");
+                    numero = Integer.parseInt(num);
+                    Sala s = sala.readSalaByNumero(numero);
+                    lista.add(s);
+                    request.getSession().setAttribute("busca", lista);
+                }
+            }
+            
+            response.sendRedirect("manter_sala.jsp");	  
         }
     }
 
@@ -70,6 +84,7 @@ public class SalaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        todos = request.getParameter("todos");        
         processRequest(request, response);
     }
 

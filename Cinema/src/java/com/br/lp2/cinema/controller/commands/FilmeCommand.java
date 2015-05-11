@@ -1,4 +1,4 @@
-package com.br.lp2.cinema.commands;
+package com.br.lp2.cinema.controller.commands;
 
 import com.br.lp2.cinema.model.DAO.FilmeDAO;
 import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;

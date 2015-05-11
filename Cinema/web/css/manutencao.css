@@ -118,3 +118,12 @@ border: 1px solid #FF5E00;
 .red{
     color: red;
 }
+table{
+    width: 100%;
+    height: 100%;
+    border: 1px black solid;
+    
+}
+table tr td{
+    border: 1px black solid;
+}

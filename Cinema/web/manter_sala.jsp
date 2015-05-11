@@ -37,12 +37,30 @@
             </form>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
-                <form name="command" action="FrontController" method="POST">
-                    <input type="number" placeholder="Buscar" name="sala" required/></br>
+                <form name="command" action="BuscaSalaController" method="POST">
+                    <select name="numero">
+                        <option value="" selected="">-- Número --</option>
+                        <c:forEach var="sala" items="${salas}" >
+                            <option value="${sala.getNumero()}">${sala.getNumero()}</option> 
+                        </c:forEach>    
+                    </select></br>
+                    Listar todos:<input type="checkbox" name="todos" value="sim"><br>
                     <input type="hidden" name="command" value="BuscaSala"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <c:if test="${busca != null}">
+                        <table style="border: 1px;">
+                            <c:forEach var="sala" items="${busca}">
+                                <tr>
+                                    <td>${sala.getPk()}</td>
+                                    <td>${sala.getNumero()}</td>
+                                    <td>${sala.getLotacao()}</td>
+                                    <td>${sala.getEspecial()}</td>
+                                    <td>${sala.getSituacao()}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
                 </form>
-                
             </div>
             <div class="modulo">
                 <p><a id="2">Criar:</a></p></br>
