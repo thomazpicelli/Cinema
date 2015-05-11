@@ -25,7 +25,7 @@
                         <c:forEach var="usuario" items="${usuarios}" >
                             <option value="${usuario.getNome()}">${usuario.getNome()}</option> 
                         </c:forEach>    
-                    </select>
+                    </select><br>
                     <input type="hidden" name="command" value="UsuarioCommand_Cargo"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
@@ -49,7 +49,7 @@
                         <option value="" selected=""> -- Cargo-- </option>
                         <option value="Atendente">Atendente</option> 
                         <option value="Gerente">Gerente</option> 
-                    </select>
+                    </select><br>
                     <input type="hidden" name="command" value="UsuarioCommand_Cria"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
@@ -84,7 +84,7 @@
                         <c:forEach var="usuario" items="${usuarios}" >
                             <option value="${usuario.getNome()}">${usuario.getNome()}</option> 
                         </c:forEach>    
-                    </select>
+                    </select><br>
                     <input type="hidden" name="command" value="UsuarioCommand_Deleta"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>

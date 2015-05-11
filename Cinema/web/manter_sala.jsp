@@ -62,7 +62,7 @@
             <div class="modulo">
                 <p><a id="3">Mudar:</a></p></br>
                     <form name="command" action="FrontController" method="POST">    
-                    Codigo:<select name="codigo">
+                    <select name="codigo">
                         <option value="" selected="">-- Código --</option>
                         <c:forEach var="sala" items="${salas}" >
                             <option value="${sala.getPk()}">${sala.getPk()}</option> 
@@ -83,12 +83,15 @@
             <div class="modulo">
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
+                    <c:if test="${verificaSessao == 'sim'}">
+                        Existe uma Sessão vinculada a esta sala! Operação inválida!
+                    </c:if>
                     <select name="numero">
                         <option value="" selected="">-- Número --</option>
                         <c:forEach var="sala" items="${salas}" >
                             <option value="${sala.getNumero()}">${sala.getNumero()}</option> 
                         </c:forEach>    
-                    </select>
+                    </select><br>
                     <input type="hidden" name="command" value="SalaCommand_Deleta"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>

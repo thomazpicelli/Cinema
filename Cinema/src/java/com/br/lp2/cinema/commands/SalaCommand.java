@@ -2,7 +2,10 @@ package com.br.lp2.cinema.commands;
 
 import com.br.lp2.cinema.model.DAO.SalaDAO;
 import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
+import com.br.lp2.cinema.model.DAO.SessaoDAO;
+import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Sala;
+import com.br.lp2.cinema.model.javabeans.Sessao;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +26,7 @@ public class SalaCommand implements Command{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
         situacao = request.getParameter("situacao");
-        if(!situacao.equals("") || situacao != null){
+        if(situacao != null){
             switch (situacao) {
                 case "Manutencao":
                     si = Sala.Situacao.MANUTENÇÃO;
@@ -94,7 +97,12 @@ public class SalaCommand implements Command{
         boolean delete = false;
         SalaDAO salaDAO = new SalaDAOconcreto();
         Sala s = salaDAO.readSalaByNumero(numero);
-        if(s != null) delete = salaDAO.deleteSala(s.getPk());
+        if(s != null){ 
+            SessaoDAO sessaoDAO = new SessaoDAOconcreto();
+            Sessao sessao = sessaoDAO.readSessaoBySala(s.getPk());
+            if(sessao == null)
+                delete = salaDAO.deleteSala(s.getPk());
+        }
         return delete;
     }
 

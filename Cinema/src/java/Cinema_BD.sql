@@ -107,7 +107,7 @@ Create table Sessao(
     pk int not null primary key generated always as identity(start with 1, increment by 1),
     id_filme int,
     id_sala int,
-    horario time,
+    horario varchar(6),
     legendado boolean,
     id_listaIngressos int
 );

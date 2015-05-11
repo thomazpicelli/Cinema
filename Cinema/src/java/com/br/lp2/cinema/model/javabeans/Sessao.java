@@ -1,7 +1,6 @@
 package com.br.lp2.cinema.model.javabeans;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @version 1.0
@@ -11,11 +10,11 @@ public class Sessao implements Serializable{
     private int pk;
     private Filme filme;
     private Sala sala;
-    private Date horario;
+    private String horario;
     private boolean legendado;
     private ListaIngressos lista;
 
-    public Sessao(int pk, Filme filme, Sala sala, Date horario, boolean legendado, ListaIngressos listaIngresso) {
+    public Sessao(int pk, Filme filme, Sala sala, String horario, boolean legendado, ListaIngressos listaIngresso) {
         this.pk = pk;
         this.filme = filme;
         this.sala = sala;
@@ -32,7 +31,7 @@ public class Sessao implements Serializable{
         this.lista = lista;
     }
 
-    public Sessao(Filme filme, Sala sala, Date horario, boolean legendado, ListaIngressos lista) {
+    public Sessao(Filme filme, Sala sala, String horario, boolean legendado, ListaIngressos lista) {
         this.filme = filme;
         this.sala = sala;
         this.horario = horario;
@@ -64,11 +63,11 @@ public class Sessao implements Serializable{
         this.sala = sala;
     }
 
-    public Date getHorario() {
+    public String getHorario() {
         return horario;
     }
 
-    public void setHorario(Date horario) {
+    public void setHorario(String horario) {
         this.horario = horario;
     }
 

@@ -7,7 +7,6 @@ import com.br.lp2.cinema.model.javabeans.ListaIngressos;
 import com.br.lp2.cinema.model.javabeans.Sala;
 import com.br.lp2.cinema.model.javabeans.Sessao;
 import java.io.IOException;
-import java.sql.Time;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,30 +18,30 @@ public class SessaoCommand implements Command{
     private int codigo;
     private int filme;
     private int sala;
-    private long horario;
+    private String horario;
     private boolean legendado = false;
     private int listadeingressos;
     private boolean resultado;
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
+        horario = request.getParameter("horario");
         String legenda = request.getParameter("legendado");
-        if(legenda.equals("legendado"))
+        if(legenda != null && legenda.equals("legendado"))
             legendado = true;  
         
         switch(operacao){
             case "Cria":
                 filme = Integer.parseInt(request.getParameter("filme"));
                 sala = Integer.parseInt(request.getParameter("sala"));
-                horario = Long.parseLong(request.getParameter("horario"));
                 listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));
+                System.out.println(filme + " - " + sala + " - " + listadeingressos + " - " + horario);
                 resultado = Cria();
                 break;
             case "Muda": 
                 codigo = Integer.parseInt(request.getParameter("codigo"));
                 filme = Integer.parseInt(request.getParameter("filme"));
                 sala = Integer.parseInt(request.getParameter("sala"));
-                horario = Long.parseLong(request.getParameter("horario"));
                 listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));
                 resultado = Muda();
                 break;
@@ -66,12 +65,12 @@ public class SessaoCommand implements Command{
     }
     private boolean Cria(){
         SessaoDAO sessaoDAO = new SessaoDAOconcreto();
-        boolean insert = sessaoDAO.insertSessao(new Sessao(new Filme(filme), new Sala(sala), new Time(horario), legendado, new ListaIngressos(listadeingressos)));
+        boolean insert = sessaoDAO.insertSessao(new Sessao(new Filme(filme), new Sala(sala),horario, legendado, new ListaIngressos(listadeingressos)));
         return insert;
     }
     private boolean Muda() {
         SessaoDAO sessaoDAO = new SessaoDAOconcreto();
-        boolean update = sessaoDAO.updateSessao(codigo, new Sessao(new Filme(filme), new Sala(sala), new Time(horario), legendado, new ListaIngressos(listadeingressos)));
+        boolean update = sessaoDAO.updateSessao(codigo, new Sessao(new Filme(filme), new Sala(sala), horario, legendado, new ListaIngressos(listadeingressos)));
         return update;
     }
     private boolean Deleta() {

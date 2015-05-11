@@ -23,5 +23,5 @@ public interface SessaoDAO {
     
     //DELETE
     public boolean deleteSessao(int id);
-    public boolean deleteSessao(Sala sala);
+    public boolean deleteSessao(Sessao sessao);
 }

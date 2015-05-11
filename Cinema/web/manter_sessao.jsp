@@ -98,7 +98,7 @@
                         <c:forEach var="sessao" items="${sessoes}" >
                             <option value="${sessao.getPk()}">${sessao.getPk()} - ${sessao.getFilme().getNome()} - ${sessao.getHorario()}</option> 
                         </c:forEach>    
-                    </select>
+                    </select><br>
                     <input type="hidden" name="command" value="SessaoCommand_Deleta"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
