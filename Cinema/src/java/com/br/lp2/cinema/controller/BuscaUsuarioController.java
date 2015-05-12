@@ -1,8 +1,10 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.SalaDAO;
-import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
-import com.br.lp2.cinema.model.javabeans.Sala;
+import com.br.lp2.cinema.model.DAO.AtendenteDAO;
+import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
+import com.br.lp2.cinema.model.DAO.GerenteDAO;
+import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
+import com.br.lp2.cinema.model.javabeans.Funcionario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,12 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author thomazpicelli
+ * @author Thomaz
  */
-@WebServlet(name = "BuscaSalaController", urlPatterns = {"/BuscaSalaController"})
-public class BuscaSalaController extends HttpServlet {
-    private String todos;
-    private int numero;
+@WebServlet(name = "BuscaUsuarioController", urlPatterns = {"/BuscaUsuarioController"})
+public class BuscaUsuarioController extends HttpServlet {
+    private String nome;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +36,28 @@ public class BuscaSalaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            request.removeAttribute("buscaSala");
+            ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
+            AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
+            GerenteDAO gerenteDAO = new GerenteDAOconcreto();
             
-            ArrayList<Sala> lista = new ArrayList<Sala>();
-            SalaDAO sala = new SalaDAOconcreto();
-            if(todos != null){
-                lista = sala.readSala();
-                request.getSession().setAttribute("buscaSala", lista);
-            }
-            else{
-                String num = request.getParameter("numero");
-                if(num != null){ 
-                    numero = Integer.parseInt(num);
-                    Sala s = sala.readSalaByNumero(numero);
-                    lista.add(s);
-                    request.getSession().setAttribute("buscaSala", lista);
+            if(request.getParameter("atendente")!= null)
+                lista.addAll(atendenteDAO.readAtendente());
+            if(request.getParameter("gerente") != null)
+                lista.addAll(gerenteDAO.readGerente());
+            if(lista.isEmpty()){
+                if(request.getParameter("nome") != null){
+                    nome = request.getParameter("nome");
+                    Funcionario f = atendenteDAO.readAtendenteByNome(nome);
+                    if(f == null){
+                        f = gerenteDAO.readGerenteByNome(nome);
+                    }
+                    lista.add(f);
                 }
             }
             
-            response.sendRedirect("manter_sala.jsp");	  
+            request.getSession().setAttribute("buscaUsuario", lista);
+                       
+            response.sendRedirect("manter_usuario.jsp");	  
         }
     }
 
@@ -83,7 +87,6 @@ public class BuscaSalaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        todos = request.getParameter("todos");        
         processRequest(request, response);
     }
 

@@ -51,8 +51,9 @@ public class SessaoDAOconcreto implements SessaoDAO{
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             FilmeDAO filme = new FilmeDAOconcreto();
+            SalaDAO sala = new SalaDAOconcreto();
             while (rs.next()) {
-                Sessao s = new Sessao(rs.getInt("pk"), filme.readFilmeById(rs.getInt("id_filme")), new Sala(rs.getInt("id_sala")), rs.getString("horario"), rs.getBoolean("legendado"), new ListaIngressos(rs.getInt("id_listaIngressos")));
+                Sessao s = new Sessao(rs.getInt("pk"), filme.readFilmeById(rs.getInt("id_filme")), sala.readSalaById(rs.getInt("id_sala")), rs.getString("horario"), rs.getBoolean("legendado"), new ListaIngressos(rs.getInt("id_listaIngressos")));
                 lista.add(s);
             }
         } catch (SQLException sQLException) {
@@ -70,8 +71,9 @@ public class SessaoDAOconcreto implements SessaoDAO{
             statement.setInt(1, id);
             rs = statement.executeQuery();
             FilmeDAO filme = new FilmeDAOconcreto();
+            SalaDAO sala = new SalaDAOconcreto();
             while (rs.next()) {
-                s = new Sessao(rs.getInt("pk"), filme.readFilmeById(rs.getInt("id_filme")), new Sala(rs.getInt("id_sala")), rs.getString("horario"), rs.getBoolean("legendado"), new ListaIngressos(rs.getInt("id_listaIngressos")));
+                s = new Sessao(rs.getInt("pk"), filme.readFilmeById(rs.getInt("id_filme")), sala.readSalaById(rs.getInt("id_sala")), rs.getString("horario"), rs.getBoolean("legendado"), new ListaIngressos(rs.getInt("id_listaIngressos")));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

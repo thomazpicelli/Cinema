@@ -1,8 +1,8 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.SalaDAO;
-import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
-import com.br.lp2.cinema.model.javabeans.Sala;
+import com.br.lp2.cinema.model.DAO.SessaoDAO;
+import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
+import com.br.lp2.cinema.model.javabeans.Sessao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author thomazpicelli
+ * @author Thomaz
  */
-@WebServlet(name = "BuscaSalaController", urlPatterns = {"/BuscaSalaController"})
-public class BuscaSalaController extends HttpServlet {
+@WebServlet(name = "BuscaSessaoController", urlPatterns = {"/BuscaSessaoController"})
+public class BuscaSessaoController extends HttpServlet {
     private String todos;
-    private int numero;
+    private int id;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +35,26 @@ public class BuscaSalaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            request.removeAttribute("buscaSala");
+            request.removeAttribute("buscaSessao");
             
-            ArrayList<Sala> lista = new ArrayList<Sala>();
-            SalaDAO sala = new SalaDAOconcreto();
+            ArrayList<Sessao> lista = new ArrayList<Sessao>();
+            SessaoDAO sessao = new SessaoDAOconcreto();
+            todos = request.getParameter("todos");
             if(todos != null){
-                lista = sala.readSala();
-                request.getSession().setAttribute("buscaSala", lista);
+                lista = sessao.readSessao();
+                request.getSession().setAttribute("buscaSessao", lista);
             }
             else{
-                String num = request.getParameter("numero");
-                if(num != null){ 
-                    numero = Integer.parseInt(num);
-                    Sala s = sala.readSalaByNumero(numero);
+                String pk = request.getParameter("sessao");
+                if(pk != null){ 
+                    id = Integer.parseInt(pk);
+                    Sessao s = sessao.readSessaoById(id);
                     lista.add(s);
-                    request.getSession().setAttribute("buscaSala", lista);
+                    request.getSession().setAttribute("buscaSessao", lista);
                 }
             }
             
-            response.sendRedirect("manter_sala.jsp");	  
+            response.sendRedirect("manter_sessao.jsp");	  
         }
     }
 
@@ -83,7 +84,6 @@ public class BuscaSalaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        todos = request.getParameter("todos");        
         processRequest(request, response);
     }
 

@@ -45,11 +45,17 @@
                         </c:forEach>    
                     </select></br>
                     Listar todos:<input type="checkbox" name="todos" value="sim"><br>
-                    <input type="hidden" name="command" value="BuscaSala"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
-                    <c:if test="${busca != null}">
-                        <table style="border: 1px;">
-                            <c:forEach var="sala" items="${busca}">
+                    <c:if test="${buscaSala != null}">
+                        <table>
+                            <tr class="aa">
+                                <td>CÓDIGO</td>
+                                <td>NÚMERO</td>
+                                <td>LOTAÇÃO</td>
+                                <td>ESPECIAL</td>
+                                <td>SITUAÇÃO</td>
+                            </tr>
+                            <c:forEach var="sala" items="${buscaSala}">
                                 <tr>
                                     <td>${sala.getPk()}</td>
                                     <td>${sala.getNumero()}</td>

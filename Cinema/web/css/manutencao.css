@@ -126,4 +126,10 @@ table{
 }
 table tr td{
     border: 1px black solid;
+    border-radius: 2px;
+    padding: 2px;
+}
+.aa td{
+    color: #FF5E00;
+    border: 2px black solid;
 }

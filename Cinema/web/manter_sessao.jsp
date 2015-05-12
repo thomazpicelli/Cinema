@@ -19,10 +19,35 @@
         <section>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
-                <form name="command" action="FrontController" method="POST">
-                    <input type="text" placeholder="Buscar" name="sessao" required/></br>
-                    <input type="hidden" name="command" value="Sessao"/>
+                <form name="command" action="BuscaSessaoController" method="POST">
+                    <select name="codigo">
+                        <option value="" selected=""> -- Código -- Filme -- Horário --</option>
+                        <c:forEach var="sessao" items="${sessoes}" >
+                            <option value="${sessao.getPk()}">${sessao.getPk()} - ${sessao.getFilme().getNome()} - ${sessao.getHorario()}</option> 
+                        </c:forEach>    
+                    </select><br>
+                    Listar todos:<input type="checkbox" name="todos" value="sim"><br>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <c:if test="${buscaSessao != null}">
+                        <table>
+                            <tr class="aa">
+                                <td>CÓDIGO</td>
+                                <td>FILME</td>
+                                <td>SALA</td>
+                                <td>HORÁRIO</td>
+                                <td>LEGENDADO</td>
+                            </tr>
+                            <c:forEach var="sessao" items="${buscaSessao}">
+                                <tr>
+                                    <td>${sessao.getPk()}</td>
+                                    <td>${sessao.getFilme().getNome()}</td>
+                                    <td>${sessao.getSala().getNumero()}</td>
+                                    <td>${sessao.getHorario()}</td>
+                                    <td>${sessao.isLegendado()}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
                 </form>
             </div>
             <div class="modulo">

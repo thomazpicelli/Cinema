@@ -32,10 +32,34 @@
             </div>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
-                <form name="command" action="FrontController" method="POST">
-                    <input type="text" placeholder="Buscar" name="usuario" required/></br>
-                    <input type="hidden" name="command" value="Usuario"/>
+                <form name="command" action="BuscaUsuarioController" method="POST">
+                    <select name="nome">
+                        <option value="" selected="selected"> -- Usuários -- </option>
+                        <c:forEach var="usuario" items="${usuarios}" >
+                            <option value="${usuario.getNome()}">${usuario.getNome()}</option> 
+                        </c:forEach>    
+                    </select><br>
+                    Listar Atendentes:<input type="checkbox" name="atendente" value="sim"><br>
+                    Listar Gerentes:<input type="checkbox" name="gerente" value="sim"><br>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <c:if test="${buscaUsuario != null}">
+                        <table>
+                            <tr class="aa">
+                                <td>CÓDIGO</td>
+                                <td>NOME</td>
+                                <td>USERNAME</td>
+                                <td>SENHA</td>
+                            </tr>
+                            <c:forEach var="usuario" items="${buscaUsuario}">
+                                <tr>
+                                    <td>${usuario.getPk()}</td>
+                                    <td>${usuario.getNome()}</td>
+                                    <td>${usuario.getLogin()}</td>
+                                    <td>${usuario.getSenha()}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
                 </form>
             </div>
             <div class="modulo">
