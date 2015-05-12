@@ -1,11 +1,6 @@
-<%-- 
-    Document   : manter_filme
-    Created on : 26/04/2015, 01:11:44
-    Author     : Thomaz
---%>
-
 <%@page import="javax.jms.Session"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,10 +33,6 @@
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
             </div>
-            <% 
-                
-                
-            %>
             <div class="modulo">    
                 <form name="command" action="FrontController" method="POST">
                     <input type="text" placeholder="Buscar por Diretor" name="diretor" required/></br>
@@ -65,10 +56,30 @@
                     <input type="number" placeholder="duração" name="duracao" required/></br>
                     <input type="number" placeholder="Ano" name="ano" required/></br>
                     <input type="number" placeholder="Classificação" name="classificacao" required/></br>
-                    <input type="number" placeholder="Diretor" name="diretor" required/></br>
-                    <input type="number" placeholder="Genero" name="genero" required/></br>
-                    <input type="number" placeholder="Distribuidora" name="distribuidora" required/></br>
-                    <input type="number" placeholder="Lista de Atores" name="listadeatores" required/></br>
+                    <select name="diretor">
+                        <option value="" selected="">-- Diretor --</option>
+                        <c:forEach var="diretor" items="${diretores}" >
+                            <option value="${diretor.getPk()}">${diretor.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="genero">
+                        <option value="" selected="">-- Genero --</option>
+                        <c:forEach var="genero" items="${generos}" >
+                            <option value="${genero.getPk()}">${genero.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="distribuidora">
+                        <option value="" selected="">-- Distribuidora --</option>
+                        <c:forEach var="distribuidora" items="${distribuidoras}" >
+                            <option value="${distribuidora.getPk()}">${distribuidora.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="listadeatores">
+                        <option value="" selected="">-- Lista de Atores --</option>
+                        <c:forEach var="la" items="${latores}" >
+                            <option value="${la.getPk()}">${la.getPk()}</option> 
+                        </c:forEach>    
+                    </select>                    
                     <select name="situacao">
                         <option>Cartaz</option>
                         <option>Estreia</option>
@@ -82,16 +93,41 @@
                 <p><a id="3">Mudar:</a></p></br>
                 
                 <form name="command" action="FrontController" method="POST">
-                    <input type="number" placeholder="Codigo do filme" name="codigo" required/></br></br>
+                    <select name="codigo">
+                        <option value="" selected="">-- Filme --</option>
+                        <c:forEach var="filme" items="${filmes}" >
+                            <option value="${filme.getPk()}">${filme.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
                     <input type="text" placeholder="Nome" name="nome" required/></br>
                     <input type="text" placeholder="Idioma" name="idioma" required/></br>
                     <input type="number" placeholder="duração" name="duracao" required/></br>
                     <input type="number" placeholder="Ano" name="ano" required/></br>
                     <input type="number" placeholder="Classificação" name="classificacao" required/></br>
-                    <input type="number" placeholder="Diretor" name="diretor" required/></br>
-                    <input type="number" placeholder="Genero" name="genero" required/></br>
-                    <input type="number" placeholder="Distribuidora" name="distribuidora" required/></br>
-                    <input type="number" placeholder="Lista de Atores" name="listadeatores" required/></br>
+                    <select name="diretor">
+                        <option value="" selected="">-- Diretor --</option>
+                        <c:forEach var="diretor" items="${diretores}" >
+                            <option value="${diretor.getPk()}">${diretor.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="genero">
+                        <option value="" selected="">-- Genero --</option>
+                        <c:forEach var="genero" items="${generos}" >
+                            <option value="${genero.getPk()}">${genero.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="distribuidora">
+                        <option value="" selected="">-- Distribuidora --</option>
+                        <c:forEach var="distribuidora" items="${distribuidoras}" >
+                            <option value="${distribuidora.getPk()}">${distribuidora.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
+                    <select name="listadeatores">
+                        <option value="" selected="">-- Lista de Atores --</option>
+                        <c:forEach var="la" items="${latores}" >
+                            <option value="${la.getPk()}">${la.getPk()}</option> 
+                        </c:forEach>    
+                    </select>                    
                     <select name="situacao">
                         <option>Cartaz</option>
                         <option>Estreia</option>
@@ -104,7 +140,12 @@
             <div class="modulo">
                 <p><a id="4">Deletar:</a></p></br>
                 <form name="command" action="FrontController" method="POST">
-                    <input type="number" placeholder="Codigo do filme" name="codigo" required/></br></br>
+                    <select name="codigo">
+                        <option value="" selected="">-- Filme --</option>
+                        <c:forEach var="filme" items="${filmes}" >
+                            <option value="${filme.getPk()}">${filme.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
                     <input type="hidden" name="command" value="FilmeCommand_Deleta"/>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>

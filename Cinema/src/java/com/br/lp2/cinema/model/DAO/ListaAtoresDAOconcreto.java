@@ -26,12 +26,11 @@ public class ListaAtoresDAOconcreto implements ListaAtoresDAO{
     public boolean insertListaAtores(ListaAtores listaAtores) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO ListaAtores (pk, id_infoator) VALUES(?,?)";
+            String sql = "INSERT INTO ListaAtores (id_infoator) VALUES(?)";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, listaAtores.getPk());
             statement.setObject(2, listaAtores.getLista());
-             rs = statement.executeQuery();
-            resultado = statement.execute();
+            int r = statement.executeUpdate();
+            if(r>0) resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
@@ -46,7 +45,7 @@ public class ListaAtoresDAOconcreto implements ListaAtoresDAO{
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                ListaAtores la = new ListaAtores();
+                ListaAtores la = new ListaAtores(rs.getInt("pk"));
                 lista.add(la);
             }
         } catch (SQLException sQLException) {
@@ -64,7 +63,7 @@ public class ListaAtoresDAOconcreto implements ListaAtoresDAO{
             statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                la = new ListaAtores();
+                la = new ListaAtores(rs.getInt("pk"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

@@ -1,8 +1,8 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.SalaDAO;
-import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
-import com.br.lp2.cinema.model.javabeans.Sala;
+import com.br.lp2.cinema.model.DAO.FilmeDAO;
+import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;
+import com.br.lp2.cinema.model.javabeans.Filme;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,12 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Thomaz
+ * @author thomazpicelli
  */
-@WebServlet(name = "SalaController", urlPatterns = {"/SalaController"})
-public class SalaController extends HttpServlet {
-    private String todos;
-    private int numero;
+@WebServlet(name = "BuscaFilmeController", urlPatterns = {"/BuscaFilmeController"})
+public class BuscaFilmeController extends HttpServlet {
+    private String busca;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,14 +36,23 @@ public class SalaController extends HttpServlet {
             
             request.removeAttribute("buscaSala");
             
-            ArrayList<Sala> lista = new ArrayList<Sala>();
-            SalaDAO sala = new SalaDAOconcreto();
-            lista = sala.readSala();
-            request.getSession().setAttribute("salas", lista);
-                        
-            response.sendRedirect("manter_sala.jsp");	            
+            ArrayList<Filme> lista = new ArrayList<>();
+            
+            switch(busca){
+                case "filme":
+                    FilmeDAO filme = new FilmeDAOconcreto();
+                    lista = filme.readFilme();
+                    break;
+                case "sessao":
+                    break;
+            }
+
+            request.getSession().setAttribute("buscaFilme", lista);
+
+            response.sendRedirect("manter_filme.jsp");	  
         }
     }
+        
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

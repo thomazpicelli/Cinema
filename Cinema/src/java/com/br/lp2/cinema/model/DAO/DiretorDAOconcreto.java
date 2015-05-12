@@ -46,7 +46,7 @@ public class DiretorDAOconcreto implements DiretorDAO{
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Diretor d = new Diretor(rs.getInt("codigo"), rs.getString("nome"), rs.getInt("pk"));
+                Diretor d = new Diretor(rs.getInt("pk"), rs.getInt("codigo"), rs.getString("nome"));
                 lista.add(d);
             }
         } catch (SQLException sQLException) {
@@ -64,7 +64,7 @@ public class DiretorDAOconcreto implements DiretorDAO{
             statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                d = new Diretor(rs.getInt("codigo"), rs.getString("nome"), rs.getInt("pk"));
+                d = new Diretor(rs.getInt("pk"), rs.getInt("codigo"), rs.getString("nome"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -81,7 +81,7 @@ public class DiretorDAOconcreto implements DiretorDAO{
             statement.setString(1, nome);
             rs = statement.executeQuery();
             while (rs.next()) {
-                d = new Diretor(rs.getInt("codigo"), rs.getString("nome"), rs.getInt("pk"));
+                d = new Diretor(rs.getInt("pk"), rs.getInt("codigo"), rs.getString("nome"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());

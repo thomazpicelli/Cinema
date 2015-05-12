@@ -29,8 +29,8 @@ public class GeneroDAOconcreto implements GeneroDAO{
             String sql = "INSERT INTO genero(nome) VALUES(?)";
             statement = connection.prepareStatement(sql);
             statement.setString(1, genero.getNome());
-            //rs = statement.executeQuery();
-            resultado = statement.execute();
+            int r = statement.executeUpdate();
+            if(r>0) resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
@@ -45,7 +45,7 @@ public class GeneroDAOconcreto implements GeneroDAO{
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Genero c = new Genero(rs.getInt("id"), rs.getString("nome"));
+                Genero c = new Genero(rs.getInt("pk"), rs.getString("nome"));
                 lista.add(c);
             }
         } catch (SQLException sQLException) {
@@ -63,7 +63,7 @@ public class GeneroDAOconcreto implements GeneroDAO{
             statement.setInt(1, pk);
             rs = statement.executeQuery();
             while (rs.next()) {
-                g = new Genero(rs.getInt("id"), rs.getString("nome"));
+                g = new Genero(rs.getInt("pk"), rs.getString("nome"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -80,7 +80,7 @@ public class GeneroDAOconcreto implements GeneroDAO{
             statement.setString(1, nome);
             rs = statement.executeQuery();
             while (rs.next()) {
-                g = new Genero(rs.getInt("id"), rs.getString("nome"));
+                g = new Genero(rs.getInt("pk"), rs.getString("nome"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -92,7 +92,7 @@ public class GeneroDAOconcreto implements GeneroDAO{
     public boolean updateGenero(int id, Genero genero) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE genero SET nome=? WHERE id=?";
+            String sql = "UPDATE genero SET nome=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
             statement.setString(1, genero.getNome());
             statement.setInt(2, id);
@@ -108,7 +108,7 @@ public class GeneroDAOconcreto implements GeneroDAO{
     public boolean deleteGenero(int id) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM genero WHERE id = ?";
+            String sql = "DELETE FROM genero WHERE pk = ?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id); 
             int r = statement.executeUpdate();

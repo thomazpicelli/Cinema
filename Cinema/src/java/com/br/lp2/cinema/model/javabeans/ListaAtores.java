@@ -14,11 +14,15 @@ public class ListaAtores implements Serializable{
     public ListaAtores(int pk) {
         this.pk = pk;
     }
+    
+    public ListaAtores(int pk, ArrayList<InfoAtor> lista) {
+        this.pk = pk;
+    }
 
     public ListaAtores() {
         lista = new ArrayList<InfoAtor>();
     }
-    
+   
     public ArrayList<InfoAtor> getLista(){
         return lista;
     }

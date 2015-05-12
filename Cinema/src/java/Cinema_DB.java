@@ -1,6 +1,8 @@
 
 import com.br.lp2.cinema.model.DAO.AtendenteDAO;
 import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
+import com.br.lp2.cinema.model.DAO.DiretorDAO;
+import com.br.lp2.cinema.model.DAO.DiretorDAOconcreto;
 import com.br.lp2.cinema.model.DAO.FilmeDAO;
 import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Genero;
@@ -15,6 +17,7 @@ import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
 import com.br.lp2.cinema.model.DAO.SessaoDAO;
 import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Atendente;
+import com.br.lp2.cinema.model.javabeans.Diretor;
 import com.br.lp2.cinema.model.javabeans.Filme;
 import com.br.lp2.cinema.model.javabeans.Funcionario;
 import com.br.lp2.cinema.model.javabeans.Gerente;
@@ -29,10 +32,11 @@ import java.util.ArrayList;
  */
 public class Cinema_DB {
     public static void main(String[] args) {
-            ArrayList<Sessao> lista1 = new ArrayList<Sessao>();
-            SessaoDAO sessao = new SessaoDAOconcreto();
-            lista1 = sessao.readSessao();
-
-            lista1.get(2).getHorario();
+            ArrayList<Diretor> lista1 = new ArrayList<Diretor>();
+            DiretorDAO sessao = new DiretorDAOconcreto();
+            lista1 = sessao.readDiretor();
+        for (Diretor lista11 : lista1) {
+            System.out.println(lista11.getNome() + " - "+ lista11.getPk());
+        }
     }
 }
