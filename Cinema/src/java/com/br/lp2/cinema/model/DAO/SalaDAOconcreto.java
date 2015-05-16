@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class SalaDAOconcreto implements SalaDAO{
+public class SalaDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -23,7 +23,8 @@ public class SalaDAOconcreto implements SalaDAO{
     }    
 
     @Override
-    public boolean insertSala(Sala sala) {
+    public boolean insert(Object object) {
+        Sala sala = (Sala)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO Sala (numero, lotacao, especial, situacao) VALUES(?,?,?,?)";
@@ -42,8 +43,8 @@ public class SalaDAOconcreto implements SalaDAO{
     }
 
     @Override
-    public ArrayList<Sala> readSala() {
-        ArrayList<Sala> lista = new ArrayList();
+    public ArrayList<Object> read() {
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Sala";
             statement = connection.prepareStatement(sql);
@@ -59,7 +60,7 @@ public class SalaDAOconcreto implements SalaDAO{
     }
 
     @Override
-    public Sala readSalaById(int id) {
+    public Sala readById(int id) {
         Sala s = null;
         try {
             String sql = "SELECT * FROM Sala WHERE pk =?";
@@ -76,7 +77,8 @@ public class SalaDAOconcreto implements SalaDAO{
     }
 
     @Override
-    public Sala readSalaByNumero(int numero) {
+    public Sala readByNome(String nome) {
+        int numero = Integer.parseInt(nome);
         Sala s = null;
         try {
             String sql = "SELECT * FROM Sala WHERE numero =?";
@@ -93,7 +95,8 @@ public class SalaDAOconcreto implements SalaDAO{
     }
 
     @Override
-    public boolean updateSala(int id, Sala sala) {
+    public boolean update(int id, Object object) {
+        Sala sala = (Sala)object;
         boolean resultado = false;
         try {
             String sql = "UPDATE sala SET numero=?, lotacao=?, especial=?, situacao=? WHERE pk=?";
@@ -112,12 +115,29 @@ public class SalaDAOconcreto implements SalaDAO{
     }
 
     @Override
-    public boolean deleteSala(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM Sala WHERE pk = ?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id); 
+            int r = statement.executeUpdate();
+            resultado = r>0;
+            
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return resultado;
+    }
+
+    @Override
+    public boolean delete(String nome) {
+        int numero = Integer.parseInt(nome);
+        boolean resultado = false;
+        try {
+            String sql = "DELETE FROM Sala WHERE numero = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, numero); 
             int r = statement.executeUpdate();
             resultado = r>0;
             

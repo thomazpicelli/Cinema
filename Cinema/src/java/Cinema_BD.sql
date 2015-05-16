@@ -1,7 +1,6 @@
 Drop table Sessao;
-Drop table Filme;
-Drop table ListaAtores;
 Drop table InfoAtor;
+Drop table Filme;
 Drop table Ator;
 Drop table ListaIngressos;
 Drop table Ingresso;
@@ -21,7 +20,7 @@ Create table Atendente(
 );
 
 Create table Ator(
-    id int not null primary key generated always as identity(start with 1, increment by 1),
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     nome varchar(20),
     nacionalidade varchar(20),
     datanasc date
@@ -49,7 +48,6 @@ Create table Filme(
     pk int not null primary key generated always as identity(start with 1, increment by 1),
     id_diretor int,
     id_genero int,
-    id_listaAtores int,
     id_distribuidora int,
     nome varchar(50),
     classificacao int,
@@ -74,6 +72,7 @@ Create table Gerente(
 Create table InfoAtor(
     pk int not null primary key generated always as identity(start with 1, increment by 1),
     id_ator int,
+    id_filme int,
     papel varchar(50),
     part varchar(50)
 );
@@ -83,11 +82,6 @@ Create table Ingresso(
     id int,
     inteira boolean,
     tipo varchar(20)
-);
-
-Create table ListaAtores(
-    pk int not null primary key generated always as identity(start with 1, increment by 1),
-    id_infoator int
 );
 
 Create table ListaIngressos(
@@ -114,10 +108,9 @@ Create table Sessao(
 
 alter table filme add FOREIGN KEY(id_diretor) references Diretor(pk);
 alter table filme add FOREIGN KEY(id_genero) references genero(pk);
-alter table filme add FOREIGN KEY(id_listaAtores) references listaAtores(pk);
 alter table filme add FOREIGN KEY(id_distribuidora) references distribuidora(pk);
-alter table infoator add FOREIGN KEY(id_ator) references ator(id);
-alter table ListaAtores add FOREIGN KEY(id_infoator) references infoator(pk);
+alter table infoator add FOREIGN KEY(id_ator) references ator(pk);
+alter table infoator add FOREIGN KEY(id_filme) references filme(pk);
 alter table ListaIngressos add FOREIGN KEY(id_ingresso) references ingresso(pk);
 alter table Sessao add FOREIGN KEY(id_filme) references filme(pk);
 alter table Sessao add FOREIGN KEY(id_sala) references sala(pk);
@@ -130,10 +123,9 @@ Insert into Diretor(codigo, nome) values(3672,'Quentin Tarantino'),(3243,'Steven
 Insert into Distribuidora(nome) values('Warner Bros. Pictures'),('Disney'),('Sony Pictures'),('Universal Studios'),('Paramount Pictures'), ('Miramax Films');
 Insert into Genero(nome) values('ação'),('Animação'),('Comédia'),('Cult'),('Dança'),('Documentário'),('Drama'),('Erótico'),('Fantasma'),('Faroeste'),('Ficção Cientifica'),('Guerra'),('Musical'),('Filme Noir'),('Policial'),('Romance'),('Suspense'),('Terror'),('Trash');
 Insert into Gerente(nome, login, senha) values('Mario','mariosuzuki','senha'),('Sueli','suelivieira','senha');
-Insert into InfoAtor(id_ator, papel, part) values(1,'Tenente Aldo Raine','protagonista'),(2,'Coronel Hans Landa','protagonista'),(3,'Tenente Archie Hicox','coadjuvante'),(4,'Bruce Wayne/Batman','protagonista'),(5,' Alfred Pennyworth','coadjuvante'),(6,'James Gordon','protagonista'),(7,'Owen Grady','protagonista'),(8,'Claire Dearing','protagonista'),(9,'Simon Masrani','coadjuvante'),(10,'Lila Crane','protagonista'),(11,'Norman Bates','protagonista'),(12,'Marion Crane','protagonista'),(13,'Vincent Vega','protagonista'),(14,'Jules Winnfield','protagonista'),(15,'Lila Crane','coadjuvante');
 Insert into Ingresso(id, inteira, tipo) values(1, true, 'GERAL'),(2, true, 'OBESO'),(3, true, 'CADEIRANTE'),(4, false, 'GERAL'),(5, false, 'OBESO'),(6, false, 'CADEIRANTE');
-Insert into ListaAtores(id_infoator) values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15);
 Insert into ListaIngressos(id_ingresso) values(1),(2),(3),(4),(5),(6);
 Insert into Sala(numero, lotacao, especial, situacao) values(1, 400, 50, 'EXIBICAO'), (2, 200, 20, 'EXIBICAO'),(3, 200, 20, 'EXIBICAO'),(4, 150, 15, 'MANUTENÇÃO'),(5, 150, 17, 'ESPERA'),(6, 60, 5, 'ESPERA');
-Insert into Filme(id_diretor, id_genero, id_listaatores, id_distribuidora, nome, classificacao, ano, duracao, situacao, idioma) values(1, 1, 1, 4, 'Bastardos Inglórios', 18, 2009, 153, 'CARTAZ', 'inglês'),(8, 1, 2, 1, 'Batman - O Cavaleiro das Trevas', 14, 2008, 152, 'CARTAZ', 'inglês'),(3, 18, 1, 4, 'Jurassic World', 10, 2015, 150, 'ESTREIA', 'inglês'),(4, 18, 1, 5, 'Psicose', 18, 1960, 109, 'CARTAZ', 'inglês'),(1, 1, 3, 6, 'Pulp Fiction', 18, 1994, 154, 'CARTAZ', 'inglês');
+Insert into Filme(id_diretor, id_genero, id_distribuidora, nome, classificacao, ano, duracao, situacao, idioma) values(1, 1, 4, 'Bastardos Inglórios', 18, 2009, 153, 'CARTAZ', 'inglês'),(8, 1, 1, 'Batman - O Cavaleiro das Trevas', 14, 2008, 152, 'CARTAZ', 'inglês'),(3, 18, 4, 'Jurassic World', 10, 2015, 150, 'ESTREIA', 'inglês'),(4, 18, 5, 'Psicose', 18, 1960, 109, 'CARTAZ', 'inglês'),(1, 1, 6, 'Pulp Fiction', 18, 1994, 154, 'CARTAZ', 'inglês');
+Insert into InfoAtor(id_ator, id_filme, papel, part) values(1,1,'Tenente Aldo Raine','protagonista'),(2,2,'Coronel Hans Landa','protagonista'),(3,1,'Tenente Archie Hicox','coadjuvante'),(4,2,'Bruce Wayne/Batman','protagonista'),(5,4,' Alfred Pennyworth','coadjuvante'),(6,4,'James Gordon','protagonista'),(7,3,'Owen Grady','protagonista'),(8,3,'Claire Dearing','protagonista'),(9,3,'Simon Masrani','coadjuvante'),(10,3,'Lila Crane','protagonista'),(11,5,'Norman Bates','protagonista'),(12,5,'Marion Crane','protagonista'),(13,3,'Vincent Vega','protagonista'),(14,5,'Jules Winnfield','protagonista'),(15,5,'Lila Crane','coadjuvante');
 Insert into Sessao(id_filme, id_sala, horario, legendado, id_listaIngressos) values(1, 3, '22:00', true, 1),(2, 4, '20:30', true, 2),(3, 1, '16:00', false, 3),(4, 6, '21:00', true, 4),(5, 2, '19:30', false, 5);

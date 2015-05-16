@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class ListaIngressosDAOconcreto implements ListaIngressosDAO{
+public class ListaIngressosDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -23,7 +23,8 @@ public class ListaIngressosDAOconcreto implements ListaIngressosDAO{
     }
     
     @Override
-    public boolean insertListaIngressos(ListaIngressos listaIngressos) {
+    public boolean insert(Object object) {
+        ListaIngressos listaIngressos = (ListaIngressos)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO ListaIngressos (pk, id_ingresso) VALUES(?,?)";
@@ -39,8 +40,8 @@ public class ListaIngressosDAOconcreto implements ListaIngressosDAO{
     }
 
     @Override
-    public ArrayList<ListaIngressos> readListaIngressos() {
-        ArrayList<ListaIngressos> lista = new ArrayList();
+    public ArrayList<Object> read() {
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM ListaIngressos";
             statement = connection.prepareStatement(sql);
@@ -56,7 +57,7 @@ public class ListaIngressosDAOconcreto implements ListaIngressosDAO{
     }
 
     @Override
-    public ListaIngressos readListaIngressosById(int id) {
+    public ListaIngressos readById(int id) {
         ListaIngressos li = null;
         try {
             String sql = "SELECT * FROM ListaIngressos WHERE pk =?";
@@ -73,7 +74,8 @@ public class ListaIngressosDAOconcreto implements ListaIngressosDAO{
     }
 
     @Override
-    public boolean updateListaIngressos(int id, ListaIngressos listaIngressos) {
+    public boolean update(int id, Object object) {
+        ListaIngressos listaIngressos = (ListaIngressos)object;
         boolean resultado = false;
         try {
             String sql = "UPDATE ListaIngressos SET pk=? id_ingresso=?";
@@ -89,7 +91,7 @@ public class ListaIngressosDAOconcreto implements ListaIngressosDAO{
     }
 
     @Override
-    public boolean deleteListaIngressos(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM ListaIngressos WHERE pk = ?";
@@ -105,17 +107,12 @@ public class ListaIngressosDAOconcreto implements ListaIngressosDAO{
     }
 
     @Override
-    public boolean deleteListaIngressos(ListaIngressos listaIngressos) {
-        boolean resultado = false;
-        try {
-            String sql = "DELETE FROM ListaIngressos WHERE VALUES(?)";
-            statement = connection.prepareStatement(sql);
-            int r = statement.executeUpdate();
-            resultado = r>0;
-            
-        } catch (SQLException sQLException) {
-            System.out.println(sQLException.getMessage());
-        }
-        return resultado;
+    public boolean delete(String nome) {
+        return false;
+    }
+
+    @Override
+    public Object readByNome(String nome) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

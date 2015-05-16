@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class AtorDAOconcreto implements AtorDAO{
+public class AtorDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -24,7 +24,8 @@ public class AtorDAOconcreto implements AtorDAO{
     }
     
     @Override
-    public boolean insertAtor(Ator ator) {
+    public boolean insert(Object object){
+        Ator ator = (Ator)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO ator(nome,nacionalidade,datanasc) VALUES(?,?,?)";
@@ -41,8 +42,8 @@ public class AtorDAOconcreto implements AtorDAO{
     }
 
     @Override
-    public ArrayList<Ator> readAtor() {
-        ArrayList<Ator> lista = new ArrayList();
+    public ArrayList<Object> read(){
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM ator";
             statement = connection.prepareStatement(sql);
@@ -58,8 +59,8 @@ public class AtorDAOconcreto implements AtorDAO{
     }
 
     @Override
-    public Ator readAtorById(int id) {
-        Ator a =null;
+    public Ator readById(int id) {
+        Ator a = null;
         try {
             String sql = "SELECT * FROM ator WHERE pk =?";
             statement = connection.prepareStatement(sql);
@@ -75,7 +76,7 @@ public class AtorDAOconcreto implements AtorDAO{
     }
 
     @Override
-    public Ator readAtorByNome(String nome) {
+    public Ator readByNome(String nome) {
         Ator a = null;
         try {
             String sql = "SELECT * FROM ator WHERE nome =?";
@@ -92,7 +93,8 @@ public class AtorDAOconcreto implements AtorDAO{
     }
 
     @Override
-    public boolean updateAtor(int id, Ator ator) {
+    public boolean update(int id, Object object) {
+        Ator ator = (Ator)object;
         boolean resultado = false;
         try {
             String sql = "UPDATE ator SET nome=? nacionalidade=? datanasc=? WHERE id=?";
@@ -110,7 +112,7 @@ public class AtorDAOconcreto implements AtorDAO{
     }
 
     @Override
-    public boolean deleteAtor(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM ator WHERE id = ?";
@@ -125,11 +127,12 @@ public class AtorDAOconcreto implements AtorDAO{
     }
 
     @Override
-    public boolean deleteAtor(Ator ator) {
+    public boolean delete(String nome) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM ator WHERE VALUES(?)";
+            String sql = "DELETE FROM ator WHERE nome =?";
             statement = connection.prepareStatement(sql);
+            statement.setString(1, nome);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {
@@ -137,5 +140,4 @@ public class AtorDAOconcreto implements AtorDAO{
         }
         return resultado;
     }
-    
 }

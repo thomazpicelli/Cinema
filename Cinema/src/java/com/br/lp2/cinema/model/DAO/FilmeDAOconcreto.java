@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class FilmeDAOconcreto implements FilmeDAO{
+public class FilmeDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -27,7 +27,8 @@ public class FilmeDAOconcreto implements FilmeDAO{
     }
     
     @Override
-    public boolean insertFilme(Filme filme) {
+    public boolean insert(Object object) {
+        Filme filme = (Filme)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO Filme (id_diretor, id_genero, id_listaAtores, id_distribuidora, nome, classificacao, ano, duracao, situacao, idioma) VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -52,8 +53,8 @@ public class FilmeDAOconcreto implements FilmeDAO{
     }
 
     @Override
-    public ArrayList<Filme> readFilme() {
-        ArrayList<Filme> lista = new ArrayList();
+    public ArrayList<Object> read() {
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Filme";
             statement = connection.prepareStatement(sql);
@@ -69,7 +70,7 @@ public class FilmeDAOconcreto implements FilmeDAO{
     }
 
     @Override
-    public Filme readFilmeById(int id) {
+    public Filme readById(int id) {
         Filme f = null;
         try {
             String sql = "SELECT * FROM Filme WHERE pk =?";
@@ -86,7 +87,7 @@ public class FilmeDAOconcreto implements FilmeDAO{
     }
 
     @Override
-    public Filme readFilmeByNome(String nome) {
+    public Filme readByNome(String nome) {
         Filme f = null;
         try {
             String sql = "SELECT * FROM Filme WHERE nome =?";
@@ -102,7 +103,6 @@ public class FilmeDAOconcreto implements FilmeDAO{
         return f;
     }
     
-    @Override
     public ArrayList<Filme> readFilmeByGenero(String genero) {
         ArrayList<Filme> lista = new ArrayList();
         try {
@@ -120,7 +120,6 @@ public class FilmeDAOconcreto implements FilmeDAO{
         return lista;
     }
     
-    @Override
     public ArrayList<Filme> readFilmeByAtor(String ator) {
         ArrayList<Filme> lista = new ArrayList();
         try {
@@ -138,7 +137,6 @@ public class FilmeDAOconcreto implements FilmeDAO{
         return lista;
     }
     
-    @Override
     public ArrayList<Filme> readFilmeByDiretor(String diretor) {
         ArrayList<Filme> lista = new ArrayList();
         try {
@@ -158,8 +156,9 @@ public class FilmeDAOconcreto implements FilmeDAO{
     
 
     @Override
-    public boolean updateFilme(int id, Filme filme) {
-         boolean resultado = false;
+    public boolean update(int id, Object object) {
+        Filme filme = (Filme)object; 
+        boolean resultado = false;
         try {
             String sql = "UPDATE filme SET id_diretor=?, id_genero=?, id_listaAtores=?, id_distribuidora=?, nome=?, classificacao=?, ano=?, duracao=?, situacao=?, idioma=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
@@ -183,7 +182,7 @@ public class FilmeDAOconcreto implements FilmeDAO{
     }
 
     @Override
-    public boolean deleteFilme(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM Filme WHERE pk = ?";
@@ -199,11 +198,12 @@ public class FilmeDAOconcreto implements FilmeDAO{
     }
 
     @Override
-    public boolean deleteFilme(Filme filme) {
+    public boolean delete(String nome) {
             boolean resultado = false;
         try {
-            String sql = "DELETE FROM Filme WHERE VALUES(?)";
+            String sql = "DELETE FROM Filme WHERE nome =?";
             statement = connection.prepareStatement(sql);
+            statement.setString(1, nome);
             int r = statement.executeUpdate();
             resultado = r>0;
             
@@ -212,5 +212,4 @@ public class FilmeDAOconcreto implements FilmeDAO{
         }
         return resultado;
     }
-
 }

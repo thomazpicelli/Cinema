@@ -8,38 +8,69 @@ import java.io.Serializable;
  * @author thomazpicelli
  */
 public class InfoAtor implements Serializable{
+    private int pk;
     private Ator ator;
+    private Filme filme;
     private String Papel;
     private String part;
-    
-    /**
-    * 
-    * @param ator Ator
-    * @param Papel Personagem Reprsentado
-    * @param part  participação do filme (coadjuvante, principal)
-    */
-    
-    public InfoAtor(Ator ator, String Papel, String part) {
+
+    public InfoAtor(int pk, Ator ator, Filme filme, String Papel, String part) {
+        this.pk = pk;
         this.ator = ator;
+        this.filme = filme;
         this.Papel = Papel;
         this.part = part;
+    }
+
+    public InfoAtor(Ator ator, Filme filme, String Papel, String part) {
+        this.ator = ator;
+        this.filme = filme;
+        this.Papel = Papel;
+        this.part = part;
+    }
+
+    public InfoAtor(int pk) {
+        this.pk = pk;
+    }
+
+    public int getPk() {
+        return pk;
+    }
+
+    public void setPk(int pk) {
+        this.pk = pk;
     }
 
     public Ator getAtor() {
         return ator;
     }
 
+    public void setAtor(Ator ator) {
+        this.ator = ator;
+    }
+
+    public Filme getFilme() {
+        return filme;
+    }
+
+    public void setFilme(Filme filme) {
+        this.filme = filme;
+    }
+
     public String getPapel() {
         return Papel;
+    }
+
+    public void setPapel(String Papel) {
+        this.Papel = Papel;
     }
 
     public String getPart() {
         return part;
     }
 
-    @Override
-    public String toString() {
-        return "InfoAtor{" + "ator=" + ator + ", Papel=" + Papel + ", part=" + part + '}';
+    public void setPart(String part) {
+        this.part = part;
     }
 
 }

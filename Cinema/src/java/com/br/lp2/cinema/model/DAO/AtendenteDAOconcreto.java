@@ -2,7 +2,6 @@ package com.br.lp2.cinema.model.DAO;
 
 import com.br.lp2.cinema.model.javabeans.Atendente;
 import com.br.lp2.cinema.model.connectionFactory.ConnectionFactory;
-import com.br.lp2.cinema.model.javabeans.Funcionario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +12,7 @@ import java.util.ArrayList;
  *
  * @author Marcelo
  */
-public class AtendenteDAOconcreto implements AtendenteDAO{
-
+public class AtendenteDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -25,7 +23,8 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     }
     
     @Override
-    public boolean insertAtendente(Funcionario atendente) {
+    public boolean insert(Object object){
+        Atendente atendente = (Atendente)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO Atendente (nome, login, senha) VALUES(?,?,?)";
@@ -43,8 +42,8 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     }
 
     @Override
-    public ArrayList<Funcionario> readAtendente() {
-        ArrayList<Funcionario> lista = new ArrayList();
+    public ArrayList<Object> read(){
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Atendente";
             statement = connection.prepareStatement(sql);
@@ -61,7 +60,7 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     }
 
     @Override
-    public Atendente readAtendenteById(int id) {
+    public Atendente readById(int id) {
         Atendente a = null;
         try {
             String sql = "SELECT * FROM Atendente WHERE pk =?";
@@ -79,9 +78,8 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     }
     
     @Override
-    public Atendente readAtendenteByNome(String nome) {
+    public Atendente readByNome(String nome) {
         Atendente a = null;
-        
         try {
             String sql = "SELECT * FROM Atendente WHERE nome =?";
             statement = connection.prepareStatement(sql);
@@ -98,7 +96,8 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     }
 
     @Override
-    public boolean updateAtendente(int id, Funcionario atendente) {
+    public boolean update(int id, Object object){
+        Atendente atendente = (Atendente)object;
         boolean resultado = false;
         try {
             String sql = "UPDATE Atendente SET nome=?, login=?, senha=? WHERE pk=?";
@@ -114,11 +113,10 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
         }
         return resultado;    
     }
-
+    
     @Override
-    public boolean deleteAtendente(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
-        
         try {
             String sql = "DELETE FROM Atendente WHERE pk = ?";
             statement = connection.prepareStatement(sql);
@@ -133,7 +131,7 @@ public class AtendenteDAOconcreto implements AtendenteDAO{
     }
 
     @Override
-    public boolean deleteAtendente(String nome) {
+    public boolean delete(String nome) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM Atendente WHERE nome =?";

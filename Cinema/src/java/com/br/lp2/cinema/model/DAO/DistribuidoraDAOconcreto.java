@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
+public class DistribuidoraDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -23,7 +23,8 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
     
     @Override
-    public boolean insertDistribuidora(Distribuidora distribuidora) {
+    public boolean insert(Object object){
+        Distribuidora distribuidora = (Distribuidora)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO distribuidora(nome) VALUES(?)";
@@ -38,8 +39,8 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
 
     @Override
-    public ArrayList<Distribuidora> readDistristribuidora() {
-        ArrayList<Distribuidora> lista = new ArrayList();
+    public ArrayList<Object> read() {
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM distribuidora";
             statement = connection.prepareStatement(sql);
@@ -55,7 +56,7 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
 
     @Override
-    public Distribuidora readDistribuidoraById(int id) {
+    public Distribuidora readById(int id) {
         Distribuidora d = null;
         try {
             String sql = "SELECT * FROM distribuidora WHERE pk =?";
@@ -72,7 +73,7 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
 
     @Override
-    public Distribuidora readDistribuidoraByNome(String nome) {
+    public Distribuidora readByNome(String nome) {
         Distribuidora d = null;
         try {
             String sql = "SELECT * FROM distribuidora WHERE nome =?";
@@ -89,7 +90,8 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
 
     @Override
-    public boolean updateDistribuidora(int id, Distribuidora distribuidora) {
+    public boolean update(int id, Object object) {
+        Distribuidora distribuidora = (Distribuidora)object;
         boolean resultado = false;
         try {
             String sql = "UPDATE distribuidora SET nome=? WHERE id=?";
@@ -105,7 +107,7 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
 
     @Override
-    public boolean deleteDistribuidora(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM distribuidora WHERE id = ?";
@@ -120,11 +122,12 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
 
     @Override
-    public boolean deleteDistribuidora(Distribuidora distribuidora) {
+    public boolean delete(String nome) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM distribuidora WHERE VALUES(?)";
+            String sql = "DELETE FROM distribuidora WHERE nome = ?";
             statement = connection.prepareStatement(sql);
+            statement.setString(1, nome);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {

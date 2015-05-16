@@ -1,9 +1,8 @@
 package com.br.lp2.cinema.controller.commands;
 
 import com.br.lp2.cinema.controller.VerificadorUsuario;
-import com.br.lp2.cinema.model.DAO.AtendenteDAO;
 import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
-import com.br.lp2.cinema.model.DAO.GerenteDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Atendente;
 import com.br.lp2.cinema.model.javabeans.Funcionario;
@@ -81,12 +80,12 @@ public class UsuarioCommand implements Command{
             return insert;
         else{
             if(cargo.equals("Gerente")){
-                GerenteDAO gerenteDAO = new GerenteDAOconcreto();
-                insert = gerenteDAO.insertGerente(new Gerente(nome, username, senha1));
+                GenericDAO gerenteDAO = new GerenteDAOconcreto();
+                insert = gerenteDAO.insert(new Gerente(nome, username, senha1));
             }
             else if(cargo.equals("Atendente")){
-                AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-                insert = atendenteDAO.insertAtendente(new Atendente(nome,username,senha1));
+                GenericDAO atendenteDAO = new AtendenteDAOconcreto();
+                insert = atendenteDAO.insert(new Atendente(nome,username,senha1));
             }
         }
         return insert;
@@ -103,12 +102,12 @@ public class UsuarioCommand implements Command{
             return update;
         else{
             if(cargo.equals("Gerente")){
-                GerenteDAO gerenteDAO = new GerenteDAOconcreto();
-                update = gerenteDAO.updateGerente(this.codigo, new Gerente(nome, username, senha1));
+                GenericDAO gerenteDAO = new GerenteDAOconcreto();
+                update = gerenteDAO.update(this.codigo, new Gerente(nome, username, senha1));
             }
             else if(cargo.equals("Atendente")){
-                AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-                update = atendenteDAO.updateAtendente(this.codigo, new Atendente(nome,username,senha1));
+                GenericDAO atendenteDAO = new AtendenteDAOconcreto();
+                update = atendenteDAO.update(this.codigo, new Atendente(nome,username,senha1));
             }
         }
         return update; 
@@ -116,35 +115,35 @@ public class UsuarioCommand implements Command{
 
     private boolean Deleta() {
         boolean delete = false;
-        GerenteDAO gerenteDAO = new GerenteDAOconcreto();
-        AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
+        GenericDAO gerenteDAO = new GerenteDAOconcreto();
+        GenericDAO atendenteDAO = new AtendenteDAOconcreto();
 
-        Funcionario funcionario = atendenteDAO.readAtendenteByNome(nome);
+        Funcionario funcionario = (Funcionario) atendenteDAO.readByNome(nome);
         if(funcionario != null)
-            delete = atendenteDAO.deleteAtendente(funcionario.getNome());
+            delete = atendenteDAO.delete(funcionario.getNome());
         else{
-            funcionario = gerenteDAO.readGerenteByNome(nome);
+            funcionario = (Funcionario) gerenteDAO.readByNome(nome);
             if(funcionario != null)
-                delete = gerenteDAO.deleteGerente(funcionario.getNome());
+                delete = gerenteDAO.delete(funcionario.getNome());
         }
         return delete;
     }    
 
     private boolean Cargo() {
         boolean delete, insert = false;
-        GerenteDAO gerenteDAO = new GerenteDAOconcreto();
-        AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
+        GenericDAO gerenteDAO = new GerenteDAOconcreto();
+        GenericDAO atendenteDAO = new AtendenteDAOconcreto();
 
-        Funcionario funcionario = atendenteDAO.readAtendenteByNome(nome);
+        Funcionario funcionario = (Funcionario) atendenteDAO.readByNome(nome);
         if(funcionario != null){
-            delete = atendenteDAO.deleteAtendente(funcionario.getNome());
-           if(delete) insert = gerenteDAO.insertGerente(funcionario);
+            delete = atendenteDAO.delete(funcionario.getNome());
+           if(delete) insert = gerenteDAO.insert(funcionario);
         }
         else{
-            funcionario = gerenteDAO.readGerenteByNome(nome);
+            funcionario = (Funcionario) gerenteDAO.readByNome(nome);
             if(funcionario != null){
-                delete = gerenteDAO.deleteGerente(funcionario.getNome());
-                if(delete) insert = atendenteDAO.insertAtendente(funcionario);
+                delete = gerenteDAO.delete(funcionario.getNome());
+                if(delete) insert = atendenteDAO.insert(funcionario);
             }
         }
         return insert;

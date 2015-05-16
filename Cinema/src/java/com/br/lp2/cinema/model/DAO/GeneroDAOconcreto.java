@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class GeneroDAOconcreto implements GeneroDAO{
+public class GeneroDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -23,7 +23,8 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
     
     @Override
-    public boolean insertGenero(Genero genero) {
+    public boolean insert(Object object) {
+        Genero genero = (Genero)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO genero(nome) VALUES(?)";
@@ -38,8 +39,8 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public ArrayList<Genero> readGenero() {
-        ArrayList<Genero> lista = new ArrayList();
+    public ArrayList<Object> read() {
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM genero";
             statement = connection.prepareStatement(sql);
@@ -55,7 +56,7 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public Genero readGeneroById(int pk) {
+    public Genero readById(int pk) {
         Genero g =null;
         try {
             String sql = "SELECT * FROM genero WHERE pk =?";
@@ -72,7 +73,7 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public Genero readGeneroByNome(String nome) {
+    public Genero readByNome(String nome) {
         Genero g =null;
         try {
             String sql = "SELECT * FROM genero WHERE nome =?";
@@ -89,7 +90,8 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public boolean updateGenero(int id, Genero genero) {
+    public boolean update(int id, Object object){
+        Genero genero = (Genero) object;
         boolean resultado = false;
         try {
             String sql = "UPDATE genero SET nome=? WHERE pk=?";
@@ -105,7 +107,7 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public boolean deleteGenero(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM genero WHERE pk = ?";
@@ -120,11 +122,12 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public boolean deleteGenero(Genero genero) {
+    public boolean delete(String nome) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM genero WHERE VALUES(?)";
+            String sql = "DELETE FROM genero WHERE nome =?";
             statement = connection.prepareStatement(sql);
+            statement.setString(1, nome);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class DiretorDAOconcreto implements DiretorDAO{
+public class DiretorDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -23,7 +23,8 @@ public class DiretorDAOconcreto implements DiretorDAO{
     }
     
     @Override
-    public boolean insertDiretor(Diretor diretor) {
+    public boolean insert(Object object) {
+        Diretor diretor = (Diretor)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO diretor(codigo,nome) VALUES(?,?)";
@@ -39,8 +40,8 @@ public class DiretorDAOconcreto implements DiretorDAO{
     }
 
     @Override
-    public ArrayList<Diretor> readDiretor() {
-        ArrayList<Diretor> lista = new ArrayList();
+    public ArrayList<Object> read(){
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM diretor";
             statement = connection.prepareStatement(sql);
@@ -56,7 +57,7 @@ public class DiretorDAOconcreto implements DiretorDAO{
     }
 
     @Override
-    public Diretor readDiretorById(int id) {
+    public Diretor readById(int id) {
         Diretor d = null;
         try {
             String sql = "SELECT * FROM diretor WHERE pk =?";
@@ -73,7 +74,7 @@ public class DiretorDAOconcreto implements DiretorDAO{
     }
 
     @Override
-    public Diretor readDiretorByNome(String nome) {
+    public Diretor readByNome(String nome) {
         Diretor d = null;
         try {
             String sql = "SELECT * FROM diretor WHERE nome =?";
@@ -90,7 +91,8 @@ public class DiretorDAOconcreto implements DiretorDAO{
     }
 
     @Override
-    public boolean updateDiretor(int id, Diretor diretor) {
+    public boolean update(int id, Object object){
+        Diretor diretor = (Diretor)object;
         boolean resultado = false;
         try {
             String sql = "UPDATE diretor SET nome=? codigo WHERE pk=?";
@@ -107,7 +109,7 @@ public class DiretorDAOconcreto implements DiretorDAO{
     }
 
     @Override
-    public boolean deleteDiretor(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM diretor WHERE id = ?";
@@ -122,11 +124,12 @@ public class DiretorDAOconcreto implements DiretorDAO{
     }
 
     @Override
-    public boolean deleteDiretor(Diretor diretor) {
+    public boolean delete(String nome) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM diretor WHERE VALUES(?)";
+            String sql = "DELETE FROM diretor WHERE nome =?";
             statement = connection.prepareStatement(sql);
+            statement.setString(1, nome);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {

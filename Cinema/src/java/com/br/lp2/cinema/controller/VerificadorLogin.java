@@ -1,8 +1,7 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.AtendenteDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
-import com.br.lp2.cinema.model.DAO.GerenteDAO;
 import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Funcionario;
 import java.math.BigInteger;
@@ -38,8 +37,8 @@ public class VerificadorLogin {
     }
     
     public boolean verificaAtendente(){
-        AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-        ArrayList<Funcionario> listaAtendentes = atendenteDAO.readAtendente();
+        GenericDAO atendenteDAO = new AtendenteDAOconcreto();
+        ArrayList<Funcionario> listaAtendentes = atendenteDAO.read();
         
         boolean verificado = false;
         if(!verificado){

@@ -1,7 +1,6 @@
 package com.br.lp2.cinema.model.DAO;
 
 import com.br.lp2.cinema.model.connectionFactory.ConnectionFactory;
-import com.br.lp2.cinema.model.javabeans.Funcionario;
 import com.br.lp2.cinema.model.javabeans.Gerente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class GerenteDAOconcreto implements GerenteDAO {
+public class GerenteDAOconcreto implements GenericDAO {
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -24,7 +23,8 @@ public class GerenteDAOconcreto implements GerenteDAO {
     }
     
     @Override
-    public boolean insertGerente(Funcionario gerente) {
+    public boolean insert(Object object) {
+        Gerente gerente = (Gerente)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO Gerente (nome, login, senha) VALUES(?,?,?)";
@@ -41,8 +41,8 @@ public class GerenteDAOconcreto implements GerenteDAO {
     }
 
     @Override
-    public ArrayList<Funcionario> readGerente() {
-        ArrayList<Funcionario> lista = new ArrayList();
+    public ArrayList<Object> read() {
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Gerente";
             statement = connection.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class GerenteDAOconcreto implements GerenteDAO {
     }
 
     @Override
-    public Gerente readGerenteById(int id) {
+    public Gerente readById(int id) {
         Gerente g = null;
         try {
             String sql = "SELECT * FROM Gerente WHERE pk =?";
@@ -75,7 +75,7 @@ public class GerenteDAOconcreto implements GerenteDAO {
     }
 
     @Override
-    public Gerente readGerenteByNome(String nome) {
+    public Gerente readByNome(String nome) {
         Gerente g = null;
         try {
             String sql = "SELECT * FROM Gerente WHERE nome =?";
@@ -92,7 +92,8 @@ public class GerenteDAOconcreto implements GerenteDAO {
     }
 
     @Override
-    public boolean updateGerente(int id, Funcionario gerente) {
+    public boolean update(int id, Object object) {
+        Gerente gerente = (Gerente)object;
         boolean resultado = false;
         try {
             String sql = "UPDATE gerente SET nome=?, login=?, senha=? WHERE pk=?";
@@ -110,7 +111,7 @@ public class GerenteDAOconcreto implements GerenteDAO {
     }
 
     @Override
-    public boolean deleteGerente(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM Gerente WHERE pk = ?";
@@ -126,7 +127,7 @@ public class GerenteDAOconcreto implements GerenteDAO {
     }
 
     @Override
-    public boolean deleteGerente(String nome) {
+    public boolean delete(String nome) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM gerente WHERE nome = ?";

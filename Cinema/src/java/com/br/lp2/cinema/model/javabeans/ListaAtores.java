@@ -32,12 +32,12 @@ public class ListaAtores implements Serializable{
         return "ListaAtores{" + '}';
     }
     
-    public void adicionaAtor(Ator ator, String papel, String part){
-        InfoAtor ia = new InfoAtor(ator, papel, part);
+    public void adicionaAtor(Ator ator, Filme filme, String papel, String part){
+        InfoAtor ia = new InfoAtor(ator, filme, papel, part);
         lista.add(ia);
     }
     
-    public void removeAtor(Ator ator, String papel, String part){
+    public void removeAtor(Ator ator, Filme filme, String papel, String part){
         for (InfoAtor infoAtor : lista) {
             if(ator.compara(infoAtor.getAtor())){
                 lista.remove(infoAtor);
@@ -45,9 +45,9 @@ public class ListaAtores implements Serializable{
         }
     }
     
-    public void substituiAtor(Ator ator1, Ator ator2, String papel, String part){
-        removeAtor(ator1, papel, part);
-        adicionaAtor(ator2, papel, part);
+    public void substituiAtor(Ator ator1, Filme filme, Ator ator2, String papel, String part){
+        removeAtor(ator1, filme, papel, part);
+        adicionaAtor(ator2, filme, papel, part);
     }
     
     public boolean procuraAtor(Ator ator){

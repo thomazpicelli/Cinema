@@ -25,7 +25,7 @@
                 <div class="dropdown hover">
                     <a href="#">Manutenção</a>
                     <ul>
-                        <li><a href="SalaController">Manter Sala</a></li>
+                        <li><a href="FrontController" name="command" value="Encaminhar_Sala">Manter Sala</a></li>
                         <li><a href="FilmeController">Manter Filme</a></li>
                         <li><a href="SessaoController">Manter Sessão</a></li>
                         <li><a href="UsuarioController">Manter Usuário</a></li>

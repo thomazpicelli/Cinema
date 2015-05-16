@@ -1,8 +1,7 @@
 package com.br.lp2.cinema.controller.commands;
 
-import com.br.lp2.cinema.model.DAO.SalaDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
-import com.br.lp2.cinema.model.DAO.SessaoDAO;
 import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Sala;
 import com.br.lp2.cinema.model.javabeans.Sessao;
@@ -82,35 +81,34 @@ public class SalaCommand implements Command{
     }
 
     private boolean Cria() {
-        SalaDAO salaDAO = new SalaDAOconcreto();
-        boolean insert = salaDAO.insertSala(new Sala(numero, lotacao, especial, si));
+        GenericDAO salaDAO = new SalaDAOconcreto();
+        boolean insert = salaDAO.insert(new Sala(numero, lotacao, especial, si));
         return insert;
     }
 
     private boolean Muda() {
-        SalaDAO salaDAO = new SalaDAOconcreto();
-        boolean update = salaDAO.updateSala(codigo, new Sala(numero, lotacao, especial, si));
+        GenericDAO salaDAO = new SalaDAOconcreto();
+        boolean update = salaDAO.update(codigo, new Sala(numero, lotacao, especial, si));
         return update;
     }
 
     private boolean Deleta() {
         boolean delete = false;
-        SalaDAO salaDAO = new SalaDAOconcreto();
-        Sala s = salaDAO.readSalaByNumero(numero);
+        GenericDAO salaDAO = new SalaDAOconcreto();
+        Sala s = salaDAO.readByNome(numero);
         if(s != null){ 
-            SessaoDAO sessaoDAO = new SessaoDAOconcreto();
-            Sessao sessao = sessaoDAO.readSessaoBySala(s.getPk());
+            GenericDAO sessaoDAO = new SessaoDAOconcreto();
+            Sessao sessao = (Sessao) sessaoDAO.readById(s.getPk());
             if(sessao == null)
-                delete = salaDAO.deleteSala(s.getPk());
+                delete = salaDAO.delete(s.getPk());
         }
         return delete;
     }
 
     private boolean Situacao() {
-        SalaDAO salaDAO = new SalaDAOconcreto();
-        Sala sala = salaDAO.readSalaByNumero(numero);
-        
-        boolean update = salaDAO.updateSala(sala.getPk(), new Sala(sala.getNumero(), sala.getLotacao(), sala.getEspecial(), si));
+        GenericDAO salaDAO = new SalaDAOconcreto();
+        Sala sala = salaDAO.readByNome(numero);
+        boolean update = salaDAO.update(sala.getPk(), new Sala(sala.getNumero(), sala.getLotacao(), sala.getEspecial(), si));
         return update;
     }
 }

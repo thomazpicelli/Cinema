@@ -2,6 +2,7 @@ package com.br.lp2.cinema.model.DAO;
 
 import com.br.lp2.cinema.model.connectionFactory.ConnectionFactory;
 import com.br.lp2.cinema.model.javabeans.Ator;
+import com.br.lp2.cinema.model.javabeans.Filme;
 import com.br.lp2.cinema.model.javabeans.InfoAtor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class InfoAtorDAOconcreto implements InfoAtorDAO{
+public class InfoAtorDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -24,7 +25,8 @@ public class InfoAtorDAOconcreto implements InfoAtorDAO{
     }
     
     @Override
-    public boolean insertInfoAtor(InfoAtor infoAtor) {
+    public boolean insert(Object object) {
+        InfoAtor infoAtor = (InfoAtor)object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO Gerente (id_ator, papel, part) VALUES(?,?,?)";
@@ -41,14 +43,14 @@ public class InfoAtorDAOconcreto implements InfoAtorDAO{
     }
 
     @Override
-    public ArrayList<InfoAtor> readInfoAtor() {
-        ArrayList<InfoAtor> lista = new ArrayList();
+    public ArrayList<Object> read() {
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM InfoAtor";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                InfoAtor ia = new InfoAtor((Ator)rs.getObject("id_ator"), rs.getString("papel"), rs.getString("part"));
+                InfoAtor ia = new InfoAtor( new Ator(rs.getInt("id_ator")), new Filme(rs.getInt("id_filme")), rs.getString("papel"), rs.getString("part"));
                 lista.add(ia);
             }
         } catch (SQLException sQLException) {
@@ -58,7 +60,7 @@ public class InfoAtorDAOconcreto implements InfoAtorDAO{
     }
 
     @Override
-    public InfoAtor readInfoAtorById(int id) {
+    public InfoAtor readById(int id) {
         InfoAtor ia = null;
         try {
             String sql = "SELECT * FROM InfoAtor WHERE pk =?";
@@ -66,7 +68,7 @@ public class InfoAtorDAOconcreto implements InfoAtorDAO{
             statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                ia = new InfoAtor((Ator)rs.getObject("id_ator"), rs.getString("papel"), rs.getString("part"));
+                ia = new InfoAtor( new Ator(rs.getInt("id_ator")), new Filme(rs.getInt("id_filme")), rs.getString("papel"), rs.getString("part"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -75,15 +77,15 @@ public class InfoAtorDAOconcreto implements InfoAtorDAO{
     }
 
     @Override
-    public InfoAtor readInfoAtorByPapel(String papel) {
+    public InfoAtor readByNome(String nome) {
         InfoAtor ia = null;
         try {
             String sql = "SELECT * FROM InfoAtor WHERE papel=?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, papel);
+            statement.setString(1, nome);
             rs = statement.executeQuery();
             while (rs.next()) {
-                ia = new InfoAtor((Ator)rs.getObject("id_ator"), rs.getString("papel"), rs.getString("part"));
+                ia = new InfoAtor( new Ator(rs.getInt("id_ator")), new Filme(rs.getInt("id_filme")), rs.getString("papel"), rs.getString("part"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -92,7 +94,8 @@ public class InfoAtorDAOconcreto implements InfoAtorDAO{
     }
 
     @Override
-    public boolean updateInfoAtor(int id, InfoAtor infoAtor) {
+    public boolean update(int id, Object object) {
+        InfoAtor infoAtor = (InfoAtor) object;
         boolean resultado = false;
         try {
             String sql = "UPDATE infoAtor SET id_ator=? papel=? part=?";
@@ -109,13 +112,33 @@ public class InfoAtorDAOconcreto implements InfoAtorDAO{
     }
 
     @Override
-    public boolean deleteInfoAtor(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(int id) {
+        boolean resultado = false;
+        try {
+            String sql = "DELETE FROM Infoator WHERE pk = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id); 
+            int r = statement.executeUpdate();
+            resultado = r>0;
+            
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return resultado;
     }
 
     @Override
-    public boolean deleteInfoAtor(InfoAtor infoAtor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(String nome) {
+        boolean resultado = false;
+        try {
+            String sql = "DELETE FROM Infoator WHERE papel = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, nome);
+            int r = statement.executeUpdate();
+            resultado = r>0;
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return resultado;
     }
-    
 }

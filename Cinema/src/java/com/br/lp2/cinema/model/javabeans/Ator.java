@@ -20,6 +20,10 @@ public class Ator implements Serializable{
         this.datanasc = datanasc;
     }
 
+    public Ator(int pk) {
+        this.pk = pk;
+    }
+    
     public int getPk() {
         return pk;
     }

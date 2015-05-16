@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class IngressoDAOconcreto implements IngressoDAO{
+public class IngressoDAOconcreto implements GenericDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
@@ -24,7 +24,8 @@ public class IngressoDAOconcreto implements IngressoDAO{
     }
 
     @Override
-    public boolean insertIngresso(Ingresso ingresso) {
+    public boolean insert(Object object) {
+        Ingresso ingresso = (Ingresso) object;
         boolean resultado = false;
         try {
             String sql = "INSERT INTO Ingresso (pk, id, inteira, tipo) VALUES(?,?,?,?)";
@@ -42,8 +43,8 @@ public class IngressoDAOconcreto implements IngressoDAO{
     }
 
     @Override
-    public ArrayList<Ingresso> readIngresso() {
-        ArrayList<Ingresso> lista = new ArrayList();
+    public ArrayList<Object> read() {
+        ArrayList<Object> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Ingresso";
             statement = connection.prepareStatement(sql);
@@ -59,7 +60,7 @@ public class IngressoDAOconcreto implements IngressoDAO{
     }
 
     @Override
-    public Ingresso readIngressoById(int id) {
+    public Ingresso readById(int id) {
         Ingresso i = null;
         try {
             String sql = "SELECT * FROM Ingresso WHERE pk =?";
@@ -76,7 +77,8 @@ public class IngressoDAOconcreto implements IngressoDAO{
     }
 
     @Override
-    public boolean updateIngresso(int id, Ingresso ingresso) {
+    public boolean update(int id, Object object) {
+        Ingresso ingresso = (Ingresso)object;
         boolean resultado = false;
         try {
             String sql = "UPDATE Ingresso SET pk=? id=? inteira=? tipo=?";
@@ -94,7 +96,7 @@ public class IngressoDAOconcreto implements IngressoDAO{
     }
 
     @Override
-    public boolean deleteIngresso(int id) {
+    public boolean delete(int id) {
         boolean resultado = false;
         try {
             String sql = "DELETE FROM Ingresso WHERE pk = ?";
@@ -110,17 +112,12 @@ public class IngressoDAOconcreto implements IngressoDAO{
     }
 
     @Override
-    public boolean deleteIngresso(Ingresso Ingresso) {
-        boolean resultado = false;
-        try {
-            String sql = "DELETE FROM Ingresso WHERE VALUES(?)";
-            statement = connection.prepareStatement(sql);
-            int r = statement.executeUpdate();
-            resultado = r>0;
-            
-        } catch (SQLException sQLException) {
-            System.out.println(sQLException.getMessage());
-        }
-        return resultado;
+    public boolean delete(String nome) {
+        return false;
     }   
+
+    @Override
+    public Object readByNome(String nome) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

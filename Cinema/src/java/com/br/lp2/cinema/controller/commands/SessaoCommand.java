@@ -1,6 +1,6 @@
 package com.br.lp2.cinema.controller.commands;
 
-import com.br.lp2.cinema.model.DAO.SessaoDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Filme;
 import com.br.lp2.cinema.model.javabeans.ListaIngressos;
@@ -64,18 +64,18 @@ public class SessaoCommand implements Command{
         }          
     }
     private boolean Cria(){
-        SessaoDAO sessaoDAO = new SessaoDAOconcreto();
-        boolean insert = sessaoDAO.insertSessao(new Sessao(new Filme(filme), new Sala(sala),horario, legendado, new ListaIngressos(listadeingressos)));
+        GenericDAO sessaoDAO = new SessaoDAOconcreto();
+        boolean insert = sessaoDAO.insert(new Sessao(new Filme(filme), new Sala(sala),horario, legendado, new ListaIngressos(listadeingressos)));
         return insert;
     }
     private boolean Muda() {
-        SessaoDAO sessaoDAO = new SessaoDAOconcreto();
-        boolean update = sessaoDAO.updateSessao(codigo, new Sessao(new Filme(filme), new Sala(sala), horario, legendado, new ListaIngressos(listadeingressos)));
+        GenericDAO sessaoDAO = new SessaoDAOconcreto();
+        boolean update = sessaoDAO.update(codigo, new Sessao(new Filme(filme), new Sala(sala), horario, legendado, new ListaIngressos(listadeingressos)));
         return update;
     }
     private boolean Deleta() {
-        SessaoDAO sessaoDAO = new SessaoDAOconcreto();
-        boolean delete = sessaoDAO.deleteSessao(codigo);
+        GenericDAO sessaoDAO = new SessaoDAOconcreto();
+        boolean delete = sessaoDAO.delete(codigo);
         return delete;
     }
 }

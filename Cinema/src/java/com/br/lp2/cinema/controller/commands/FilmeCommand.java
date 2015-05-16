@@ -1,6 +1,6 @@
 package com.br.lp2.cinema.controller.commands;
 
-import com.br.lp2.cinema.model.DAO.FilmeDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Diretor;
 import com.br.lp2.cinema.model.javabeans.Distribuidora;
@@ -85,18 +85,18 @@ public class FilmeCommand implements Command{
     }
     
     private boolean Muda(){
-        FilmeDAO filmeDAO = new FilmeDAOconcreto();
-        boolean update = filmeDAO.updateFilme(codigo, new Filme(new Diretor(diretor), new Genero(genero), new ListaAtores(listadeatores), new Distribuidora(distribuidora), nome, classificacao, ano, duracao, si, idioma));
+        GenericDAO filmeDAO = new FilmeDAOconcreto();
+        boolean update = filmeDAO.update(codigo, new Filme(new Diretor(diretor), new Genero(genero), new ListaAtores(listadeatores), new Distribuidora(distribuidora), nome, classificacao, ano, duracao, si, idioma));
         return update;
     }
     private boolean Cria(){
-        FilmeDAO filmeDAO = new FilmeDAOconcreto();
-        boolean insert = filmeDAO.insertFilme(new Filme(new Diretor(diretor), new Genero(genero), new ListaAtores(listadeatores), new Distribuidora(distribuidora), nome, classificacao, ano, duracao, si, idioma));
+        GenericDAO filmeDAO = new FilmeDAOconcreto();
+        boolean insert = filmeDAO.insert(new Filme(new Diretor(diretor), new Genero(genero), new ListaAtores(listadeatores), new Distribuidora(distribuidora), nome, classificacao, ano, duracao, si, idioma));
         return insert;
     }
     private boolean Deleta() {
-        FilmeDAO filmeDAO = new FilmeDAOconcreto();
-        boolean delete = filmeDAO.deleteFilme(codigo);
+        GenericDAO filmeDAO = new FilmeDAOconcreto();
+        boolean delete = filmeDAO.delete(codigo);
         return delete;
     }
 }

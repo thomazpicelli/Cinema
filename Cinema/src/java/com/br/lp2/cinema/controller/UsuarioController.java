@@ -1,8 +1,7 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.AtendenteDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
-import com.br.lp2.cinema.model.DAO.GerenteDAO;
 import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Funcionario;
 import java.io.IOException;
@@ -38,10 +37,10 @@ public class UsuarioController extends HttpServlet {
             ArrayList<Funcionario> lista1 = new ArrayList<Funcionario>();
             ArrayList<Funcionario> lista2 = new ArrayList<Funcionario>();
     
-            GerenteDAO gerente = new GerenteDAOconcreto();
-            AtendenteDAO atendente = new AtendenteDAOconcreto();
-            lista1 = gerente.readGerente();
-            lista2 = atendente.readAtendente();
+            GenericDAO gerente = new GerenteDAOconcreto();
+            GenericDAO atendente = new AtendenteDAOconcreto();
+            lista1 = gerente.read();
+            lista2 = atendente.read();
             for (Funcionario li : lista2) {
                 lista1.add(li);
             }
