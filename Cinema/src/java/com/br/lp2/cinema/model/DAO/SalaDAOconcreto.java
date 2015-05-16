@@ -43,8 +43,8 @@ public class SalaDAOconcreto implements GenericDAO{
     }
 
     @Override
-    public ArrayList<Object> read() {
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<Sala> read() {
+        ArrayList<Sala> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Sala";
             statement = connection.prepareStatement(sql);

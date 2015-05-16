@@ -42,7 +42,7 @@ public class VerificadorUsuario {
         boolean verificado = false;
         if(cargoA.equals("Gerente")){
             GenericDAO gerenteDAO = new GerenteDAOconcreto();
-            ArrayList<Object> listaGerentes = gerenteDAO.read();
+            ArrayList<Funcionario> listaGerentes = gerenteDAO.read();
             for (Funcionario gerente : listaGerentes) {
                 if(gerente.getPk() == codigo){
                     verificado = true;
@@ -52,7 +52,7 @@ public class VerificadorUsuario {
         }
         else{
             GenericDAO atendenteDAO = new AtendenteDAOconcreto();
-            ArrayList<Object> listaAtendentes = atendenteDAO.read();
+            ArrayList<Funcionario> listaAtendentes = atendenteDAO.read();
         
             for (Funcionario atendente : listaAtendentes){
                 if(atendente.getPk() == codigo){
@@ -66,9 +66,9 @@ public class VerificadorUsuario {
     
     public boolean verificaUserName(){
         GenericDAO gerenteDao = new GerenteDAOconcreto();
-        ArrayList<Object> listaGerentes = gerenteDao.read();
+        ArrayList<Funcionario> listaGerentes = gerenteDao.read();
         GenericDAO atendenteDAO = new AtendenteDAOconcreto();
-        ArrayList<Object> listaAtendentes = atendenteDAO.read();
+        ArrayList<Funcionario> listaAtendentes = atendenteDAO.read();
         
         boolean verificado = true;
         for (Funcionario gerente : listaGerentes) {

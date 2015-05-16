@@ -43,8 +43,8 @@ public class InfoAtorDAOconcreto implements GenericDAO{
     }
 
     @Override
-    public ArrayList<Object> read() {
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<InfoAtor> read() {
+        ArrayList<InfoAtor> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM InfoAtor";
             statement = connection.prepareStatement(sql);
@@ -74,6 +74,23 @@ public class InfoAtorDAOconcreto implements GenericDAO{
             System.out.println(sQLException.getMessage());
         }
         return ia;
+    }
+    
+    public ArrayList<InfoAtor> readByFilme(int id) {
+        ArrayList<InfoAtor> lista = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM InfoAtor WHERE id_filme =?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                InfoAtor ia = new InfoAtor( new Ator(rs.getInt("id_ator")), new Filme(rs.getInt("id_filme")), rs.getString("papel"), rs.getString("part"));
+                lista.add(ia);
+            }
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return lista;
     }
 
     @Override

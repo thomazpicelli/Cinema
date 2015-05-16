@@ -12,7 +12,7 @@ public interface GenericDAO {
     public boolean insert(Object object);
     
     //READ
-    public ArrayList<Object> read();
+    public ArrayList read();
     public Object readById(int id);
     public Object readByNome(String nome);
     

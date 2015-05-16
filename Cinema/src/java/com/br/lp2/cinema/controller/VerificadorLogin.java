@@ -23,8 +23,8 @@ public class VerificadorLogin {
     }
 
     public boolean verificaGerente(){
-        GerenteDAO gerenteDao = new GerenteDAOconcreto();
-        ArrayList<Funcionario> listaGerentes = gerenteDao.readGerente();
+        GenericDAO gerenteDao = new GerenteDAOconcreto();
+        ArrayList<Funcionario> listaGerentes = gerenteDao.read();
         
         boolean verificado = false;
         for (Funcionario gerente : listaGerentes) {

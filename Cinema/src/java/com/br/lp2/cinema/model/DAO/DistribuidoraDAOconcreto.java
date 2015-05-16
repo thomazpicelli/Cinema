@@ -39,8 +39,8 @@ public class DistribuidoraDAOconcreto implements GenericDAO{
     }
 
     @Override
-    public ArrayList<Object> read() {
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<Distribuidora> read() {
+        ArrayList<Distribuidora> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM distribuidora";
             statement = connection.prepareStatement(sql);

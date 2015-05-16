@@ -1,15 +1,11 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.DiretorDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.DiretorDAOconcreto;
-import com.br.lp2.cinema.model.DAO.DistribuidoraDAO;
 import com.br.lp2.cinema.model.DAO.DistribuidoraDAOconcreto;
-import com.br.lp2.cinema.model.DAO.FilmeDAO;
 import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;
-import com.br.lp2.cinema.model.DAO.GeneroDAO;
 import com.br.lp2.cinema.model.DAO.GeneroDAOconcreto;
-import com.br.lp2.cinema.model.DAO.ListaAtoresDAO;
-import com.br.lp2.cinema.model.DAO.ListaAtoresDAOconcreto;
+import com.br.lp2.cinema.model.DAO.InfoAtorDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Diretor;
 import com.br.lp2.cinema.model.javabeans.Distribuidora;
 import com.br.lp2.cinema.model.javabeans.Filme;
@@ -46,28 +42,28 @@ public class FilmeController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             ArrayList<Diretor> lista1 = new ArrayList<>();
-            DiretorDAO diretor = new DiretorDAOconcreto();
-            lista1 = diretor.readDiretor();
+            GenericDAO diretor = new DiretorDAOconcreto();
+            lista1 = diretor.read();
             request.getSession().setAttribute("diretores", lista1);
             
             ArrayList<Genero> lista2 = new ArrayList<Genero>();
-            GeneroDAO genero = new GeneroDAOconcreto();
-            lista2 = genero.readGenero();
+            GenericDAO genero = new GeneroDAOconcreto();
+            lista2 = genero.read();
             request.getSession().setAttribute("generos", lista2);
             
             ArrayList<Distribuidora> lista3 = new ArrayList<Distribuidora>();
-            DistribuidoraDAO distribuidora = new DistribuidoraDAOconcreto();
-            lista3 = distribuidora.readDistristribuidora();
+            GenericDAO distribuidora = new DistribuidoraDAOconcreto();
+            lista3 = distribuidora.read();
             request.getSession().setAttribute("distribuidoras", lista3);
   
             ArrayList<ListaAtores> lista4 = new ArrayList<ListaAtores>();
-            ListaAtoresDAO la = new ListaAtoresDAOconcreto();
-            lista4 = la.readListaAtores();
+            GenericDAO ia = new InfoAtorDAOconcreto();
+            lista4 = ia.read();
             request.getSession().setAttribute("latores", lista4);
 
             ArrayList<Filme> lista = new ArrayList<Filme>();
-            FilmeDAO filme = new FilmeDAOconcreto();
-            lista = filme.readFilme();
+            GenericDAO filme = new FilmeDAOconcreto();
+            lista = filme.read();
             request.getSession().setAttribute("filmes", lista);
             
             response.sendRedirect("manter_filme.jsp");

@@ -39,8 +39,8 @@ public class GeneroDAOconcreto implements GenericDAO{
     }
 
     @Override
-    public ArrayList<Object> read() {
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<Genero> read() {
+        ArrayList<Genero> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM genero";
             statement = connection.prepareStatement(sql);

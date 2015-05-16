@@ -1,6 +1,6 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.SalaDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Sala;
 import java.io.IOException;
@@ -33,8 +33,8 @@ public class SalaMudaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             Sala salaUpdate;
-            SalaDAO sala = new SalaDAOconcreto();
-            salaUpdate = sala.readSalaById(numero);
+            GenericDAO sala = new SalaDAOconcreto();
+            salaUpdate = (Sala)sala.readById(numero);
             
             request.getSession().setAttribute("salaUpdate", salaUpdate);
             

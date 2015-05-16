@@ -42,8 +42,8 @@ public class AtorDAOconcreto implements GenericDAO{
     }
 
     @Override
-    public ArrayList<Object> read(){
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<Ator> read(){
+        ArrayList<Ator> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM ator";
             statement = connection.prepareStatement(sql);

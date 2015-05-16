@@ -40,8 +40,8 @@ public class ListaIngressosDAOconcreto implements GenericDAO{
     }
 
     @Override
-    public ArrayList<Object> read() {
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<ListaIngressos> read() {
+        ArrayList<ListaIngressos> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM ListaIngressos";
             statement = connection.prepareStatement(sql);

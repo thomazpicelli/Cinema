@@ -1,12 +1,9 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.FilmeDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;
-import com.br.lp2.cinema.model.DAO.ListaIngressosDAO;
 import com.br.lp2.cinema.model.DAO.ListaIngressosDAOconcreto;
-import com.br.lp2.cinema.model.DAO.SalaDAO;
 import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
-import com.br.lp2.cinema.model.DAO.SessaoDAO;
 import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Filme;
 import com.br.lp2.cinema.model.javabeans.ListaIngressos;
@@ -43,23 +40,23 @@ public class SessaoController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             ArrayList<Sessao> lista1 = new ArrayList<Sessao>();
-            SessaoDAO sessao = new SessaoDAOconcreto();
-            lista1 = sessao.readSessao();
+            GenericDAO sessao = new SessaoDAOconcreto();
+            lista1 = sessao.read();
             request.getSession().setAttribute("sessoes", lista1);
 
             ArrayList<Filme> lista2 = new ArrayList<Filme>();
-            FilmeDAO filme = new FilmeDAOconcreto();
-            lista2 = filme.readFilme();
+            GenericDAO filme = new FilmeDAOconcreto();
+            lista2 = filme.read();
             request.getSession().setAttribute("filmes", lista2);
             
             ArrayList<Sala> lista3 = new ArrayList<Sala>();
-            SalaDAO sala = new SalaDAOconcreto();
-            lista3 = sala.readSala();
+            GenericDAO sala = new SalaDAOconcreto();
+            lista3 = sala.read();
             request.getSession().setAttribute("salas", lista3);
             
             ArrayList<ListaIngressos> lista4 = new ArrayList<ListaIngressos>();
-            ListaIngressosDAO listaIngressosDAO = new ListaIngressosDAOconcreto();
-            lista4 = listaIngressosDAO.readListaIngressos();
+            GenericDAO listaIngressosDAO = new ListaIngressosDAOconcreto();
+            lista4 = listaIngressosDAO.read();
             request.getSession().setAttribute("ingressos", lista4);
             
             response.sendRedirect("manter_sessao.jsp");	

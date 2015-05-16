@@ -40,8 +40,8 @@ public class DiretorDAOconcreto implements GenericDAO{
     }
 
     @Override
-    public ArrayList<Object> read(){
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<Diretor> read(){
+        ArrayList<Diretor> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM diretor";
             statement = connection.prepareStatement(sql);

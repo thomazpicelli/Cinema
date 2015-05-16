@@ -1,6 +1,6 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.SessaoDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Sessao;
 import java.io.IOException;
@@ -38,23 +38,23 @@ public class BuscaSessaoController extends HttpServlet {
             request.removeAttribute("buscaSessao");
             
             ArrayList<Sessao> lista = new ArrayList<Sessao>();
-            SessaoDAO sessao = new SessaoDAOconcreto();
+            GenericDAO sessao = new SessaoDAOconcreto();
             todos = request.getParameter("todos");
             if(todos != null){
-                lista = sessao.readSessao();
+                lista = sessao.read();
                 request.getSession().setAttribute("buscaSessao", lista);
             }
             else{
                 String pk = request.getParameter("sessao");
                 if(pk != null){ 
                     id = Integer.parseInt(pk);
-                    Sessao s = sessao.readSessaoById(id);
+                    Sessao s = (Sessao)sessao.readById(id);
                     lista.add(s);
                     request.getSession().setAttribute("buscaSessao", lista);
                 }
             }
             
-            response.sendRedirect("manter_sessao.jsp");	  
+            response.sendRedirect("manter_sessao.jsp#1");	  
         }
     }
 

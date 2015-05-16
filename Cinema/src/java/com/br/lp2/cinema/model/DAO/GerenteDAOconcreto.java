@@ -41,8 +41,8 @@ public class GerenteDAOconcreto implements GenericDAO {
     }
 
     @Override
-    public ArrayList<Object> read() {
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<Gerente> read() {
+        ArrayList<Gerente> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Gerente";
             statement = connection.prepareStatement(sql);

@@ -1,6 +1,6 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.FilmeDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Filme;
 import java.io.IOException;
@@ -40,8 +40,8 @@ public class BuscaFilmeController extends HttpServlet {
             
             switch(busca){
                 case "filme":
-                    FilmeDAO filme = new FilmeDAOconcreto();
-                    lista = filme.readFilme();
+                    GenericDAO filme = new FilmeDAOconcreto();
+                    lista = filme.read();
                     break;
                 case "sessao":
                     break;

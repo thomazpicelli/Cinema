@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     public static final String driver = "org.apache.derby.jdbc.ClientDriver";
     public static final String protocol = "jdbc:derby:";
-    public static final String dbname = "cinema_db";
+    public static final String dbname = "cinema_d";
     private static final String dominio = "//localhost:1527/"; 
     private Connection connection;
 

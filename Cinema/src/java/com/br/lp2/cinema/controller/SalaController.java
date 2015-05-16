@@ -1,6 +1,6 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.SalaDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Sala;
 import java.io.IOException;
@@ -38,8 +38,8 @@ public class SalaController extends HttpServlet {
             request.removeAttribute("buscaSala");
             
             ArrayList<Sala> lista = new ArrayList<Sala>();
-            SalaDAO sala = new SalaDAOconcreto();
-            lista = sala.readSala();
+            GenericDAO sala = new SalaDAOconcreto();
+            lista = sala.read();
             request.getSession().setAttribute("salas", lista);
                         
             response.sendRedirect("manter_sala.jsp");	            

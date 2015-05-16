@@ -46,8 +46,8 @@ public class SessaoDAOconcreto implements GenericDAO{
     }
 
     @Override
-    public ArrayList<Object> read() {
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<Sessao> read() {
+        ArrayList<Sessao> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Sessao";
             statement = connection.prepareStatement(sql);

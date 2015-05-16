@@ -1,8 +1,7 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.AtendenteDAO;
+import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
-import com.br.lp2.cinema.model.DAO.GerenteDAO;
 import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Funcionario;
 import java.io.IOException;
@@ -37,19 +36,19 @@ public class BuscaUsuarioController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
-            AtendenteDAO atendenteDAO = new AtendenteDAOconcreto();
-            GerenteDAO gerenteDAO = new GerenteDAOconcreto();
+            GenericDAO atendenteDAO = new AtendenteDAOconcreto();
+            GenericDAO gerenteDAO = new GerenteDAOconcreto();
             
             if(request.getParameter("atendente")!= null)
-                lista.addAll(atendenteDAO.readAtendente());
+                lista.addAll(atendenteDAO.read());
             if(request.getParameter("gerente") != null)
-                lista.addAll(gerenteDAO.readGerente());
+                lista.addAll(gerenteDAO.read());
             if(lista.isEmpty()){
                 if(request.getParameter("nome") != null){
                     nome = request.getParameter("nome");
-                    Funcionario f = atendenteDAO.readAtendenteByNome(nome);
+                    Funcionario f = (Funcionario)atendenteDAO.readByNome(nome);
                     if(f == null){
-                        f = gerenteDAO.readGerenteByNome(nome);
+                        f = (Funcionario) gerenteDAO.readByNome(nome);
                     }
                     lista.add(f);
                 }
@@ -57,7 +56,7 @@ public class BuscaUsuarioController extends HttpServlet {
             
             request.getSession().setAttribute("buscaUsuario", lista);
                        
-            response.sendRedirect("manter_usuario.jsp");	  
+            response.sendRedirect("manter_usuario.jsp#1");	  
         }
     }
 

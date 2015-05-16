@@ -53,14 +53,18 @@ public class FilmeDAOconcreto implements GenericDAO{
     }
 
     @Override
-    public ArrayList<Object> read() {
-        ArrayList<Object> lista = new ArrayList();
+    public ArrayList<Filme> read() {
+        ArrayList<Filme> lista = new ArrayList();
         try {
             String sql = "SELECT * FROM Filme";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
+            GenericDAO diretor = new DiretorDAOconcreto();
+            GenericDAO genero = new GeneroDAOconcreto();
+            GenericDAO infoator = new InfoAtorDAOconcreto();
+            GenericDAO distribuidora = new DistribuidoraDAOconcreto();
             while (rs.next()) {
-                Filme f = new Filme(rs.getInt("pk"), new Diretor(rs.getInt("id_diretor")), new Genero(rs.getInt("id_genero")), new ListaAtores(rs.getInt("id_listaAtores")), new Distribuidora(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
+                Filme f = new Filme(rs.getInt("pk"), (Diretor)diretor.readById(rs.getInt("id_diretor")), (Genero)genero.readById(rs.getInt("id_genero")), new ListaAtores(infoator.read()), (Distribuidora)distribuidora.readById(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
                 lista.add(f);
             }
         } catch (SQLException sQLException) {
@@ -77,8 +81,12 @@ public class FilmeDAOconcreto implements GenericDAO{
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             rs = statement.executeQuery();
+            GenericDAO diretor = new DiretorDAOconcreto();
+            GenericDAO genero = new GeneroDAOconcreto();
+            GenericDAO infoator = new InfoAtorDAOconcreto();
+            GenericDAO distribuidora = new DistribuidoraDAOconcreto();
             while (rs.next()) {
-                f = new Filme(rs.getInt("pk"), new Diretor(rs.getInt("id_diretor")), new Genero(rs.getInt("id_genero")), new ListaAtores(rs.getInt("id_listaAtores")), new Distribuidora(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));            
+                f = new Filme(rs.getInt("pk"), (Diretor)diretor.readById(rs.getInt("id_diretor")), (Genero)genero.readById(rs.getInt("id_genero")), new ListaAtores(infoator.read()), (Distribuidora)distribuidora.readById(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -94,8 +102,12 @@ public class FilmeDAOconcreto implements GenericDAO{
             statement = connection.prepareStatement(sql);
             statement.setString(1, nome);
             rs = statement.executeQuery();
+            GenericDAO diretor = new DiretorDAOconcreto();
+            GenericDAO genero = new GeneroDAOconcreto();
+            GenericDAO infoator = new InfoAtorDAOconcreto();
+            GenericDAO distribuidora = new DistribuidoraDAOconcreto();
             while (rs.next()) {
-                f = new Filme(rs.getInt("pk"), new Diretor(rs.getInt("id_diretor")), new Genero(rs.getInt("id_genero")), new ListaAtores(rs.getInt("id_listaAtores")), new Distribuidora(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
+                f = new Filme(rs.getInt("pk"), (Diretor)diretor.readById(rs.getInt("id_diretor")), (Genero)genero.readById(rs.getInt("id_genero")), new ListaAtores(infoator.read()), (Distribuidora)distribuidora.readById(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -110,8 +122,12 @@ public class FilmeDAOconcreto implements GenericDAO{
             statement = connection.prepareStatement(sql);
             statement.setString(1, genero);
             rs = statement.executeQuery();
+            GenericDAO diretor = new DiretorDAOconcreto();
+            GenericDAO g = new GeneroDAOconcreto();
+            GenericDAO infoator = new InfoAtorDAOconcreto();
+            GenericDAO distribuidora = new DistribuidoraDAOconcreto();
             while (rs.next()) {
-                Filme f = new Filme(rs.getInt("pk"), new Diretor(rs.getInt("id_diretor")), new Genero(rs.getInt("id_genero")), new ListaAtores(rs.getInt("id_listaAtores")), new Distribuidora(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
+                Filme f = new Filme(rs.getInt("pk"), (Diretor)diretor.readById(rs.getInt("id_diretor")), (Genero)g.readById(rs.getInt("id_genero")), new ListaAtores(infoator.read()), (Distribuidora)distribuidora.readById(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
                 lista.add(f);
             }
         } catch (SQLException sQLException) {
@@ -127,8 +143,12 @@ public class FilmeDAOconcreto implements GenericDAO{
             statement = connection.prepareStatement(sql);
             statement.setString(1, ator);
             rs = statement.executeQuery();
+            GenericDAO diretor = new DiretorDAOconcreto();
+            GenericDAO genero = new GeneroDAOconcreto();
+            GenericDAO infoator = new InfoAtorDAOconcreto();
+            GenericDAO distribuidora = new DistribuidoraDAOconcreto();
             while (rs.next()) {
-                Filme f = new Filme(rs.getInt("pk"), new Diretor(rs.getInt("id_diretor")), new Genero(rs.getInt("id_genero")), new ListaAtores(rs.getInt("id_listaAtores")), new Distribuidora(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), (Filme.tiposituacao)rs.getObject("situacao"), rs.getString("idioma"));
+                Filme f = new Filme(rs.getInt("pk"), (Diretor)diretor.readById(rs.getInt("id_diretor")), (Genero)genero.readById(rs.getInt("id_genero")), new ListaAtores(infoator.read()), (Distribuidora)distribuidora.readById(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
                 lista.add(f);
             }
         } catch (SQLException sQLException) {
@@ -144,8 +164,12 @@ public class FilmeDAOconcreto implements GenericDAO{
             statement = connection.prepareStatement(sql);
             statement.setString(1, diretor);
             rs = statement.executeQuery();
+            GenericDAO d = new DiretorDAOconcreto();
+            GenericDAO g = new GeneroDAOconcreto();
+            GenericDAO infoator = new InfoAtorDAOconcreto();
+            GenericDAO distribuidora = new DistribuidoraDAOconcreto();
             while (rs.next()) {
-                Filme f = new Filme(rs.getInt("pk"), new Diretor(rs.getInt("id_diretor")), new Genero(rs.getInt("id_genero")), new ListaAtores(rs.getInt("id_listaAtores")), new Distribuidora(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), (Filme.tiposituacao)rs.getObject("situacao"), rs.getString("idioma"));
+                Filme f = new Filme(rs.getInt("pk"), (Diretor)d.readById(rs.getInt("id_diretor")), (Genero)g.readById(rs.getInt("id_genero")), new ListaAtores(infoator.read()), (Distribuidora)distribuidora.readById(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
                 lista.add(f);
             }
         } catch (SQLException sQLException) {
