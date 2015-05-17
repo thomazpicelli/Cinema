@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 25/04/2015, 23:16:53
-    Author     : Thomaz
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +6,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/acesso.css"/>
-        <script type="text/javascript" src="js.js"></script>
     </head>
     <body>
         <header>

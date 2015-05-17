@@ -115,12 +115,12 @@ public class FilmeDAOconcreto implements GenericDAO{
         return f;
     }
     
-    public ArrayList<Filme> readFilmeByGenero(String genero) {
+    public ArrayList<Filme> readFilmeByGenero(int pk) {
         ArrayList<Filme> lista = new ArrayList();
         try {
-            String sql = "SELECT * FROM Filme INNER JOIN genero ON filme.id_genero = genero.pk WHERE genero.nome=?";
+            String sql = "SELECT * FROM Filme INNER JOIN genero ON filme.id_genero = genero.pk WHERE genero.pk=?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, genero);
+            statement.setInt(1, pk);
             rs = statement.executeQuery();
             GenericDAO diretor = new DiretorDAOconcreto();
             GenericDAO g = new GeneroDAOconcreto();

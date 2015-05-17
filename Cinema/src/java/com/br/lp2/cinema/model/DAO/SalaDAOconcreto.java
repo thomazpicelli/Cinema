@@ -94,6 +94,22 @@ public class SalaDAOconcreto implements GenericDAO{
         return s;
     }
 
+    public Sala readByNumero(int numero) {
+        Sala s = null;
+        try {
+            String sql = "SELECT * FROM Sala WHERE numero =?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, numero);
+            rs = statement.executeQuery();
+            while (rs.next()) {
+                s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"),rs.getString("situacao"));
+            }
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return s;
+    }
+
     @Override
     public boolean update(int id, Object object) {
         Sala sala = (Sala)object;

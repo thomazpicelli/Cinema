@@ -88,5 +88,4 @@ public class Sessao implements Serializable{
     public String toString() {
         return "Sessao{" + "pk=" + pk + ", filme=" + filme + ", sala=" + sala + ", horario=" + horario + ", legendado=" + legendado + ", lista=" + lista + '}';
     }
-
 }

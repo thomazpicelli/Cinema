@@ -38,7 +38,5 @@ public class Distribuidora implements Serializable{
     @Override
     public String toString() {
         return "Distribuidora{" + "pk=" + pk + ", nome=" + nome + '}';
-    }
-    
-    
+    } 
 }

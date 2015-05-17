@@ -1,9 +1,3 @@
-<%-- 
-    Document   : principal_atendente
-    Created on : 26/04/2015, 00:37:00
-    Author     : Thomaz
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

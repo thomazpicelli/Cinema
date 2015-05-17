@@ -38,12 +38,16 @@
                                 <td>LEGENDADO</td>
                             </tr>
                             <c:forEach var="sessao" items="${buscaSessao}">
+                                <c:set var="l" value="NÃO"></c:set>
+                                <c:if test="${sessao.isLegendado() == true}">
+                                    <c:set var="l" value="SIM"></c:set>
+                                </c:if>
                                 <tr>
                                     <td>${sessao.getPk()}</td>
                                     <td>${sessao.getFilme().getNome()}</td>
                                     <td>${sessao.getSala().getNumero()}</td>
                                     <td>${sessao.getHorario()}</td>
-                                    <td>${sessao.isLegendado()}</td>
+                                    <td>${l}</td>
                                 </tr>
                             </c:forEach>
                         </table>

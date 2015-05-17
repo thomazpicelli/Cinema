@@ -5,8 +5,6 @@ import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Sessao;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

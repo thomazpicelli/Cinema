@@ -159,7 +159,4 @@ public class Filme implements Serializable{
     public String toString() {
         return "Filme{" + "pk=" + pk + ", diretor=" + diretor + ", genero=" + genero + ", listaAtores=" + listaAtores + ", nome=" + nome + ", classificacao=" + classificacao + ", ano=" + ano + ", duracao=" + duracao + ", situacao=" + situacao + ", idioma=" + idioma + '}';
     }
-
-   
-            
 }

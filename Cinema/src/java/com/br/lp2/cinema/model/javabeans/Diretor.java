@@ -40,6 +40,5 @@ public class Diretor implements Serializable{
     @Override
     public String toString() {
         return "Diretor{" + "pk=" + pk + ", codigo=" + codigo + ", nome=" + nome + '}';
-    }
-    
+    }   
 }

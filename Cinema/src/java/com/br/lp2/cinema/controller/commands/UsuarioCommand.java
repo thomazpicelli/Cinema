@@ -1,12 +1,8 @@
 package com.br.lp2.cinema.controller.commands;
 
 import com.br.lp2.cinema.controller.VerificadorUsuario;
-import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
-import com.br.lp2.cinema.model.DAO.GenericDAO;
-import com.br.lp2.cinema.model.DAO.GerenteDAOconcreto;
-import com.br.lp2.cinema.model.javabeans.Atendente;
-import com.br.lp2.cinema.model.javabeans.Funcionario;
-import com.br.lp2.cinema.model.javabeans.Gerente;
+import com.br.lp2.cinema.model.DAO.*;
+import com.br.lp2.cinema.model.javabeans.*;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,8 +39,6 @@ public class UsuarioCommand implements Command{
             case "Deleta":
                 resultado = Deleta();
                 break;
-            case "Busca":
-                break;
             case "Cargo":
                 resultado = Cargo();
                 break;
@@ -56,7 +50,7 @@ public class UsuarioCommand implements Command{
         
         if(resultado){
             try{    
-                response.sendRedirect("./sucesso.html");
+                response.sendRedirect("./sucesso.jsp");
             } catch(IOException ex){
                 ex.getMessage();
             }

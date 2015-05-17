@@ -65,6 +65,5 @@ public class Cliente implements Serializable{
     @Override
     public String toString() {
         return "Cliente{" + "pk=" + pk + ", nome=" + nome + ", anoNasc=" + anoNasc + ", tipo=" + tipo + '}';
-    }
-        
+    }   
 }

@@ -2,10 +2,7 @@ package com.br.lp2.cinema.controller.commands;
 
 import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
-import com.br.lp2.cinema.model.javabeans.Filme;
-import com.br.lp2.cinema.model.javabeans.ListaIngressos;
-import com.br.lp2.cinema.model.javabeans.Sala;
-import com.br.lp2.cinema.model.javabeans.Sessao;
+import com.br.lp2.cinema.model.javabeans.*;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +32,6 @@ public class SessaoCommand implements Command{
                 filme = Integer.parseInt(request.getParameter("filme"));
                 sala = Integer.parseInt(request.getParameter("sala"));
                 listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));
-                System.out.println(filme + " - " + sala + " - " + listadeingressos + " - " + horario);
                 resultado = Cria();
                 break;
             case "Muda": 
@@ -48,7 +44,6 @@ public class SessaoCommand implements Command{
             case "Deleta":
                 resultado = Deleta();
                 break;
-            case "Busca":
             default:
                 try {
                     response.sendRedirect("manter_sessao.jsp");
@@ -56,7 +51,7 @@ public class SessaoCommand implements Command{
         }   
         try{
             if(resultado)
-                response.sendRedirect("sucesso.html");
+                response.sendRedirect("sucesso.jsp");
             else
                 response.sendRedirect("manter_sessao.jsp");
         } catch(IOException ex){

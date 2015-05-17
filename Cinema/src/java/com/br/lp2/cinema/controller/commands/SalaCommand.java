@@ -58,8 +58,6 @@ public class SalaCommand implements Command{
                 if(!resultado)
                     request.getSession().setAttribute("verificaSessao", "sim");
                 break;
-            case "Busca":
-                break;
             case "MudaSituacao":
                 numero = Integer.parseInt(request.getParameter("numero"));                
                 resultado = Situacao();
@@ -72,7 +70,7 @@ public class SalaCommand implements Command{
         
         try { 
             if(resultado)
-                response.sendRedirect("sucesso.html");
+                response.sendRedirect("sucesso.jsp");
             else
                 response.sendRedirect("manter_sala.jsp");
         } catch (IOException ex) {
@@ -94,8 +92,8 @@ public class SalaCommand implements Command{
 
     private boolean Deleta() {
         boolean delete = false;
-        GenericDAO salaDAO = new SalaDAOconcreto();
-        Sala s = salaDAO.readByNome(numero);
+        SalaDAOconcreto salaDAO = new SalaDAOconcreto();
+        Sala s = salaDAO.readByNumero(numero);
         if(s != null){ 
             GenericDAO sessaoDAO = new SessaoDAOconcreto();
             Sessao sessao = (Sessao) sessaoDAO.readById(s.getPk());
@@ -106,8 +104,8 @@ public class SalaCommand implements Command{
     }
 
     private boolean Situacao() {
-        GenericDAO salaDAO = new SalaDAOconcreto();
-        Sala sala = salaDAO.readByNome(numero);
+        SalaDAOconcreto salaDAO = new SalaDAOconcreto();
+        Sala sala = salaDAO.readByNumero(numero);
         boolean update = salaDAO.update(sala.getPk(), new Sala(sala.getNumero(), sala.getLotacao(), sala.getEspecial(), si));
         return update;
     }

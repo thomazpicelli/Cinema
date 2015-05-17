@@ -28,10 +28,38 @@
             </div>
             <div class="modulo">    
                 <form name="command" action="FrontController" method="POST">
-                    <input type="text" placeholder="Buscar por Genero" name="genero" required/></br>
-                    <input type="hidden" name="command" value="BuscaFilme_G"/>
+                    <select name="genero">
+                        <option value="" selected="">-- Genero --</option>
+                        <c:forEach var="genero" items="${generos}" >
+                            <option value="${genero.getPk()}">${genero.getNome()}</option> 
+                        </c:forEach>    
+                    </select>
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                 </form>
+                <c:if test="${buscaGenero != null}">
+                        <table>
+                            <tr class="aa">
+                                <td>CÓDIGO</td>
+                                <td>NOME</td>
+                                <td>DIRETOR</td>
+                                <td>DISTRIBUIDORA</td>
+                                <td>CLASSIFICAÇÃO</td>
+                                <td>ANO</td>
+                                <td>DURAÇÃO</td>
+                            </tr>
+                            <c:forEach var="filme" items="${buscaGenero}">
+                                <tr>
+                                    <td>${filme.getPk()}</td>
+                                    <td>${filme.getNome()}</td>
+                                    <td>${filme.getDiretor().getNome()}</td>
+                                    <td>${filme.getDistribuidora().getNome()}</td>
+                                    <td>${filme.getClassificacao()}</td>
+                                    <td>${filme.getAno()}</td>
+                                    <td>${filme.getDuracao()}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
             </div>
             <div class="modulo">    
                 <form name="command" action="FrontController" method="POST">

@@ -1,10 +1,5 @@
-<%-- 
-    Document   : principal_gerente
-    Created on : 26/04/2015, 01:04:24
-    Author     : Thomaz
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,10 +20,10 @@
                 <div class="dropdown hover">
                     <a href="#">Manutenção</a>
                     <ul>
-                        <li><a href="SalaController"><input type="hidden" name="command" value="Encaminhar_Sala"/>Manter Sala</a></li>
-                        <li><a href="FrontController"><input type="hidden" name="command" value="Encaminhar_Filme"/>Manter Filme</a></li>
-                        <li><a href="FrontController"><input type="hidden" name="command" value="Encaminhar_Sessao"/>Manter Sessão</a></li>
-                        <li><a href="FrontController"><input type="hidden" name="command" value="Encaminhar_Usuario">Manter Usuário</a></li>
+                        <li><a href="SalaController">Manter Sala</a></li>
+                        <li><a href="FilmeController">Manter Filme</a></li>
+                        <li><a href="SessaoController">Manter Sessão</a></li>
+                        <li><a href="UsuarioController">Manter Usuário</a></li>
                     </ul>
                 </div>
                 <div class="dropdown hover">
