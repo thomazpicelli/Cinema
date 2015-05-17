@@ -15,8 +15,19 @@ public class Encaminhar implements Command{
         try{
             switch(operacao){
                 case "Sala":
-                    response.sendRedirect("manter_sala.jsp");	
+                    response.sendRedirect("SalaController");	
                     break;
+                case "Sessao":
+                    response.sendRedirect("SessaoController");
+                    break;
+                case "Usuario":
+                    response.sendRedirect("UsuarioController");
+                    break;
+                case "Filme":
+                    response.sendRedirect("FilmeController");
+                    break;
+                default:
+                    response.sendRedirect("/principal_gerente.jsp");
             }
         } catch(IOException ex){
             ex.getMessage();

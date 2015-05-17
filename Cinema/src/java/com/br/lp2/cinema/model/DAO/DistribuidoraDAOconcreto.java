@@ -61,7 +61,7 @@ public class DistribuidoraDAOconcreto implements GenericDAO{
         try {
             String sql = "SELECT * FROM distribuidora WHERE pk =?";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, d.getPk());
+            statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
                 d = new Distribuidora(rs.getInt("pk"), rs.getString("nome"));

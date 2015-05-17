@@ -18,24 +18,24 @@
     </head>
     <body>
         <header>
-            <%@ include file= "header.jsp" %>
+            <%@include file= "header.jsp" %>
         </header>
         <section>
             <nav>
                 <div class="dropdown hover">
                     <a href="#">Manutenção</a>
                     <ul>
-                        <li><a href="FrontController" name="command" value="Encaminhar_Sala">Manter Sala</a></li>
-                        <li><a href="FilmeController">Manter Filme</a></li>
-                        <li><a href="SessaoController">Manter Sessão</a></li>
-                        <li><a href="UsuarioController">Manter Usuário</a></li>
+                        <li><a href="SalaController"><input type="hidden" name="command" value="Encaminhar_Sala"/>Manter Sala</a></li>
+                        <li><a href="FrontController"><input type="hidden" name="command" value="Encaminhar_Filme"/>Manter Filme</a></li>
+                        <li><a href="FrontController"><input type="hidden" name="command" value="Encaminhar_Sessao"/>Manter Sessão</a></li>
+                        <li><a href="FrontController"><input type="hidden" name="command" value="Encaminhar_Usuario">Manter Usuário</a></li>
                     </ul>
                 </div>
                 <div class="dropdown hover">
                     <a href="#">Vender Ingresso</a>
                     <ul>
-                        <li><a href="vender_ingresso.html">Por Filme</a></li>
-                        <li><a href="vender_ingresso.html">Por Sessão</a></li>
+                        <li><a href="VenderFilmeController">Por Filme</a></li>
+                        <li><a href="VenderSessaoController">Por Sessão</a></li>
                     </ul>
                 </div>
             </nav>
