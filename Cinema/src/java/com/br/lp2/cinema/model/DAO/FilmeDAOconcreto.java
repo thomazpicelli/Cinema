@@ -136,12 +136,12 @@ public class FilmeDAOconcreto implements GenericDAO{
         return lista;
     }
     
-    public ArrayList<Filme> readFilmeByAtor(String ator) {
+    public ArrayList<Filme> readFilmeByAtor(int pk) {
         ArrayList<Filme> lista = new ArrayList();
         try {
-            String sql = "SELECT * FROM Filme INNER JOIN listaatores ON filme.id_listaatores = listaatores.pk JOIN infoator ON listaatores.id_infoator = infoator.pk JOIN ator ON infoator.id_ator = ator.pk WHERE ator.nome=?";
+            String sql = "SELECT * FROM Filme INNER JOIN infoator ON filme.pk = infoator.id_filme JOIN ator ON infoator.id_ator = ator.pk WHERE ator.pk=?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, ator);
+            statement.setInt(1, pk);
             rs = statement.executeQuery();
             GenericDAO diretor = new DiretorDAOconcreto();
             GenericDAO genero = new GeneroDAOconcreto();
@@ -157,12 +157,12 @@ public class FilmeDAOconcreto implements GenericDAO{
         return lista;
     }
     
-    public ArrayList<Filme> readFilmeByDiretor(String diretor) {
+    public ArrayList<Filme> readFilmeByDiretor(int pk) {
         ArrayList<Filme> lista = new ArrayList();
         try {
-            String sql = "SELECT * FROM Filme INNER JOIN diretor ON diretor.pk = filme.id_diretor WHERE diretor.nome=?";
+            String sql = "SELECT * FROM Filme INNER JOIN diretor ON diretor.pk = filme.id_diretor WHERE diretor.pk=?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, diretor);
+            statement.setInt(1, pk);
             rs = statement.executeQuery();
             GenericDAO d = new DiretorDAOconcreto();
             GenericDAO g = new GeneroDAOconcreto();
@@ -178,6 +178,27 @@ public class FilmeDAOconcreto implements GenericDAO{
         return lista;
     }
     
+    public ArrayList<Filme> readFilmeByDistribuidora(int pk) {
+        ArrayList<Filme> lista = new ArrayList();
+        try {
+            String sql = "SELECT * FROM Filme INNER JOIN distribuidora ON distribuidora.pk = filme.id_distribuidora WHERE distribuidora.pk=?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, pk);
+            rs = statement.executeQuery();
+            GenericDAO d = new DiretorDAOconcreto();
+            GenericDAO g = new GeneroDAOconcreto();
+            GenericDAO infoator = new InfoAtorDAOconcreto();
+            GenericDAO distribuidora = new DistribuidoraDAOconcreto();
+            while (rs.next()) {
+                Filme f = new Filme(rs.getInt("pk"), (Diretor)d.readById(rs.getInt("id_diretor")), (Genero)g.readById(rs.getInt("id_genero")), new ListaAtores(infoator.read()), (Distribuidora)distribuidora.readById(rs.getInt("id_distribuidora")), rs.getString("nome"), rs.getInt("classificacao"), rs.getInt("ano"), rs.getInt("duracao"), rs.getString("situacao"), rs.getString("idioma"));
+                lista.add(f);
+            }
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return lista;
+    
+    }
 
     @Override
     public boolean update(int id, Object object) {

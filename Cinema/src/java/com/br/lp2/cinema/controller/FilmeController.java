@@ -51,6 +51,11 @@ public class FilmeController extends HttpServlet {
             GenericDAO ia = new InfoAtorDAOconcreto();
             lista4 = ia.read();
             request.getSession().setAttribute("latores", lista4);
+            
+            ArrayList<Ator> lista5 = new ArrayList<Ator>();
+            GenericDAO ator = new AtorDAOconcreto();
+            lista5 = ator.read();
+            request.getSession().setAttribute("atores", lista5);
 
             ArrayList<Filme> lista = new ArrayList<Filme>();
             GenericDAO filme = new FilmeDAOconcreto();

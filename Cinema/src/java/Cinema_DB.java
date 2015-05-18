@@ -7,5 +7,5 @@ import java.util.ArrayList;
  */
 public class Cinema_DB {
     public static void main(String[] args) {
+        }
     }
-}

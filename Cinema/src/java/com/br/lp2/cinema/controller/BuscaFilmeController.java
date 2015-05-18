@@ -34,22 +34,34 @@ public class BuscaFilmeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            request.removeAttribute("buscaSala");
-            
-            ArrayList<Filme> lista = new ArrayList<>();
-            
+            ArrayList<Filme> lista = new ArrayList<Filme>();
+            FilmeDAOconcreto filme = new FilmeDAOconcreto();
+
             switch(busca){
                 case "filme":
-                    GenericDAO filme = new FilmeDAOconcreto();
-                    lista = filme.read();
+                    String todos = request.getParameter("todos");
+                    if(todos != null)
+                        lista = filme.read();
+                    else
+                        lista.add(filme.readById(Integer.parseInt(request.getParameter("filme"))));
                     break;
-                case "sessao":
+                case "genero":
+                    lista = filme.readFilmeByGenero(Integer.parseInt(request.getParameter("genero")));
+                    break;
+                case "diretor":
+                    lista = filme.readFilmeByDiretor(Integer.parseInt(request.getParameter("diretor")));
+                    break;
+                case "distribuidora":
+                    lista = filme.readFilmeByDistribuidora(Integer.parseInt(request.getParameter("distribuidora")));
+                    break;
+                case "ator":
+                    lista = filme.readFilmeByAtor(Integer.parseInt(request.getParameter("ator")));
                     break;
             }
-
+            
             request.getSession().setAttribute("buscaFilme", lista);
-
-            response.sendRedirect("manter_filme.jsp");	  
+            
+            response.sendRedirect("manter_filme.jsp#b");	  
         }
     }
         
@@ -80,6 +92,7 @@ public class BuscaFilmeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        busca = request.getParameter("busca");
         processRequest(request, response);
     }
 
