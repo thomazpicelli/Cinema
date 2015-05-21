@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,13 +10,12 @@
     </head>
     <body>
         <header>
-            <% session.removeAttribute("nome"); %>
+            <c:remove var="nome"></c:remove>
         </header>
         <section>
-            <% if(session.getAttribute("nlogin")!=null && !session.getAttribute("nlogin").equals("")){
-                    out.print("<p class='invalido'> Login Inválido</p>");
-                }
-            %>
+            <c:if test="${nlogin != null && nlogin != ''}">
+                <p class="invalido">Login Inválido</p>
+            </c:if>
             <fieldset class="login">
                 <p>Login</p>
                 <form name="command" action="FrontController" method="POST">

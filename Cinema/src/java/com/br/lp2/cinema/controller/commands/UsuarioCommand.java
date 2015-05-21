@@ -1,6 +1,6 @@
 package com.br.lp2.cinema.controller.commands;
 
-import com.br.lp2.cinema.controller.VerificadorUsuario;
+import com.br.lp2.cinema.controller.commands.VerificadorUsuario;
 import com.br.lp2.cinema.model.DAO.*;
 import com.br.lp2.cinema.model.javabeans.*;
 import java.io.IOException;

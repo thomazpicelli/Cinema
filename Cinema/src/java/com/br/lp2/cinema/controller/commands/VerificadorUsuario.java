@@ -1,4 +1,4 @@
-package com.br.lp2.cinema.controller;
+package com.br.lp2.cinema.controller.commands;
 
 import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.AtendenteDAOconcreto;
