@@ -1,6 +1,5 @@
 package com.br.lp2.cinema.controller;
 
-import com.br.lp2.cinema.model.DAO.GenericDAO;
 import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Filme;
 import java.io.IOException;

@@ -36,7 +36,7 @@
             </form>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
-                <form name="command" action="BuscaSalaController" method="POST">
+                <form name="command" action="FrontController" method="POST">
                     <select name="numero">
                         <option value="" selected="">-- Número --</option>
                         <c:forEach var="sala" items="${salas}" >
@@ -44,28 +44,29 @@
                         </c:forEach>    
                     </select></br>
                     Listar todos:<input type="checkbox" name="todos" value="sim"><br>
+                    <input type="hidden" name="command" value="SalaCommand_Busca">
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
-                    <c:if test="${buscaSala != null}">
-                        <table>
-                            <tr class="aa">
-                                <td>CÓDIGO</td>
-                                <td>NÚMERO</td>
-                                <td>LOTAÇÃO</td>
-                                <td>ESPECIAL</td>
-                                <td>SITUAÇÃO</td>
-                            </tr>
-                            <c:forEach var="sala" items="${buscaSala}">
-                                <tr>
-                                    <td>${sala.getPk()}</td>
-                                    <td>${sala.getNumero()}</td>
-                                    <td>${sala.getLotacao()}</td>
-                                    <td>${sala.getEspecial()}</td>
-                                    <td>${sala.getSituacao()}</td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </c:if>
                 </form>
+                <c:if test="${buscaSala != null}">
+                    <table>
+                        <tr class="aa">
+                            <td>CÓDIGO</td>
+                            <td>NÚMERO</td>
+                            <td>LOTAÇÃO</td>
+                            <td>ESPECIAL</td>
+                            <td>SITUAÇÃO</td>
+                        </tr>
+                        <c:forEach var="sala" items="${buscaSala}">
+                            <tr>
+                                <td>${sala.getPk()}</td>
+                                <td>${sala.getNumero()}</td>
+                                <td>${sala.getLotacao()}</td>
+                                <td>${sala.getEspecial()}</td>
+                                <td>${sala.getSituacao()}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
             </div>
             <div class="modulo">
                 <p><a id="2">Criar:</a></p></br>

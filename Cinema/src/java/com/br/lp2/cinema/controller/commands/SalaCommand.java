@@ -6,6 +6,7 @@ import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.Sala;
 import com.br.lp2.cinema.model.javabeans.Sessao;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +22,7 @@ public class SalaCommand implements Command{
     private String situacao;
     private Sala.Situacao si;
     private boolean resultado;
+    private String todos;
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
@@ -39,6 +41,30 @@ public class SalaCommand implements Command{
             }
         }
         switch(operacao){
+            case "Busca":
+                todos = request.getParameter("todos");
+                ArrayList<Sala> lista = new ArrayList<Sala>();
+                SalaDAOconcreto sala = new SalaDAOconcreto();
+                System.out.println("aaaaaaaaaaaaaaaaa");
+                if(todos != null){
+                    lista = sala.read();
+                    request.getSession().setAttribute("buscaSala", lista);
+                }
+                else{
+                    String num = request.getParameter("numero");
+                    if(num != null){ 
+                        numero = Integer.parseInt(num);
+                        Sala s = sala.readByNumero(numero);
+                        lista.add(s);
+                        request.getSession().setAttribute("buscaSala", lista);
+                    }
+                }	  
+                try {
+                    response.sendRedirect("manter_sala.jsp#1");
+                } catch (IOException ex) {
+                    ex.getMessage();
+                }
+                break;
             case "Cria":
                 numero = Integer.parseInt(request.getParameter("numero"));
                 lotacao = Integer.parseInt(request.getParameter("lotacao"));
