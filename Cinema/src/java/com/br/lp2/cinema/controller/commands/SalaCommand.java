@@ -41,22 +41,31 @@ public class SalaCommand implements Command{
             }
         }
         switch(operacao){
+            case "Encaminhar":
+                request.removeAttribute("buscaSala");
+            
+                ArrayList<Sala> lista = new ArrayList<Sala>();
+                GenericDAO sala = new SalaDAOconcreto();
+                lista = sala.read();
+                request.getSession().setAttribute("salas", lista);
+                resultado = false;
+                break;
             case "Busca":
                 todos = request.getParameter("todos");
-                ArrayList<Sala> lista = new ArrayList<Sala>();
-                SalaDAOconcreto sala = new SalaDAOconcreto();
+                ArrayList<Sala> lista1 = new ArrayList<Sala>();
+                SalaDAOconcreto sala1 = new SalaDAOconcreto();
                 System.out.println("aaaaaaaaaaaaaaaaa");
                 if(todos != null){
-                    lista = sala.read();
+                    lista = sala1.read();
                     request.getSession().setAttribute("buscaSala", lista);
                 }
                 else{
                     String num = request.getParameter("numero");
                     if(num != null){ 
                         numero = Integer.parseInt(num);
-                        Sala s = sala.readByNumero(numero);
-                        lista.add(s);
-                        request.getSession().setAttribute("buscaSala", lista);
+                        Sala s = sala1.readByNumero(numero);
+                        lista1.add(s);
+                        request.getSession().setAttribute("buscaSala", lista1);
                     }
                 }	  
                 try {

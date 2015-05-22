@@ -1,9 +1,9 @@
 package com.br.lp2.cinema.controller.commands;
 
-import com.br.lp2.cinema.controller.commands.VerificadorUsuario;
 import com.br.lp2.cinema.model.DAO.*;
 import com.br.lp2.cinema.model.javabeans.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,6 +29,24 @@ public class UsuarioCommand implements Command{
         cargo = request.getParameter("cargo");
         
         switch(operacao){
+            case "Encaminhar":
+                
+                ArrayList<Funcionario> lista1 = new ArrayList<Funcionario>();
+                ArrayList<Funcionario> lista2 = new ArrayList<Funcionario>();
+
+                GenericDAO gerente = new GerenteDAOconcreto();
+                GenericDAO atendente = new AtendenteDAOconcreto();
+                lista1 = gerente.read();
+                lista2 = atendente.read();
+                for (Funcionario li : lista2) {
+                    lista1.add(li);
+                }
+
+                request.getSession().setAttribute("usuarios", lista1);
+                
+                resultado = false;
+                
+                break;
             case "Cria":
                 resultado = Cria();
                 break;
@@ -50,14 +68,14 @@ public class UsuarioCommand implements Command{
         
         if(resultado){
             try{    
-                response.sendRedirect("./sucesso.jsp");
+                response.sendRedirect("sucesso.jsp");
             } catch(IOException ex){
                 ex.getMessage();
             }
         }
         else{
             try{    
-                response.sendRedirect("./manter_usuario.jsp");
+                response.sendRedirect("manter_usuario.jsp");
             } catch(IOException ex){
                 ex.getMessage();
             }

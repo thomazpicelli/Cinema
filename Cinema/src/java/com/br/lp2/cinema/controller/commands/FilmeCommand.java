@@ -5,6 +5,7 @@ import com.br.lp2.cinema.model.javabeans.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -29,19 +30,56 @@ public class FilmeCommand implements Command{
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
         situacao = request.getParameter("situacao");
 
-        switch(situacao){
-            case "Cartaz":
-                si = Filme.tiposituacao.CARTAZ;
-                break;
-            case "Estreia":
-                si = Filme.tiposituacao.ESTREIA;
-                break;
-            case "Lancamento":
-                si = Filme.tiposituacao.LANÇAMENTO;
-                break;  
+        if(situacao != null){
+            switch(situacao){
+                case "Cartaz":
+                    si = Filme.tiposituacao.CARTAZ;
+                    break;
+                case "Estreia":
+                    si = Filme.tiposituacao.ESTREIA;
+                    break;
+                case "Lancamento":
+                    si = Filme.tiposituacao.LANÇAMENTO;
+                    break;  
+            }
         }
         
         switch(operacao){
+            case "Encaminhar":
+                
+                ArrayList<Diretor> lista1 = new ArrayList<>();
+                GenericDAO diretor1 = new DiretorDAOconcreto();
+                lista1 = diretor1.read();
+                request.getSession().setAttribute("diretores", lista1);
+
+                ArrayList<Genero> lista2 = new ArrayList<Genero>();
+                GenericDAO genero1 = new GeneroDAOconcreto();
+                lista2 = genero1.read();
+                request.getSession().setAttribute("generos", lista2);
+
+                ArrayList<Distribuidora> lista3 = new ArrayList<Distribuidora>();
+                GenericDAO distribuidora1 = new DistribuidoraDAOconcreto();
+                lista3 = distribuidora1.read();
+                request.getSession().setAttribute("distribuidoras", lista3);
+
+                ArrayList<InfoAtor> lista4 = new ArrayList<InfoAtor>();
+                GenericDAO ia1 = new InfoAtorDAOconcreto();
+                lista4 = ia1.read();
+                request.getSession().setAttribute("latores", lista4);
+
+                ArrayList<Ator> lista5 = new ArrayList<Ator>();
+                GenericDAO ator1 = new AtorDAOconcreto();
+                lista5 = ator1.read();
+                request.getSession().setAttribute("atores", lista5);
+
+                ArrayList<Filme> lista = new ArrayList<Filme>();
+                GenericDAO filme1 = new FilmeDAOconcreto();
+                lista = filme1.read();
+                request.getSession().setAttribute("filmes", lista);
+
+                resultado = false;
+                
+                break;
             case "Cria":
                 nome = request.getParameter("nome");
                 idioma = request.getParameter("idioma");

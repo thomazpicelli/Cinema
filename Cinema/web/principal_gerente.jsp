@@ -20,10 +20,10 @@
                 <div class="dropdown hover">
                     <a href="#">Manutenção</a>
                     <ul>
-                        <li><a href="SalaController">Manter Sala</a></li>
-                        <li><a href="FilmeController">Manter Filme</a></li>
-                        <li><a href="SessaoController">Manter Sessão</a></li>
-                        <li><a href="UsuarioController">Manter Usuário</a></li>
+                        <li><a href="FrontController?command=SalaCommand_Encaminhar">Manter Sala</a></li>
+                        <li><a href="FrontController?command=FilmeCommand_Encaminhar">Manter Filme</a></li>
+                        <li><a href="FrontController?command=SessaoCommand_Encaminhar">Manter Sessão</a></li>
+                        <li><a href="FrontController?command=UsuarioCommand_Encaminhar">Manter Usuário</a></li>
                     </ul>
                 </div>
                 <div class="dropdown hover">

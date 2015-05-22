@@ -1,9 +1,13 @@
 package com.br.lp2.cinema.controller.commands;
 
+import com.br.lp2.cinema.model.DAO.FilmeDAOconcreto;
 import com.br.lp2.cinema.model.DAO.GenericDAO;
+import com.br.lp2.cinema.model.DAO.ListaIngressosDAOconcreto;
+import com.br.lp2.cinema.model.DAO.SalaDAOconcreto;
 import com.br.lp2.cinema.model.DAO.SessaoDAOconcreto;
 import com.br.lp2.cinema.model.javabeans.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,6 +32,28 @@ public class SessaoCommand implements Command{
             legendado = true;  
         
         switch(operacao){
+            case "Encaminhar":
+                ArrayList<Sessao> lista1 = new ArrayList<Sessao>();
+                GenericDAO sessao1 = new SessaoDAOconcreto();
+                lista1 = sessao1.read();
+                request.getSession().setAttribute("sessoes", lista1);
+
+                ArrayList<Filme> lista2 = new ArrayList<Filme>();
+                GenericDAO filme1 = new FilmeDAOconcreto();
+                lista2 = filme1.read();
+                request.getSession().setAttribute("filmes", lista2);
+
+                ArrayList<Sala> lista3 = new ArrayList<Sala>();
+                GenericDAO sala1 = new SalaDAOconcreto();
+                lista3 = sala1.read();
+                request.getSession().setAttribute("salas", lista3);
+
+                ArrayList<ListaIngressos> lista4 = new ArrayList<ListaIngressos>();
+                GenericDAO listaIngressos1 = new ListaIngressosDAOconcreto();
+                lista4 = listaIngressos1.read();
+                request.getSession().setAttribute("ingressos", lista4);
+                resultado = false;
+                break;
             case "Cria":
                 filme = Integer.parseInt(request.getParameter("filme"));
                 sala = Integer.parseInt(request.getParameter("sala"));
