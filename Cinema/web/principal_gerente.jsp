@@ -29,8 +29,8 @@
                 <div class="dropdown hover">
                     <a href="#">Vender Ingresso</a>
                     <ul>
-                        <li><a href="VenderFilmeController">Por Filme</a></li>
-                        <li><a href="VenderSessaoController">Por Sessão</a></li>
+                        <li><a href="FrontController?command=VendaFilmeCommand_Encaminhar">Por Filme</a></li>
+                        <li><a href="FrontController?command=VendaSessaoCommand_Encaminhar">Por Sessão</a></li>
                     </ul>
                 </div>
             </nav>

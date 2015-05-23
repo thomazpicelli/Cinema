@@ -32,7 +32,7 @@
             </div>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
-                <form name="command" action="BuscaUsuarioController" method="POST">
+                <form name="command" action="FrontController" method="POST">
                     <select name="nome">
                         <option value="" selected="selected"> -- Usuários -- </option>
                         <c:forEach var="usuario" items="${usuarios}" >
@@ -41,7 +41,8 @@
                     </select><br>
                     Listar Atendentes:<input type="checkbox" name="atendente" value="sim"><br>
                     Listar Gerentes:<input type="checkbox" name="gerente" value="sim"><br>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="hidden" name="command" value="UsuarioCommand_Busca">
+                    <input type="image" src="img/enviar.png" alt="Submit Form"/>
                     <c:if test="${buscaUsuario != null}">
                         <table>
                             <tr class="aa">

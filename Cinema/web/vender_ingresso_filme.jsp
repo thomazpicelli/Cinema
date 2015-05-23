@@ -16,7 +16,7 @@
         </header>
         <section>
             <form action="FrontController"> 
-                <select name="codigo">
+                <select name="codigo" onchange="window.location='FrontController?command=VenderFilme_Seleciona&''">
                     <option value="" selected="">-- Selecione o Filme --</option>
                     <c:forEach var="filme" items="${venderfilmes}" >
                         <option value="${filme.getPk()}">${filme.getNome()}</option> 

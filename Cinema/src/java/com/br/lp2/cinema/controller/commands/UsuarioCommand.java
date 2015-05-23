@@ -4,6 +4,8 @@ import com.br.lp2.cinema.model.DAO.*;
 import com.br.lp2.cinema.model.javabeans.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +21,7 @@ public class UsuarioCommand implements Command{
     private String senha2;
     private String cargo;
     private boolean resultado;
+    private String i = "";
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
@@ -47,15 +50,42 @@ public class UsuarioCommand implements Command{
                 resultado = false;
                 
                 break;
+            case "Busca":
+                ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
+                GenericDAO atendenteDAO = new AtendenteDAOconcreto();
+                GenericDAO gerenteDAO = new GerenteDAOconcreto();
+
+                if(request.getParameter("atendente")!= null)
+                    lista.addAll(atendenteDAO.read());
+                if(request.getParameter("gerente") != null)
+                    lista.addAll(gerenteDAO.read());
+                if(lista.isEmpty()){
+                    if(request.getParameter("nome") != null){
+                        nome = request.getParameter("nome");
+                        Funcionario f = (Funcionario)atendenteDAO.readByNome(nome);
+                        if(f == null){
+                            f = (Funcionario) gerenteDAO.readByNome(nome);
+                        }
+                        lista.add(f);
+                    }
+                }
+
+                request.getSession().setAttribute("buscaUsuario", lista);
+                resultado = false;
+                i = "#1";
+                break;
             case "Cria":
                 resultado = Cria();
+                i = "#2";
                 break;
             case "Muda": 
                 codigo = Integer.parseInt(request.getParameter("codigo"));
                 resultado = Muda();
+                i = "#3";
                 break;
             case "Deleta":
                 resultado = Deleta();
+                i = "#4";
                 break;
             case "Cargo":
                 resultado = Cargo();
@@ -75,7 +105,7 @@ public class UsuarioCommand implements Command{
         }
         else{
             try{    
-                response.sendRedirect("manter_usuario.jsp");
+                response.sendRedirect("manter_usuario.jsp"+i);
             } catch(IOException ex){
                 ex.getMessage();
             }

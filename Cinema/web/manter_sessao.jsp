@@ -19,7 +19,7 @@
         <section>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
-                <form name="command" action="BuscaSessaoController" method="POST">
+                <form name="command" action="FrontController" method="POST">
                     <select name="codigo">
                         <option value="" selected=""> -- Código -- Filme -- Horário --</option>
                         <c:forEach var="sessao" items="${sessoes}" >
@@ -27,6 +27,7 @@
                         </c:forEach>    
                     </select><br>
                     Listar todos:<input type="checkbox" name="todos" value="sim"><br>
+                    <input type="hidden" name="command" value="SessaoCommand_Busca">
                     <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
                     <c:if test="${buscaSessao != null}">
                         <table>

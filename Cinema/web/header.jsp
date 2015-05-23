@@ -2,7 +2,7 @@
     <c:when test="${nome != null && nome != ''}">
         <p class='nome'> Olá <c:out value="${nome}"></c:out>
         <c:choose>
-            <c:when test="${cargo == 'gerente'}">
+            <c:when test="${cargo.equals('gerente')}">
                 <c:out value=" - Acesso Total"></c:out>
             </c:when>    
             <c:otherwise>

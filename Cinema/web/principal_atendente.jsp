@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,8 +20,8 @@
                 <div class="dropdown hover">
                     <a href="#">Vender Ingresso</a>
                     <ul>
-                        <li><a href="#">Por filme</a></li>
-                        <li><a href="#">Por sessão</a></li>
+                        <li><a href="FrontController?command=VendaFilmeCommand_Encaminhar">Por Filme</a></li>
+                        <li><a href="FrontController?command=VendaSessaoCommand_Encaminhar">Por Sessão</a></li>
                     </ul>
                 </div>
             </nav>

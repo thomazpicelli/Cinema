@@ -23,6 +23,7 @@ public class SessaoCommand implements Command{
     private boolean legendado = false;
     private int listadeingressos;
     private boolean resultado;
+    private String i = "";
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
@@ -54,11 +55,32 @@ public class SessaoCommand implements Command{
                 request.getSession().setAttribute("ingressos", lista4);
                 resultado = false;
                 break;
+            case "Busca":
+                ArrayList<Sessao> lista = new ArrayList<Sessao>();
+                GenericDAO sessao = new SessaoDAOconcreto();
+                String todos = request.getParameter("todos");
+                if(todos != null){
+                    lista = sessao.read();
+                    request.getSession().setAttribute("buscaSessao", lista);
+                }
+                else{
+                    String pk = request.getParameter("sessao");
+                    if(pk != null){ 
+                        int id = Integer.parseInt(pk);
+                        Sessao s = (Sessao)sessao.readById(id);
+                        lista.add(s);
+                        request.getSession().setAttribute("buscaSessao", lista);
+                    }
+                }
+                resultado = false;
+                i = "#1";
+                break;
             case "Cria":
                 filme = Integer.parseInt(request.getParameter("filme"));
                 sala = Integer.parseInt(request.getParameter("sala"));
                 listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));
                 resultado = Cria();
+                i = "#2";
                 break;
             case "Muda": 
                 codigo = Integer.parseInt(request.getParameter("codigo"));
@@ -66,9 +88,11 @@ public class SessaoCommand implements Command{
                 sala = Integer.parseInt(request.getParameter("sala"));
                 listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));
                 resultado = Muda();
+                i = "#3";
                 break;
             case "Deleta":
                 resultado = Deleta();
+                i = "#4";
                 break;
             default:
                 try {
@@ -79,7 +103,7 @@ public class SessaoCommand implements Command{
             if(resultado)
                 response.sendRedirect("sucesso.jsp");
             else
-                response.sendRedirect("manter_sessao.jsp");
+                response.sendRedirect("manter_sessao.jsp"+i);
         } catch(IOException ex){
             ex.getMessage();
         }          

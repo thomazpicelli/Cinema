@@ -23,6 +23,7 @@ public class SalaCommand implements Command{
     private Sala.Situacao si;
     private boolean resultado;
     private String todos;
+    String i = "";
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
@@ -54,7 +55,6 @@ public class SalaCommand implements Command{
                 todos = request.getParameter("todos");
                 ArrayList<Sala> lista1 = new ArrayList<Sala>();
                 SalaDAOconcreto sala1 = new SalaDAOconcreto();
-                System.out.println("aaaaaaaaaaaaaaaaa");
                 if(todos != null){
                     lista = sala1.read();
                     request.getSession().setAttribute("buscaSala", lista);
@@ -68,17 +68,15 @@ public class SalaCommand implements Command{
                         request.getSession().setAttribute("buscaSala", lista1);
                     }
                 }	  
-                try {
-                    response.sendRedirect("manter_sala.jsp#1");
-                } catch (IOException ex) {
-                    ex.getMessage();
-                }
+                resultado = false;
+                i = "#1";
                 break;
             case "Cria":
                 numero = Integer.parseInt(request.getParameter("numero"));
                 lotacao = Integer.parseInt(request.getParameter("lotacao"));
                 especial = Integer.parseInt(request.getParameter("especial"));
                 resultado = Cria();
+                i = "#2";
                 break;
             case "Muda": 
                 codigo = Integer.parseInt(request.getParameter("codigo"));
@@ -86,12 +84,14 @@ public class SalaCommand implements Command{
                 lotacao = Integer.parseInt(request.getParameter("lotacao"));
                 especial = Integer.parseInt(request.getParameter("especial"));
                 resultado = Muda();
+                i = "#3";
                 break;
             case "Deleta":
                 numero = Integer.parseInt(request.getParameter("numero"));
                 resultado = Deleta();
                 if(!resultado)
                     request.getSession().setAttribute("verificaSessao", "sim");
+                i = "#4";
                 break;
             case "MudaSituacao":
                 numero = Integer.parseInt(request.getParameter("numero"));                
@@ -107,7 +107,7 @@ public class SalaCommand implements Command{
             if(resultado)
                 response.sendRedirect("sucesso.jsp");
             else
-                response.sendRedirect("manter_sala.jsp");
+                response.sendRedirect("manter_sala.jsp"+i);
         } catch (IOException ex) {
             ex.getMessage();
         }
