@@ -24,7 +24,8 @@ public class FilmeCommand implements Command{
     private int listadeatores;
     private String situacao;
     private Filme.tiposituacao si;
-    private boolean resultado;
+    private boolean resultado = false;
+    private String i = "";
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String operacao) {
@@ -44,6 +45,9 @@ public class FilmeCommand implements Command{
             }
         }
         
+        ArrayList<Filme> l = new ArrayList<Filme>();
+        FilmeDAOconcreto f = new FilmeDAOconcreto();
+                
         switch(operacao){
             case "Encaminhar":
                 
@@ -76,9 +80,26 @@ public class FilmeCommand implements Command{
                 GenericDAO filme1 = new FilmeDAOconcreto();
                 lista = filme1.read();
                 request.getSession().setAttribute("filmes", lista);
-
-                resultado = false;
                 
+                break;
+            case "BuscaF":
+                String todos = request.getParameter("todos");
+                if(todos != null)
+                    l = f.read();
+                else
+                    l.add(f.readById(Integer.parseInt(request.getParameter("filme"))));
+                break;
+            case "BuscaG":
+                l = f.readFilmeByGenero(Integer.parseInt(request.getParameter("genero")));
+                break;
+            case "BuscaD":
+                l = f.readFilmeByDiretor(Integer.parseInt(request.getParameter("diretor")));
+                break;
+            case "BuscaDT":
+                l = f.readFilmeByDistribuidora(Integer.parseInt(request.getParameter("distribuidora")));
+                break;
+            case "BuscaA":
+                l = f.readFilmeByAtor(Integer.parseInt(request.getParameter("ator")));
                 break;
             case "Cria":
                 nome = request.getParameter("nome");
@@ -91,6 +112,7 @@ public class FilmeCommand implements Command{
                 distribuidora = Integer.parseInt(request.getParameter("distribuidora"));
                 listadeatores = Integer.parseInt(request.getParameter("listadeatores"));
                 resultado = Cria();
+                i = "#2";
                 break;
             case "Muda": 
                 codigo = Integer.parseInt(request.getParameter("codigo"));
@@ -104,10 +126,12 @@ public class FilmeCommand implements Command{
                 distribuidora = Integer.parseInt(request.getParameter("distribuidora"));
                 listadeatores = Integer.parseInt(request.getParameter("listadeatores"));
                 resultado = Muda();
+                i = "#3";
                 break;
             case "Deleta":
                 codigo = Integer.parseInt(request.getParameter("codigo"));
                 resultado = Deleta();
+                i = "#4";
                 break;
             default:
                 try {
@@ -118,8 +142,12 @@ public class FilmeCommand implements Command{
         try{
             if(resultado)
                 response.sendRedirect("sucesso.jsp");
-            else
-                response.sendRedirect("manter_filme.jsp");
+            else{
+                if(operacao.startsWith("Busca"))
+                    i = "#b";
+                request.getSession().setAttribute("buscaFilme", l);
+                response.sendRedirect("manter_filme.jsp"+i);
+            }
         } catch(IOException ex){
             ex.getMessage();
         }  

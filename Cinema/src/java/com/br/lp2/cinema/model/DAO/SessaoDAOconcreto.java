@@ -87,6 +87,44 @@ public class SessaoDAOconcreto implements GenericDAO{
     public Sessao readByNome(String nome) {
         return null;
     }
+    
+    public ArrayList readByHorario(String sessao){
+        ArrayList<Sessao> lista = new ArrayList();
+        try {
+            String sql = "SELECT * FROM Sessao WHERE SUBSTR(horario,1,2)=?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, sessao);
+            rs = statement.executeQuery();
+            GenericDAO filme = new FilmeDAOconcreto();
+            GenericDAO sala = new SalaDAOconcreto();
+            while (rs.next()) {
+                Sessao s = new Sessao(rs.getInt("pk"), (Filme)filme.readById(rs.getInt("id_filme")), (Sala)sala.readById(rs.getInt("id_sala")), rs.getString("horario"), rs.getBoolean("legendado"), new ListaIngressos(rs.getInt("id_listaIngressos")));
+                lista.add(s);
+            }
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return lista;
+    }
+    
+    public ArrayList readByFilme(int f) {
+        ArrayList<Sessao> lista = new ArrayList();
+        try {
+            String sql = "SELECT * FROM Sessao INNER JOIN Filme ON filme.pk = sessao.id_filme WHERE id_filme=?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, f);
+            rs = statement.executeQuery();
+            GenericDAO filme = new FilmeDAOconcreto();
+            GenericDAO sala = new SalaDAOconcreto();
+            while (rs.next()) {
+                Sessao s = new Sessao(rs.getInt("pk"), (Filme)filme.readById(rs.getInt("id_filme")), (Sala)sala.readById(rs.getInt("id_sala")), rs.getString("horario"), rs.getBoolean("legendado"), new ListaIngressos(rs.getInt("id_listaIngressos")));
+                lista.add(s);
+            }
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return lista;
+    }
 
     @Override
     public boolean update(int id, Object object) {

@@ -22,7 +22,7 @@
                     <input type="text" placeholder="Login" name="nome" required/></br>
                     <input type="password" placeholder="Senha" name="senha" required/></br>  
                     <input type="hidden" name="command" value="Login_x"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form"/>
                 </form>
             </fieldset> 
         </section>

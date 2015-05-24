@@ -20,7 +20,7 @@
         <section>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
-                <form name="command" action="BuscaFilmeController" method="POST">
+                <form action="FrontController" method="POST">
                     <h4>Por Filme:</h4>
                     Listar todos:<input type="checkbox" name="todos" value="sim"><br>
                     <select name="filme">
@@ -28,13 +28,13 @@
                         <c:forEach var="filme" items="${filmes}" >
                             <option value="${filme.getPk()}">${filme.getNome()}</option> 
                         </c:forEach>    
-                    </select><br>
-                    <input type="hidden" name="busca" value="filme"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>        
+                    </select>
+                    <input type="hidden" name="command" value="FilmeCommand_BuscaF"/>
+                    <input class="pesq" type="image" src="img/pesquisa.jpg" alt="Submit Form"/>        
                 </form>
             </div>
             <div class="modulo">    
-                <form name="command" action="BuscaFilmeController" method="POST">
+                <form action="FrontController" method="POST">
                     <h4>Por Genero:</h4>
                     <select name="genero">
                         <option value="" selected="">-- Genero --</option>
@@ -42,48 +42,48 @@
                             <option value="${genero.getPk()}">${genero.getNome()}</option> 
                         </c:forEach>    
                     </select><br>
-                    <input type="hidden" name="busca" value="genero"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="hidden" name="command" value="FilmeCommand_BuscaG"/>
+                    <input class="pesq" type="image" src="img/pesquisa.jpg" alt="Submit Form"/>
                 </form>
             </div>
             <div class="modulo">    
-                <form name="command" action="BuscaFilmeController" method="POST">
+                <form action="FrontController" method="POST">
                     <select name="diretor">
                         <option value="" selected="">-- Diretor --</option>
                         <c:forEach var="diretor" items="${diretores}" >
                             <option value="${diretor.getPk()}">${diretor.getNome()}</option> 
                         </c:forEach>    
                     </select><br>
-                    <input type="hidden" name="busca" value="diretor"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="hidden" name="command" value="FilmeCommand_BuscaD"/>
+                    <input class="pesq" type="image" src="img/pesquisa.jpg" alt="Submit Form"/>
                 </form>
             </div>
             <div class="modulo">    
-                <form name="command" action="BuscaFilmeController" method="POST">
+                <form action="FrontController" method="POST">
                     <select name="distribuidora">
                         <option value="" selected="">-- Distribuidora --</option>
                         <c:forEach var="distribuidora" items="${distribuidoras}" >
                             <option value="${distribuidora.getPk()}">${distribuidora.getNome()}</option> 
                         </c:forEach>    
                     </select><br>
-                    <input type="hidden" name="busca" value="distribuidora"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="hidden" name="command" value="FilmeCommand_BuscaDT"/>
+                    <input class="pesq" type="image" src="img/pesquisa.jpg" alt="Submit Form"/>
                 </form>
             </div>
             <div class="modulo">    
-                <form name="command" action="BuscaFilmeController" method="POST">
+                <form action="FrontController" method="POST">
                     <select name="ator">
                         <option value="" selected="">-- Ator --</option>
                         <c:forEach var="ator" items="${atores}" >
                             <option value="${ator.getPk()}">${ator.getNome()}</option> 
                         </c:forEach>    
                     </select><br>
-                    <input type="hidden" name="busca" value="ator"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="hidden" name="command" value="FilmeCommand_BuscaA"/>
+                    <input class="pesq" type="image" src="img/pesquisa.jpg" alt="Submit Form"  id="b"/>
                 </form>
             </div>
-            <c:if test="${buscaFilmeF != null}">
-                <table id="b">
+            <c:if test="${buscaFilme != null}">
+                <table>
                     <tr class="aa">
                         <td>CÓD</td>
                         <td>NOME</td>
@@ -95,7 +95,7 @@
                         <td>ANO</td>
                         <td>DURAÇÃO</td>
                     </tr>
-                    <c:forEach var="filme" items="${buscaFilmeF}">
+                    <c:forEach var="filme" items="${buscaFilme}">
                         <tr>
                             <td>${filme.getPk()}</td>
                             <td>${filme.getNome()}</td>

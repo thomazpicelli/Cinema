@@ -13,38 +13,48 @@
     <body>
         <header>
             <%@ include file= "header.jsp" %>
+            <h1>Vender por Filme</h1>
         </header>
+        
         <section>
-            <form action="FrontController"> 
-                <select name="codigo" onchange="window.location='FrontController?command=VenderFilme_Seleciona&''">
+            
+            <form action="FrontController" method="POST"> 
+                <select name="filme">
                     <option value="" selected="">-- Selecione o Filme --</option>
                     <c:forEach var="filme" items="${venderfilmes}" >
                         <option value="${filme.getPk()}">${filme.getNome()}</option> 
                     </c:forEach>    
-                </select>
-                <input type="hidden" name="command" value="BuscaSessaoPFilme_x"/>
-                <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
-                <c:if test="${buscaSessaoPFilme != null}">
-                    <table>
-                        <tr class="aa">
-                            <td>CÓDIGO</td>
-                            <td>FILME</td>
-                            <td>SALA</td>
-                            <td>HORÁRIO</td>
-                            <td>LEGENDADO</td>
-                        </tr>
-                        <c:forEach var="sessao" items="${buscaSessaoPFilme}">
+                </select><br>
+                <input type="hidden" name="command" value="VendaPorCommand_BuscaF"/>
+                <input type="image" src="img/enviar.png" alt="Submit Form"/>
+            </form>
+            <c:if test="${BuscaSessaoPF != null}">
+                <h3>Sessões Disponíveis:</h3>
+                <table>
+                    <tr class="aa">
+                        <td>CÓDIGO</td>
+                        <td>FILME</td>
+                        <td>SALA</td>
+                        <td>HORÁRIO</td>
+                        <td>LEGENDADO</td>
+                        <td>IR</td>
+                    </tr>
+                    <form action="FrontController" method="POST">
+                        <c:forEach var="sessao" items="${BuscaSessaoPF}">
                             <tr>
                                 <td>${sessao.getPk()}</td>
                                 <td>${sessao.getFilme().getNome()}</td>
                                 <td>${sessao.getSala().getNumero()}</td>
                                 <td>${sessao.getHorario()}</td>
                                 <td>${sessao.isLegendado()}</td>
+                                <td><input type="radio" name="seleciona" value="${sessao.getPk()}"></td>
                             </tr>
                         </c:forEach>
-                    </table>
-                </c:if>
-            </form>
+                        </table><br>
+                        <input type="image" src="img/enviar.png" alt="Submit Form"/><br>
+                        <input type="hidden" name="command" value="VendaPorCommand_Seleciona">
+                    </form>
+            </c:if>
         </section>
         <footer>
             

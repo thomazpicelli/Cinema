@@ -14,14 +14,15 @@
     <body>
         <header>
             <%@include file= "header.jsp" %>
+            <h1>Menu Principal</h1>
         </header>
         <section>
             <nav>
                 <div class="dropdown hover">
                     <a href="#">Vender Ingresso</a>
                     <ul>
-                        <li><a href="FrontController?command=VendaFilmeCommand_Encaminhar">Por Filme</a></li>
-                        <li><a href="FrontController?command=VendaSessaoCommand_Encaminhar">Por Sessão</a></li>
+                        <li><a href="FrontController?command=VendaPorCommand_Filme">Por Filme</a></li>
+                        <li><a href="FrontController?command=VendaPorCommand_Sessao">Por Sessão</a></li>
                     </ul>
                 </div>
             </nav>
