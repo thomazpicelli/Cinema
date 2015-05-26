@@ -135,13 +135,7 @@
                         <c:forEach var="distribuidora" items="${distribuidoras}" >
                             <option value="${distribuidora.getPk()}">${distribuidora.getNome()}</option> 
                         </c:forEach>    
-                    </select>
-                    <select name="listadeatores">
-                        <option value="" selected="">-- Lista de Atores --</option>
-                        <c:forEach var="la" items="${latores}" >
-                            <option value="${la.getPk()}">${la.getPk()}</option> 
-                        </c:forEach>    
-                    </select>                    
+                    </select>               
                     <select name="situacao">
                         <option>Cartaz</option>
                         <option>Estreia</option>
@@ -183,13 +177,7 @@
                         <c:forEach var="distribuidora" items="${distribuidoras}" >
                             <option value="${distribuidora.getPk()}">${distribuidora.getNome()}</option> 
                         </c:forEach>    
-                    </select>
-                    <select name="listadeatores">
-                        <option value="" selected="">-- Lista de Atores --</option>
-                        <c:forEach var="la" items="${latores}" >
-                            <option value="${la.getPk()}">${la.getPk()}</option> 
-                        </c:forEach>    
-                    </select>                    
+                    </select>                   
                     <select name="situacao">
                         <option>Cartaz</option>
                         <option>Estreia</option>

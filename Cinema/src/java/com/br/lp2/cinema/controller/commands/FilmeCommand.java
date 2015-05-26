@@ -21,7 +21,6 @@ public class FilmeCommand implements Command{
     private int genero;
     private int distribuidora;
     private int diretor;
-    private int listadeatores;
     private String situacao;
     private Filme.tiposituacao si;
     private boolean resultado = false;
@@ -66,16 +65,6 @@ public class FilmeCommand implements Command{
                 lista3 = distribuidora1.read();
                 request.getSession().setAttribute("distribuidoras", lista3);
 
-                ArrayList<InfoAtor> lista4 = new ArrayList<InfoAtor>();
-                GenericDAO ia1 = new InfoAtorDAOconcreto();
-                lista4 = ia1.read();
-                request.getSession().setAttribute("latores", lista4);
-
-                ArrayList<Ator> lista5 = new ArrayList<Ator>();
-                GenericDAO ator1 = new AtorDAOconcreto();
-                lista5 = ator1.read();
-                request.getSession().setAttribute("atores", lista5);
-
                 ArrayList<Filme> lista = new ArrayList<Filme>();
                 GenericDAO filme1 = new FilmeDAOconcreto();
                 lista = filme1.read();
@@ -110,7 +99,6 @@ public class FilmeCommand implements Command{
                 genero = Integer.parseInt(request.getParameter("genero"));
                 diretor = Integer.parseInt(request.getParameter("diretor"));
                 distribuidora = Integer.parseInt(request.getParameter("distribuidora"));
-                listadeatores = Integer.parseInt(request.getParameter("listadeatores"));
                 resultado = Cria();
                 i = "#2";
                 break;
@@ -124,7 +112,6 @@ public class FilmeCommand implements Command{
                 genero = Integer.parseInt(request.getParameter("genero"));
                 diretor = Integer.parseInt(request.getParameter("diretor"));
                 distribuidora = Integer.parseInt(request.getParameter("distribuidora"));
-                listadeatores = Integer.parseInt(request.getParameter("listadeatores"));
                 resultado = Muda();
                 i = "#3";
                 break;
@@ -155,12 +142,12 @@ public class FilmeCommand implements Command{
     
     private boolean Muda(){
         GenericDAO filmeDAO = new FilmeDAOconcreto();
-        boolean update = filmeDAO.update(codigo, new Filme(new Diretor(diretor), new Genero(genero), new ListaAtores(listadeatores), new Distribuidora(distribuidora), nome, classificacao, ano, duracao, si, idioma));
+        boolean update = filmeDAO.update(codigo, new Filme(new Diretor(diretor), new Genero(genero), new Distribuidora(distribuidora), nome, classificacao, ano, duracao, si, idioma));
         return update;
     }
     private boolean Cria(){
         GenericDAO filmeDAO = new FilmeDAOconcreto();
-        boolean insert = filmeDAO.insert(new Filme(new Diretor(diretor), new Genero(genero), new ListaAtores(listadeatores), new Distribuidora(distribuidora), nome, classificacao, ano, duracao, si, idioma));
+        boolean insert = filmeDAO.insert(new Filme(new Diretor(diretor), new Genero(genero), new Distribuidora(distribuidora), nome, classificacao, ano, duracao, si, idioma));
         return insert;
     }
     private boolean Deleta() {

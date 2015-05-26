@@ -52,7 +52,19 @@ public class Filme implements Serializable{
         this.situacao = situacao;
         this.idioma = idioma;
     }
-
+    
+    public Filme(Diretor diretor, Genero genero, Distribuidora distribuidora, String nome, int classificacao, int ano, int duracao, tiposituacao situacao, String idioma) {
+        this.diretor = diretor;
+        this.genero = genero;
+        this.distribuidora = distribuidora;
+        this.nome = nome;
+        this.classificacao = classificacao;
+        this.ano = ano;
+        this.duracao = duracao;
+        this.situacao = situacao;
+        this.idioma = idioma;
+    }
+    
     public Filme(int pk, Diretor diretor, Genero genero, ListaAtores listaAtores, Distribuidora distribuidora, String nome, int classificacao, int ano, int duracao, String situacao, String idioma) {
         this.pk = pk;
         this.diretor = diretor;
