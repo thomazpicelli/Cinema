@@ -71,7 +71,9 @@ public class VendaPorCommand implements Command{
                 String sele = request.getParameter("seleciona");
                 if(sele != null){
                     selecionada = Integer.parseInt(sele);
-                    request.getSession().setAttribute("sessaoSele", sele);
+                    SessaoDAOconcreto selec = new SessaoDAOconcreto();
+                    Sessao sessaoselecionada = selec.readById(selecionada);
+                    request.getSession().setAttribute("SessaoSele", sessaoselecionada);
                     try{
                         response.sendRedirect("vender_ingresso.jsp");
                     }catch(IOException ex){

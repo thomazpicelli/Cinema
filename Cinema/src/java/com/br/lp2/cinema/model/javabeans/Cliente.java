@@ -15,11 +15,24 @@ public class Cliente implements Serializable{
         GERAL, CADEIRANTE, OBESO 
     }
 
+    public Cliente(String nome, int anoNasc, Especiais tipo) {
+        this.nome = nome;
+        this.anoNasc = anoNasc;
+        this.tipo = tipo;
+    }
+    
     public Cliente(int pk, String nome, int anoNasc, Especiais tipo) {
         this.pk = pk;
         this.nome = nome;
         this.anoNasc = anoNasc;
         this.tipo = tipo;
+    }
+
+    public Cliente(int pk, String nome, int anoNasc, String tipo) {
+        this.pk = pk;
+        this.nome = nome;
+        this.anoNasc = anoNasc;
+        this.tipo = Enum.valueOf(Cliente.Especiais.class,tipo);
     }
 
     public Cliente(int pk, String nome, int anoNasc) {
