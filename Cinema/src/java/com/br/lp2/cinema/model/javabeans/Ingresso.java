@@ -18,7 +18,13 @@ public class Ingresso implements Serializable{
         this.inteira = inteira;
         this.tipo = tipo;
     }
-
+    
+    public Ingresso(int id, boolean inteira, Cliente.Especiais tipo) {
+        this.id = id;
+        this.inteira = inteira;
+        this.tipo = tipo;
+    }
+    
     public Ingresso(int pk, int id, boolean inteira) {
         this.pk = pk;
         this.id = id;

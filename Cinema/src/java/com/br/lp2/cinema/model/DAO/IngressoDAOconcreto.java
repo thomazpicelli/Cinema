@@ -28,14 +28,13 @@ public class IngressoDAOconcreto implements GenericDAO{
         Ingresso ingresso = (Ingresso) object;
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Ingresso (pk, id, inteira, tipo) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO Ingresso (id, inteira, tipo) VALUES(?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, ingresso.getPk());
-            statement.setInt(2, ingresso.getId());
-            statement.setBoolean(3, ingresso.isInteira());
-            statement.setObject(4,(Especiais)ingresso.getTipo());
-            rs = statement.executeQuery();
-            resultado = statement.execute();
+            statement.setInt(1, ingresso.getId());
+            statement.setBoolean(2, ingresso.isInteira());
+            statement.setString(3,ingresso.getTipo().toString());
+            int r = statement.executeUpdate();
+            if(r>0) resultado = true;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
@@ -81,12 +80,11 @@ public class IngressoDAOconcreto implements GenericDAO{
         Ingresso ingresso = (Ingresso)object;
         boolean resultado = false;
         try {
-            String sql = "UPDATE Ingresso SET pk=? id=? inteira=? tipo=?";
+            String sql = "UPDATE Ingresso SET id=? inteira=? tipo=?";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, ingresso.getPk());
-            statement.setInt(2, ingresso.getId());
-            statement.setBoolean(3, ingresso.isInteira());
-            statement.setObject(4,(Especiais)ingresso.getTipo());
+            statement.setInt(1, ingresso.getId());
+            statement.setBoolean(2, ingresso.isInteira());
+            statement.setString(3,ingresso.getTipo().toString());
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {

@@ -22,6 +22,7 @@ public class VendaPorCommand implements Command{
         SessaoDAOconcreto s = new SessaoDAOconcreto();
         switch(operacao){
             case "Filme":    
+                request.getSession().removeAttribute("BuscaSessaoPF");
                 ArrayList<Filme> lista = new ArrayList<Filme>();
                 GenericDAO filme = new FilmeDAOconcreto();
                 lista = filme.read();
@@ -35,6 +36,7 @@ public class VendaPorCommand implements Command{
                 }
                 break;
             case "Sessao":
+                request.getSession().removeAttribute("BuscaSessaoPS");
                 ArrayList<Sessao> lista1 = new ArrayList<Sessao>();
                 GenericDAO sessao = new SessaoDAOconcreto();
                 lista1 = sessao.read();
