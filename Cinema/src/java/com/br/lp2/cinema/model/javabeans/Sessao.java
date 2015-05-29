@@ -38,7 +38,13 @@ public class Sessao implements Serializable{
         this.legendado = legendado;
         this.lista = lista;
     }
-    
+    public Sessao(Filme filme, Sala sala, String horario, boolean legendado) {
+        this.filme = filme;
+        this.sala = sala;
+        this.horario = horario;
+        this.legendado = legendado;
+    }
+        
     public int getPk() {
         return pk;
     }

@@ -31,18 +31,17 @@ public class FilmeDAOconcreto implements GenericDAO{
         Filme filme = (Filme)object;
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Filme (id_diretor, id_genero, id_listaAtores, id_distribuidora, nome, classificacao, ano, duracao, situacao, idioma) VALUES(?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Filme (id_diretor, id_genero, id_distribuidora, nome, classificacao, ano, duracao, situacao, idioma) VALUES(?,?,?,?,?,?,?,?,?)";
             statement = connection.prepareStatement(sql);
             statement.setObject(1, filme.getDiretor().getPk());
             statement.setObject(2, filme.getGenero().getPk());
-            statement.setObject(3, filme.getListaAtores().getPk());
-            statement.setObject(4, filme.getDistribuidora().getPk());
-            statement.setString(5, filme.getNome());
-            statement.setInt(6, filme.getClassificacao());
-            statement.setInt(7, filme.getAno());
-            statement.setInt(8, filme.getDuracao());
-            statement.setObject(9, filme.getSituacao().toString());
-            statement.setString(10, filme.getIdioma());
+            statement.setObject(3, filme.getDistribuidora().getPk());
+            statement.setString(4, filme.getNome());
+            statement.setInt(5, filme.getClassificacao());
+            statement.setInt(6, filme.getAno());
+            statement.setInt(7, filme.getDuracao());
+            statement.setObject(8, filme.getSituacao().toString());
+            statement.setString(9, filme.getIdioma());
             int r = statement.executeUpdate();
             if(r>0)
                 resultado = true;
@@ -205,19 +204,18 @@ public class FilmeDAOconcreto implements GenericDAO{
         Filme filme = (Filme)object; 
         boolean resultado = false;
         try {
-            String sql = "UPDATE filme SET id_diretor=?, id_genero=?, id_listaAtores=?, id_distribuidora=?, nome=?, classificacao=?, ano=?, duracao=?, situacao=?, idioma=? WHERE pk=?";
+            String sql = "UPDATE filme SET id_diretor=?, id_genero=?, id_distribuidora=?, nome=?, classificacao=?, ano=?, duracao=?, situacao=?, idioma=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
             statement.setObject(1, filme.getDiretor().getPk());
             statement.setObject(2, filme.getGenero().getPk());
-            statement.setObject(3, filme.getListaAtores().getPk());
-            statement.setObject(4, filme.getDistribuidora().getPk());
-            statement.setString(5, filme.getNome());
-            statement.setInt(6, filme.getClassificacao());
-            statement.setInt(7, filme.getAno());
-            statement.setInt(8, filme.getDuracao());
-            statement.setObject(9, filme.getSituacao().toString());
-            statement.setString(10, filme.getIdioma());
-            statement.setInt(11, id);
+            statement.setObject(3, filme.getDistribuidora().getPk());
+            statement.setString(4, filme.getNome());
+            statement.setInt(5, filme.getClassificacao());
+            statement.setInt(6, filme.getAno());
+            statement.setInt(7, filme.getDuracao());
+            statement.setObject(8, filme.getSituacao().toString());
+            statement.setString(9, filme.getIdioma());
+            statement.setInt(10, id);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {

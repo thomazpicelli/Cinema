@@ -34,6 +34,8 @@ public class SessaoCommand implements Command{
         
         switch(operacao){
             case "Encaminhar":
+                request.getSession().removeAttribute("buscaSessao");
+                
                 ArrayList<Sessao> lista1 = new ArrayList<Sessao>();
                 GenericDAO sessao1 = new SessaoDAOconcreto();
                 lista1 = sessao1.read();
@@ -49,10 +51,6 @@ public class SessaoCommand implements Command{
                 lista3 = sala1.read();
                 request.getSession().setAttribute("salas", lista3);
 
-                ArrayList<ListaIngressos> lista4 = new ArrayList<ListaIngressos>();
-                GenericDAO listaIngressos1 = new ListaIngressosDAOconcreto();
-                lista4 = listaIngressos1.read();
-                request.getSession().setAttribute("ingressos", lista4);
                 resultado = false;
                 break;
             case "Busca":
@@ -78,7 +76,6 @@ public class SessaoCommand implements Command{
             case "Cria":
                 filme = Integer.parseInt(request.getParameter("filme"));
                 sala = Integer.parseInt(request.getParameter("sala"));
-                listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));
                 resultado = Cria();
                 i = "#2";
                 break;
@@ -86,11 +83,11 @@ public class SessaoCommand implements Command{
                 codigo = Integer.parseInt(request.getParameter("codigo"));
                 filme = Integer.parseInt(request.getParameter("filme"));
                 sala = Integer.parseInt(request.getParameter("sala"));
-                listadeingressos = Integer.parseInt(request.getParameter("listadeingressos"));
                 resultado = Muda();
                 i = "#3";
                 break;
             case "Deleta":
+                codigo = Integer.parseInt(request.getParameter("codigo"));
                 resultado = Deleta();
                 i = "#4";
                 break;
@@ -110,12 +107,12 @@ public class SessaoCommand implements Command{
     }
     private boolean Cria(){
         GenericDAO sessaoDAO = new SessaoDAOconcreto();
-        boolean insert = sessaoDAO.insert(new Sessao(new Filme(filme), new Sala(sala),horario, legendado, new ListaIngressos(listadeingressos)));
+        boolean insert = sessaoDAO.insert(new Sessao(new Filme(filme), new Sala(sala),horario, legendado));
         return insert;
     }
     private boolean Muda() {
         GenericDAO sessaoDAO = new SessaoDAOconcreto();
-        boolean update = sessaoDAO.update(codigo, new Sessao(new Filme(filme), new Sala(sala), horario, legendado, new ListaIngressos(listadeingressos)));
+        boolean update = sessaoDAO.update(codigo, new Sessao(new Filme(filme), new Sala(sala), horario, legendado));
         return update;
     }
     private boolean Deleta() {

@@ -50,6 +50,13 @@ public class FilmeCommand implements Command{
         switch(operacao){
             case "Encaminhar":
                 
+                request.getSession().removeAttribute("buscaFilme");
+                
+                ArrayList<Filme> lista = new ArrayList<Filme>();
+                GenericDAO filme1 = new FilmeDAOconcreto();
+                lista = filme1.read();
+                request.getSession().setAttribute("filmes", lista);
+                
                 ArrayList<Diretor> lista1 = new ArrayList<>();
                 GenericDAO diretor1 = new DiretorDAOconcreto();
                 lista1 = diretor1.read();
@@ -64,12 +71,11 @@ public class FilmeCommand implements Command{
                 GenericDAO distribuidora1 = new DistribuidoraDAOconcreto();
                 lista3 = distribuidora1.read();
                 request.getSession().setAttribute("distribuidoras", lista3);
-
-                ArrayList<Filme> lista = new ArrayList<Filme>();
-                GenericDAO filme1 = new FilmeDAOconcreto();
-                lista = filme1.read();
-                request.getSession().setAttribute("filmes", lista);
                 
+                ArrayList<Ator> lista4 = new ArrayList<Ator>();
+                GenericDAO ator1 = new AtorDAOconcreto();
+                lista4 = ator1.read();
+                request.getSession().setAttribute("atores", lista4);
                 break;
             case "BuscaF":
                 String todos = request.getParameter("todos");
@@ -130,9 +136,10 @@ public class FilmeCommand implements Command{
             if(resultado)
                 response.sendRedirect("sucesso.jsp");
             else{
-                if(operacao.startsWith("Busca"))
+                if(operacao.startsWith("Busca")){
                     i = "#b";
-                request.getSession().setAttribute("buscaFilme", l);
+                    request.getSession().setAttribute("buscaFilme", l);
+                }
                 response.sendRedirect("manter_filme.jsp"+i);
             }
         } catch(IOException ex){

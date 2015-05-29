@@ -29,13 +29,12 @@ public class SessaoDAOconcreto implements GenericDAO{
         Sessao sessao = (Sessao)object;
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO Sessao (id_filme, id_sala, horario, legendado, id_listaIngressos) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO Sessao (id_filme, id_sala, horario, legendado) VALUES(?,?,?,?)";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, sessao.getFilme().getPk());
             statement.setInt(2, sessao.getSala().getPk());
             statement.setString(3, sessao.getHorario());
             statement.setBoolean(4, sessao.isLegendado());
-            statement.setInt(5, sessao.getLista().getPk());
             int r = statement.executeUpdate();
             if(r>0)
                 resultado = true;
@@ -131,14 +130,13 @@ public class SessaoDAOconcreto implements GenericDAO{
         Sessao sessao = (Sessao)object;
         boolean resultado = false;
         try {
-            String sql = "UPDATE sessao SET id_filme=?, id_sala=?, horario=?, legendado=?, id_listaIngressos=? WHERE pk=?";
+            String sql = "UPDATE sessao SET id_filme=?, id_sala=?, horario=?, legendado=? WHERE pk=?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, sessao.getFilme().getPk());
             statement.setInt(2, sessao.getSala().getPk());
             statement.setString(3, sessao.getHorario());
             statement.setBoolean(4, sessao.isLegendado());
-            statement.setInt(5, sessao.getLista().getPk()); 
-            statement.setInt(6, id);
+            statement.setInt(5, id);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {

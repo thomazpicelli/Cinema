@@ -19,7 +19,7 @@
         <section>
             <div class="modulo">    
                 <p><a id="1">Buscar:</a></p></br>
-                <form name="command" action="FrontController" method="POST">
+                <form action="FrontController" method="POST">
                     <select name="codigo">
                         <option value="" selected=""> -- Código -- Filme -- Horário --</option>
                         <c:forEach var="sessao" items="${sessoes}" >
@@ -28,7 +28,7 @@
                     </select><br>
                     Listar todos:<input type="checkbox" name="todos" value="sim"><br>
                     <input type="hidden" name="command" value="SessaoCommand_Busca">
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form"/>
                     <c:if test="${buscaSessao != null}">
                         <table>
                             <tr class="aa">
@@ -57,7 +57,7 @@
             </div>
             <div class="modulo">
                 <p><a id="2">Criar:</a></p></br>
-                <form name="command" action="FrontController" method="POST">
+                <form action="FrontController" method="POST">
                     <select name="filme">
                         <option value="" selected="">-- Filme --</option>
                         <c:forEach var="filme" items="${filmes}" >
@@ -70,24 +70,18 @@
                             <option value="${sala.getPk()}">${sala.getNumero()}</option> 
                         </c:forEach>    
                     </select>
-                    <select name="listadeingressos">
-                        <option value="" selected="">-- Ingressos Disponíveis --</option>
-                        <c:forEach var="ing" items="${ingressos}" >
-                            <option value="${ing.getPk()}">${ing.getPk()}</option> 
-                        </c:forEach>    
-                    </select>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
                     Legendado:<br><br>
                     Sim:<input type="radio" name="legendado" value="legendado" checked=""/>
                     Não:<input type="radio" name="legendado" value=""/></br>
                     <input type="hidden" name="command" value="SessaoCommand_Cria"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form"/>
                 </form>
             </div>
             <div class="modulo">
                 <p><a id="3">Mudar:</a></p></br>
                 
-                <form name="command" action="FrontController" method="POST">
+                <form action="FrontController" method="POST">
                     <select name="codigo">
                         <option value="" selected=""> -- Código -- </option>
                         <c:forEach var="sessao" items="${sessoes}" >
@@ -106,23 +100,17 @@
                             <option value="${sala.getPk()}">${sala.getNumero()}</option> 
                         </c:forEach>    
                     </select>
-                    <select name="listadeingressos">
-                        <option value="" selected="">-- Ingressos Disponíveis --</option>
-                        <c:forEach var="ing" items="${ingressos}" >
-                            <option value="${ing.getPk()}">${ing.getPk()}</option> 
-                        </c:forEach>    
-                    </select>
                     <input type="text" placeholder="Horário" name="horario" required/></br>
                     Legendado:<br><br>
                     Sim:<input type="radio" name="legendado" value="legendado" checked=""/>
                     Não:<input type="radio" name="legendado" value=""/></br>
                     <input type="hidden" name="command" value="SessaoCommand_Muda"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form"/>
                 </form>
             </div>
             <div class="modulo">
                 <p><a id="4">Deletar:</a></p></br>
-                <form name="command" action="FrontController" method="POST">
+                <form action="FrontController" method="POST">
                     <select name="codigo">
                         <option value="" selected=""> -- Código -- Filme -- Horário --</option>
                         <c:forEach var="sessao" items="${sessoes}" >
@@ -130,7 +118,7 @@
                         </c:forEach>    
                     </select><br>
                     <input type="hidden" name="command" value="SessaoCommand_Deleta"/>
-                    <input type="image" src="img/enviar.png" alt="Submit Form" name="command"/>
+                    <input type="image" src="img/enviar.png" alt="Submit Form"/>
                 </form>
             </div>
         </section>

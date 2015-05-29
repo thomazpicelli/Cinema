@@ -33,7 +33,7 @@ public class UsuarioCommand implements Command{
         
         switch(operacao){
             case "Encaminhar":
-                
+                request.getSession().removeAttribute("buscaUsuario");
                 ArrayList<Funcionario> lista1 = new ArrayList<Funcionario>();
                 ArrayList<Funcionario> lista2 = new ArrayList<Funcionario>();
 

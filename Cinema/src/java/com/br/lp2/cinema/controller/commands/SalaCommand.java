@@ -43,8 +43,9 @@ public class SalaCommand implements Command{
         }
         switch(operacao){
             case "Encaminhar":
-                request.removeAttribute("buscaSala");
-            
+                request.getSession().removeAttribute("buscaSala");
+                request.getSession().removeAttribute("verificaSessao");
+                
                 ArrayList<Sala> lista = new ArrayList<Sala>();
                 GenericDAO sala = new SalaDAOconcreto();
                 lista = sala.read();

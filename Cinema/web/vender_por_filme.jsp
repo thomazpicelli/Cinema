@@ -17,7 +17,6 @@
         </header>
         
         <section>
-            
             <form action="FrontController" method="POST"> 
                 <select name="filme">
                     <option value="" selected="">-- Selecione o Filme --</option>
